@@ -481,8 +481,8 @@
   }
 
   .chevron-container {
-    width: 400px;
-    height: 400px;
+    width: 420px;
+    height: 420px;
     position: relative;
   }
 
@@ -491,14 +491,13 @@
     height: 100%;
   }
 
-  .chevron-arc {
+  .chevron-segment {
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    opacity: 0.8;
   }
 
-  .chevron-arc.active {
-    opacity: 1;
-    stroke-width: 6;
+  .chevron-segment:hover {
+    filter: brightness(1.15);
+    cursor: pointer;
   }
 
   .chevron-center {
@@ -506,10 +505,22 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: var(--white);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .chevron-center-text {
     font-family: 'Playfair Display', serif;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
-    color: var(--blue-bright);
+    color: var(--navy-deep);
     text-align: center;
     line-height: 1.3;
   }
@@ -517,84 +528,41 @@
   .chevron-step {
     position: absolute;
     display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 20px;
-    background: rgba(20, 45, 80, 0.9);
-    border: 1px solid rgba(65, 105, 225, 0.3);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 12px 16px;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.3s ease;
     z-index: 2;
   }
 
-  .chevron-step:hover,
-  .chevron-step.active {
-    background: rgba(40, 81, 164, 0.5);
-    border-color: var(--blue-bright);
-    box-shadow: 0 8px 32px rgba(65, 105, 225, 0.3);
+  .chevron-step:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
   }
 
   .step-number {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--blue-accent);
-    color: var(--white);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    color: var(--gray-400);
+    letter-spacing: 0.05em;
   }
 
   .step-label {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--gray-200);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy-deep);
     white-space: nowrap;
   }
 
   /* Position steps around the circle */
-  .step-1 { top: -15px; left: 50%; transform: translateX(-50%); }
-  .step-2 { bottom: 60px; right: -50px; }
-  .step-3 { bottom: 60px; left: -50px; }
-
-  .step-1:hover { transform: translateX(-50%) scale(1.05); }
-  .step-2:hover, .step-3:hover { transform: scale(1.05); }
-
-  /* Tooltip */
-  .step-tooltip {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 220px;
-    padding: 20px;
-    background: rgba(10, 22, 40, 0.95);
-    border: 1px solid rgba(65, 105, 225, 0.4);
-    border-radius: 12px;
-    backdrop-filter: blur(15px);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 10;
-    pointer-events: none;
-  }
-
-  .step-tooltip.visible {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .step-tooltip-text {
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--gray-200);
-    text-align: center;
-    margin: 0;
-  }
+  .step-1 { top: -10px; left: -30px; }
+  .step-2 { top: 90px; right: -80px; }
+  .step-3 { bottom: 40px; left: 30px; }
 
   .value-ctas {
     display: flex;
@@ -811,6 +779,22 @@
     background: rgba(255,255,255,0.05);
   }
 
+  .case-card:target,
+  .case-card.highlight {
+    border-color: var(--blue-accent);
+    background: rgba(65, 105, 225, 0.1);
+    box-shadow: 0 0 30px rgba(65, 105, 225, 0.2);
+  }
+
+  @keyframes highlightPulse {
+    0%, 100% { box-shadow: 0 0 30px rgba(65, 105, 225, 0.2); }
+    50% { box-shadow: 0 0 40px rgba(65, 105, 225, 0.35); }
+  }
+
+  .case-card.highlight {
+    animation: highlightPulse 1.5s ease-in-out 2;
+  }
+
   .case-tag {
     display: inline-block;
     padding: 4px 14px;
@@ -925,17 +909,22 @@
   .team-credentials {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 16px;
     margin-top: 16px;
     flex-wrap: wrap;
+    min-height: 28px;
+    width: 100%;
   }
 
   .credential-logo {
     height: 20px;
     width: auto;
+    max-width: 80px;
     opacity: 0.6;
     filter: brightness(0) invert(1);
     transition: all 0.3s;
+    object-fit: contain;
   }
 
   .credential-logo:hover {
@@ -1133,45 +1122,53 @@
     </div>
     <div class="chevron-visual reveal reveal-delay-2">
       <div class="chevron-container">
-        <!-- SVG Circle with arrows -->
+        <!-- SVG Circle with chevron segments -->
         <svg class="chevron-svg" viewBox="0 0 400 400">
           <defs>
-            <linearGradient id="chevronGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="var(--blue-accent)"/>
-              <stop offset="100%" stop-color="var(--blue-bright)"/>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#7BA7F7"/>
+              <stop offset="100%" stop-color="#5B8DEF"/>
             </linearGradient>
-            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="5" refY="3.5" orient="auto">
-              <polygon points="0 0, 10 3.5, 0 7" fill="var(--blue-bright)"/>
-            </marker>
+            <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4169E1"/>
+              <stop offset="100%" stop-color="#2851A4"/>
+            </linearGradient>
+            <linearGradient id="grad3" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#142D50"/>
+              <stop offset="100%" stop-color="#2851A4"/>
+            </linearGradient>
           </defs>
-          <!-- Outer decorative ring -->
-          <circle cx="200" cy="200" r="170" fill="none" stroke="rgba(65, 105, 225, 0.15)" stroke-width="1"/>
-          <!-- Arc segments with arrows -->
-          <path class="chevron-arc arc-1" d="M200,35 A165,165 0 0,1 343,285" fill="none" stroke="url(#chevronGradient)" stroke-width="4" stroke-linecap="round" marker-end="url(#arrowhead)"/>
-          <path class="chevron-arc arc-2" d="M343,285 A165,165 0 0,1 57,285" fill="none" stroke="url(#chevronGradient)" stroke-width="4" stroke-linecap="round" marker-end="url(#arrowhead)"/>
-          <path class="chevron-arc arc-3" d="M57,285 A165,165 0 0,1 200,35" fill="none" stroke="url(#chevronGradient)" stroke-width="4" stroke-linecap="round" marker-end="url(#arrowhead)"/>
+          <!-- Segment 1: Top - Unlock Value (Light Blue) -->
+          <path class="chevron-segment" d="M200,60 L200,30 A170,170 0 0,1 347,115 L322,135 A140,140 0 0,0 200,60 Z" fill="url(#grad1)"/>
+          <polygon class="chevron-segment" points="347,115 375,95 350,145" fill="url(#grad1)"/>
+          <!-- Segment 2: Right - Build Capabilities (Medium Blue) -->
+          <path class="chevron-segment" d="M322,135 L350,115 A170,170 0 0,1 290,355 L270,325 A140,140 0 0,0 322,135 Z" fill="url(#grad2)"/>
+          <polygon class="chevron-segment" points="290,355 305,385 255,345" fill="url(#grad2)"/>
+          <!-- Segment 3: Left - Compound Returns (Dark Blue) -->
+          <path class="chevron-segment" d="M270,325 L295,350 A170,170 0 0,1 53,115 L78,135 A140,140 0 0,0 270,325 Z" fill="url(#grad3)"/>
+          <polygon class="chevron-segment" points="53,115 25,95 50,145" fill="url(#grad3)"/>
+          <!-- Back to top connector -->
+          <path class="chevron-segment" d="M78,135 L50,115 A170,170 0 0,1 200,30 L200,60 A140,140 0 0,0 78,135 Z" fill="url(#grad1)" opacity="0.7"/>
+          <!-- Number labels on segments -->
+          <text x="260" y="85" fill="white" font-size="28" font-weight="700" font-family="Inter, sans-serif">01</text>
+          <text x="320" y="250" fill="white" font-size="28" font-weight="700" font-family="Inter, sans-serif">02</text>
+          <text x="60" y="250" fill="white" font-size="28" font-weight="700" font-family="Inter, sans-serif">03</text>
         </svg>
 
-        <!-- Center text -->
-        <div class="chevron-center">Our<br>Approach</div>
+        <!-- Center circle with text -->
+        <div class="chevron-center">
+          <span class="chevron-center-text">Our<br>Approach</span>
+        </div>
 
-        <!-- Step labels -->
+        <!-- Step labels positioned outside -->
         <div class="chevron-step step-1" data-step="1">
-          <span class="step-number">1</span>
           <span class="step-label">Unlock Value</span>
         </div>
         <div class="chevron-step step-2" data-step="2">
-          <span class="step-number">2</span>
-          <span class="step-label">Build Capabilities</span>
+          <span class="step-label">Build<br>Capabilities</span>
         </div>
         <div class="chevron-step step-3" data-step="3">
-          <span class="step-number">3</span>
-          <span class="step-label">Compound Returns</span>
-        </div>
-
-        <!-- Hover description box -->
-        <div class="step-tooltip" id="step-tooltip">
-          <p class="step-tooltip-text"></p>
+          <span class="step-label">Compound<br>Returns</span>
         </div>
       </div>
     </div>
@@ -1229,7 +1226,7 @@
       </div>
       <h3>Growth Strategy</h3>
       <p>Build an organic and/or inorganic growth strategy — where to play, how to win, and what initiatives (or acquisitions) will drive results.</p>
-      <a href="#cases" class="offering-link">View case studies <span class="arrow">→</span></a>
+      <a href="#case-growth" class="offering-link">View case study <span class="arrow">→</span></a>
     </div>
     <div class="offering-card reveal reveal-delay-1">
       <div class="offering-icon">
@@ -1240,7 +1237,7 @@
       </div>
       <h3>Pricing</h3>
       <p>Set and optimize pricing and discounting to capture value — then embed tools to keep decisions current as conditions change.</p>
-      <a href="#cases" class="offering-link">View case studies <span class="arrow">→</span></a>
+      <a href="#case-pricing" class="offering-link">View case study <span class="arrow">→</span></a>
     </div>
     <div class="offering-card reveal reveal-delay-2">
       <div class="offering-icon">
@@ -1253,7 +1250,7 @@
       </div>
       <h3>Commercial Due Diligence</h3>
       <p>Underwrite growth and risk with MBB-grade diligence — combining market intelligence, bottom-up market size models and detailed growth assessment.</p>
-      <a href="#cases" class="offering-link">View case studies <span class="arrow">→</span></a>
+      <a href="#case-cdd" class="offering-link">View case study <span class="arrow">→</span></a>
     </div>
     <div class="offering-card reveal reveal-delay-3">
       <div class="offering-icon">
@@ -1265,7 +1262,7 @@
       </div>
       <h3>Demand Forecasting</h3>
       <p>Build accurate, always-updated forecasts that improve planning, inventory, and revenue performance over time.</p>
-      <a href="#cases" class="offering-link">View case studies <span class="arrow">→</span></a>
+      <a href="#case-forecasting" class="offering-link">View case study <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -1277,7 +1274,7 @@
     <h2 class="section-title reveal reveal-delay-1">Case Studies</h2>
   </div>
   <div class="cases-grid">
-    <div class="case-card reveal">
+    <div class="case-card reveal" id="case-growth">
       <span class="case-tag">Growth Strategy</span>
       <h3>Growth Strategy for $2B+ Industrials Manufacturer</h3>
       <div class="case-meta">Large Enterprise · Industrials · Corporate Strategy</div>
@@ -1293,7 +1290,7 @@
         <div class="case-result-text">$500M+ growth opportunities identified. 8+ acquisitions completed. $300M+ top-line impact delivered.</div>
       </div>
     </div>
-    <div class="case-card reveal reveal-delay-1">
+    <div class="case-card reveal reveal-delay-1" id="case-pricing">
       <span class="case-tag">Pricing</span>
       <h3>Pricing System for $700M Fabless Semiconductor</h3>
       <div class="case-meta">Large Enterprise · Technology · Commercial Ops</div>
@@ -1309,7 +1306,7 @@
         <div class="case-result-text">$4M impact. 40x ROI.</div>
       </div>
     </div>
-    <div class="case-card reveal reveal-delay-2">
+    <div class="case-card reveal reveal-delay-2" id="case-cdd">
       <span class="case-tag">Commercial Due Diligence</span>
       <h3>CDD: Trucks & Heavy Equipment Resale Market</h3>
       <div class="case-meta">Large Enterprise · Industrials · Strategy & Development</div>
@@ -1325,7 +1322,7 @@
         <div class="case-result-text">Delivered independent market study. PE green-lighted the acquisition.</div>
       </div>
     </div>
-    <div class="case-card reveal reveal-delay-3">
+    <div class="case-card reveal reveal-delay-3" id="case-forecasting">
       <span class="case-tag">Demand Forecasting</span>
       <h3>Demand Forecasting for $4B Semiconductor Co.</h3>
       <div class="case-meta">Large Enterprise · Technology · Operations</div>
@@ -1442,43 +1439,21 @@ const counterObserver = new IntersectionObserver((entries) => {
 
 counters.forEach(el => counterObserver.observe(el));
 
-// ─── SMOOTH SCROLL ───
+// ─── SMOOTH SCROLL WITH CASE STUDY HIGHLIGHT ───
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
+    const href = this.getAttribute('href');
+    const target = document.querySelector(href);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Highlight case study cards when navigating to them
+      if (href.startsWith('#case-')) {
+        document.querySelectorAll('.case-card.highlight').forEach(el => el.classList.remove('highlight'));
+        target.classList.add('highlight');
+        setTimeout(() => target.classList.remove('highlight'), 4000);
+      }
     }
-  });
-});
-
-// ─── CHEVRON HOVER INTERACTION ───
-const stepDescriptions = {
-  1: "Solve a high-value growth question with McKinsey-grade analysis and recommendations, designing the path to unlock value.",
-  2: "Turn the insight into an operating capability by embedding AI/analytics systems unique to your team.",
-  3: "Keep insights current as markets change: monitor performance, refresh inputs/models, and scale so impact compounds over time."
-};
-
-const chevronSteps = document.querySelectorAll('.chevron-step');
-const tooltip = document.getElementById('step-tooltip');
-const tooltipText = tooltip?.querySelector('.step-tooltip-text');
-
-chevronSteps.forEach(step => {
-  step.addEventListener('mouseenter', () => {
-    const stepNum = step.dataset.step;
-    if (tooltipText) {
-      tooltipText.textContent = stepDescriptions[stepNum];
-    }
-    tooltip?.classList.add('visible');
-    step.classList.add('active');
-    document.querySelector(`.arc-${stepNum}`)?.classList.add('active');
-  });
-
-  step.addEventListener('mouseleave', () => {
-    tooltip?.classList.remove('visible');
-    step.classList.remove('active');
-    document.querySelectorAll('.chevron-arc').forEach(arc => arc.classList.remove('active'));
   });
 });
 </script>
