@@ -668,52 +668,52 @@
     box-shadow: 0 0 12px rgba(65, 105, 225, 0.6);
   }
 
-  /* Position steps around the ring */
+  /* Position steps around the ring - aligned to segments */
   .step-1 {
-    top: -30px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 20px;
+    right: -200px;
   }
   .step-1 .step-connector {
-    bottom: -24px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: -16px;
+    top: 24px;
   }
 
   .step-2 {
-    top: 50%;
-    right: -220px;
-    transform: translateY(-50%);
+    bottom: 20px;
+    right: -200px;
   }
   .step-2 .step-connector {
-    left: -20px;
-    top: 50%;
-    transform: translateY(-50%);
+    left: -16px;
+    top: 24px;
   }
 
   .step-3 {
-    bottom: -30px;
-    left: -40px;
+    top: 50%;
+    left: -220px;
+    transform: translateY(-50%);
   }
   .step-3 .step-connector {
-    top: -20px;
-    right: 40px;
+    right: -16px;
+    top: 24px;
   }
 
   .step-1:hover, .step-1.active {
-    transform: translateX(-50%) translateY(-4px);
+    transform: translateX(4px);
   }
   .step-2:hover, .step-2.active {
-    transform: translateY(-50%) translateX(4px);
+    transform: translateX(4px);
   }
   .step-3:hover, .step-3.active {
-    transform: translateY(-4px);
+    transform: translateY(-50%) translateX(-4px);
   }
 
   /* Responsive - Approach Ring */
   @media (max-width: 1100px) {
-    .step-2 {
-      right: -180px;
+    .step-1, .step-2 {
+      right: -170px;
+    }
+    .step-3 {
+      left: -190px;
     }
   }
 
