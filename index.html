@@ -483,11 +483,10 @@
 
   .approach-container {
     position: relative;
-    width: 380px;
-    height: 380px;
+    width: 440px;
+    height: 440px;
   }
 
-  /* The SVG ring */
   .approach-svg {
     width: 100%;
     height: 100%;
@@ -496,29 +495,40 @@
 
   .ring-segment {
     fill: none;
-    stroke-width: 28;
+    stroke-width: 5;
     stroke-linecap: round;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Each arc: 120deg of 2*pi*115 ≈ 722.57 → ~240.86 per segment, gap of ~12 */
+    stroke-dasharray: 228.86 493.71;
+    transition: stroke-width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
   }
 
-  .ring-segment.segment-1 {
-    stroke: url(#ringGrad1);
-  }
-
-  .ring-segment.segment-2 {
-    stroke: url(#ringGrad2);
-  }
-
-  .ring-segment.segment-3 {
-    stroke: url(#ringGrad3);
-  }
+  .ring-segment.segment-1 { stroke-dashoffset: 0; }
+  .ring-segment.segment-2 { stroke-dashoffset: -240.86; }
+  .ring-segment.segment-3 { stroke-dashoffset: -481.72; }
 
   .ring-segment:hover,
   .ring-segment.active {
-    stroke-width: 34;
-    filter: drop-shadow(0 8px 24px rgba(65, 105, 225, 0.35));
+    stroke-width: 10;
+    filter: url(#arcGlow);
+  }
+
+  /* Dim siblings when one is active */
+  .approach-container.has-active .ring-segment {
+    opacity: 0.25;
+  }
+  .approach-container.has-active .ring-segment.active {
+    opacity: 1;
+  }
+
+  .arc-marker {
+    opacity: 0;
+    transition: opacity 0.4s ease, r 0.4s ease;
+  }
+  .arc-marker.active {
+    opacity: 1;
   }
 
   /* Center element */
@@ -527,102 +537,55 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 140px;
-    height: 140px;
-    background: linear-gradient(135deg, rgba(20, 45, 80, 0.95), rgba(10, 22, 40, 0.98));
-    border: 1px solid rgba(91, 141, 239, 0.25);
+    width: 130px;
+    height: 130px;
+    background: var(--navy-deep);
+    border: 1px solid rgba(91, 141, 239, 0.12);
     border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow:
-      0 0 60px rgba(65, 105, 225, 0.15),
-      inset 0 0 30px rgba(65, 105, 225, 0.08);
+    box-shadow: 0 0 80px rgba(65, 105, 225, 0.08);
   }
 
   .approach-center-label {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--blue-light);
-    margin-bottom: 4px;
+    color: var(--gray-400);
+    margin-bottom: 2px;
   }
 
   .approach-center-title {
     font-family: 'Playfair Display', serif;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     color: var(--white);
     text-align: center;
     line-height: 1.2;
   }
 
-  /* Step cards - integrated design */
-  .approach-steps {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-
+  /* Step labels */
   .approach-step {
     position: absolute;
     display: flex;
     align-items: flex-start;
-    gap: 16px;
-    padding: 20px 24px;
-    background: linear-gradient(135deg, rgba(20, 45, 80, 0.6), rgba(10, 22, 40, 0.8));
-    border: 1px solid rgba(91, 141, 239, 0.15);
-    border-radius: 12px;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    gap: 14px;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: auto;
-    max-width: 200px;
+    transition: opacity 0.4s ease;
   }
 
-  .approach-step:hover,
-  .approach-step.active {
-    background: linear-gradient(135deg, rgba(40, 81, 164, 0.5), rgba(20, 45, 80, 0.7));
-    border-color: rgba(91, 141, 239, 0.4);
-    transform: translateY(-4px);
-    box-shadow:
-      0 16px 40px rgba(0, 0, 0, 0.25),
-      0 0 30px rgba(65, 105, 225, 0.15);
-  }
-
-  .step-indicator {
+  .step-num {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--blue-bright);
+    opacity: 0.5;
+    padding-top: 2px;
+    transition: opacity 0.4s ease, color 0.4s ease;
     flex-shrink: 0;
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--white);
-    transition: all 0.4s ease;
-  }
-
-  .step-1 .step-indicator {
-    background: linear-gradient(135deg, #7BA7F7, #5B8DEF);
-  }
-
-  .step-2 .step-indicator {
-    background: linear-gradient(135deg, #4169E1, #2851A4);
-  }
-
-  .step-3 .step-indicator {
-    background: linear-gradient(135deg, #2851A4, #142D50);
-  }
-
-  .approach-step.active .step-indicator,
-  .approach-step:hover .step-indicator {
-    transform: scale(1.1);
-    box-shadow: 0 4px 16px rgba(65, 105, 225, 0.4);
   }
 
   .step-content {
@@ -631,115 +594,100 @@
   }
 
   .step-title {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
     color: var(--white);
-    margin-bottom: 4px;
     line-height: 1.3;
+    margin-bottom: 0;
+    transition: color 0.4s ease;
   }
 
   .step-desc {
     font-size: 13px;
-    color: var(--gray-300);
-    line-height: 1.5;
-    display: none;
+    color: var(--gray-400);
+    line-height: 1.6;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.4s ease,
+                margin 0.4s ease;
+    margin-top: 0;
   }
 
-  .approach-step.active .step-desc,
-  .approach-step:hover .step-desc {
-    display: block;
-  }
-
-  /* Connection dots */
-  .step-connector {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: var(--blue-accent);
-    border-radius: 50%;
-    opacity: 0.6;
-    transition: all 0.4s ease;
-  }
-
-  .approach-step.active .step-connector,
-  .approach-step:hover .step-connector {
+  .approach-step:hover .step-desc,
+  .approach-step.active .step-desc {
+    max-height: 80px;
     opacity: 1;
-    transform: scale(1.5);
-    box-shadow: 0 0 12px rgba(65, 105, 225, 0.6);
+    margin-top: 6px;
   }
 
-  /* Position steps around the ring - aligned to segments */
-  .step-1 {
-    top: 20px;
-    right: -200px;
+  .approach-step:hover .step-num,
+  .approach-step.active .step-num {
+    opacity: 1;
   }
-  .step-1 .step-connector {
-    left: -16px;
-    top: 24px;
+
+  /* Dim siblings when one is active */
+  .approach-container.has-active .approach-step {
+    opacity: 0.35;
+  }
+  .approach-container.has-active .approach-step.active {
+    opacity: 1;
+  }
+
+  /* Position steps at arc midpoints */
+  .step-1 {
+    top: -12px;
+    right: -28px;
+    max-width: 210px;
   }
 
   .step-2 {
-    bottom: 20px;
-    right: -200px;
-  }
-  .step-2 .step-connector {
-    left: -16px;
-    top: 24px;
+    bottom: 18px;
+    right: -28px;
+    max-width: 210px;
   }
 
   .step-3 {
-    top: 50%;
-    left: -220px;
-    transform: translateY(-50%);
-  }
-  .step-3 .step-connector {
-    right: -16px;
-    top: 24px;
+    bottom: 18px;
+    left: -28px;
+    max-width: 210px;
+    text-align: right;
+    flex-direction: row-reverse;
   }
 
-  .step-1:hover, .step-1.active {
-    transform: translateX(4px);
-  }
-  .step-2:hover, .step-2.active {
-    transform: translateX(4px);
-  }
-  .step-3:hover, .step-3.active {
-    transform: translateY(-50%) translateX(-4px);
-  }
-
-  /* Responsive - Approach Ring */
+  /* Responsive */
   @media (max-width: 1100px) {
-    .step-1, .step-2 {
-      right: -170px;
+    .approach-container {
+      width: 380px;
+      height: 380px;
     }
-    .step-3 {
-      left: -190px;
-    }
+    .step-1 { right: -16px; }
+    .step-2 { right: -16px; }
+    .step-3 { left: -16px; }
   }
 
   @media (max-width: 900px) {
     .approach-ring {
       min-height: auto;
+      flex-direction: column;
+      gap: 40px;
       padding: 40px 0;
     }
 
     .approach-container {
-      width: 300px;
-      height: 300px;
+      width: 240px;
+      height: 240px;
+      flex-shrink: 0;
     }
 
     .approach-center {
-      width: 110px;
-      height: 110px;
+      width: 100px;
+      height: 100px;
     }
 
-    .approach-center-label {
-      font-size: 10px;
-    }
-
-    .approach-center-title {
-      font-size: 15px;
-    }
+    .approach-center-label { font-size: 9px; }
+    .approach-center-title { font-size: 16px; }
 
     .approach-step {
       position: relative;
@@ -747,24 +695,28 @@
       left: auto !important;
       right: auto !important;
       bottom: auto !important;
-      transform: none !important;
-      max-width: none;
-      margin: 12px 0;
+      max-width: none !important;
+      text-align: left !important;
+      flex-direction: row !important;
+      padding: 16px 0;
+      border-top: 1px solid rgba(91, 141, 239, 0.08);
     }
 
-    .approach-step:hover, .approach-step.active {
-      transform: translateY(-2px) !important;
+    .approach-step:last-child {
+      border-bottom: 1px solid rgba(91, 141, 239, 0.08);
     }
 
-    .approach-steps {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      margin-top: 32px;
+    .step-desc {
+      max-height: none;
+      opacity: 1;
+      margin-top: 4px;
     }
 
-    .step-connector {
-      display: none;
+    .step-num { opacity: 1; }
+
+    .approach-container.has-active .approach-step,
+    .approach-container.has-active .ring-segment {
+      opacity: 1;
     }
 
     .value-grid {
@@ -1335,64 +1287,73 @@
     </div>
     <div class="approach-ring reveal reveal-delay-2">
       <div class="approach-container">
-        <!-- Clean SVG ring with three segments -->
-        <svg class="approach-svg" viewBox="0 0 200 200">
+        <svg class="approach-svg" viewBox="0 0 300 300">
           <defs>
-            <linearGradient id="ringGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#7BA7F7"/>
-              <stop offset="100%" stop-color="#5B8DEF"/>
+            <linearGradient id="ringGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#93B8FF"/>
+              <stop offset="100%" stop-color="#6E9BF7"/>
             </linearGradient>
             <linearGradient id="ringGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#4169E1"/>
-              <stop offset="100%" stop-color="#2851A4"/>
+              <stop offset="0%" stop-color="#5B8DEF"/>
+              <stop offset="100%" stop-color="#4169E1"/>
             </linearGradient>
-            <linearGradient id="ringGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#2851A4"/>
-              <stop offset="100%" stop-color="#142D50"/>
+            <linearGradient id="ringGrad3" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#3355B8"/>
+              <stop offset="100%" stop-color="#2243A0"/>
             </linearGradient>
+            <filter id="arcGlow">
+              <feGaussianBlur stdDeviation="6" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
           </defs>
-          <!-- Three arc segments with gaps -->
-          <circle class="ring-segment segment-1" cx="100" cy="100" r="75"
-                  stroke-dasharray="141.37 330" stroke-dashoffset="0" data-step="1"/>
-          <circle class="ring-segment segment-2" cx="100" cy="100" r="75"
-                  stroke-dasharray="141.37 330" stroke-dashoffset="-157" data-step="2"/>
-          <circle class="ring-segment segment-3" cx="100" cy="100" r="75"
-                  stroke-dasharray="141.37 330" stroke-dashoffset="-314" data-step="3"/>
+
+          <!-- Track ring -->
+          <circle cx="150" cy="150" r="115" fill="none" stroke="rgba(91,141,239,0.07)" stroke-width="3"/>
+
+          <!-- Three arc segments -->
+          <circle class="ring-segment segment-1" cx="150" cy="150" r="115"
+                  stroke="url(#ringGrad1)" data-step="1"/>
+          <circle class="ring-segment segment-2" cx="150" cy="150" r="115"
+                  stroke="url(#ringGrad2)" data-step="2"/>
+          <circle class="ring-segment segment-3" cx="150" cy="150" r="115"
+                  stroke="url(#ringGrad3)" data-step="3"/>
+
+          <!-- Endpoint markers -->
+          <circle class="arc-marker marker-1" cx="150" cy="35" r="4" fill="#93B8FF" data-step="1"/>
+          <circle class="arc-marker marker-2" cx="249.6" cy="207.5" r="4" fill="#5B8DEF" data-step="2"/>
+          <circle class="arc-marker marker-3" cx="50.4" cy="207.5" r="4" fill="#3355B8" data-step="3"/>
         </svg>
 
-        <!-- Premium center element -->
         <div class="approach-center">
           <span class="approach-center-label">Our</span>
           <span class="approach-center-title">Approach</span>
         </div>
 
-        <!-- Integrated step cards -->
-        <div class="approach-steps">
-          <div class="approach-step step-1" data-step="1">
-            <div class="step-connector"></div>
-            <div class="step-indicator">01</div>
-            <div class="step-content">
-              <div class="step-title">Unlock Value</div>
-              <div class="step-desc">McKinsey-grade analysis to identify growth opportunities</div>
-            </div>
+        <!-- Step labels positioned at arc midpoints -->
+        <div class="approach-step step-1" data-step="1">
+          <span class="step-num">01</span>
+          <div class="step-content">
+            <div class="step-title">Unlock Value</div>
+            <div class="step-desc">McKinsey-grade analysis to identify growth opportunities</div>
           </div>
+        </div>
 
-          <div class="approach-step step-2" data-step="2">
-            <div class="step-connector"></div>
-            <div class="step-indicator">02</div>
-            <div class="step-content">
-              <div class="step-title">Build Capabilities</div>
-              <div class="step-desc">Embed AI systems unique to your organization</div>
-            </div>
+        <div class="approach-step step-2" data-step="2">
+          <span class="step-num">02</span>
+          <div class="step-content">
+            <div class="step-title">Build Capabilities</div>
+            <div class="step-desc">Embed AI systems unique to your organization</div>
           </div>
+        </div>
 
-          <div class="approach-step step-3" data-step="3">
-            <div class="step-connector"></div>
-            <div class="step-indicator">03</div>
-            <div class="step-content">
-              <div class="step-title">Compound Returns</div>
-              <div class="step-desc">Ongoing support so impact grows over time</div>
-            </div>
+        <div class="approach-step step-3" data-step="3">
+          <span class="step-num">03</span>
+          <div class="step-content">
+            <div class="step-title">Compound Returns</div>
+            <div class="step-desc">Ongoing support so impact grows over time</div>
           </div>
         </div>
       </div>
@@ -1665,33 +1626,37 @@ const counterObserver = new IntersectionObserver((entries) => {
 counters.forEach(el => counterObserver.observe(el));
 
 // ─── APPROACH RING INTERACTION ───
+const approachContainer = document.querySelector('.approach-container');
 const approachSteps = document.querySelectorAll('.approach-step');
 const ringSegments = document.querySelectorAll('.ring-segment');
+const arcMarkers = document.querySelectorAll('.arc-marker');
 
 function activateStep(stepNum) {
-  // Remove all active states
   approachSteps.forEach(s => s.classList.remove('active'));
   ringSegments.forEach(s => s.classList.remove('active'));
+  arcMarkers.forEach(m => m.classList.remove('active'));
+  approachContainer.classList.add('has-active');
 
-  // Add active to matching elements
   const step = document.querySelector(`.approach-step[data-step="${stepNum}"]`);
   const segment = document.querySelector(`.ring-segment[data-step="${stepNum}"]`);
+  const marker = document.querySelector(`.arc-marker[data-step="${stepNum}"]`);
   if (step) step.classList.add('active');
   if (segment) segment.classList.add('active');
+  if (marker) marker.classList.add('active');
 }
 
 function deactivateAll() {
   approachSteps.forEach(s => s.classList.remove('active'));
   ringSegments.forEach(s => s.classList.remove('active'));
+  arcMarkers.forEach(m => m.classList.remove('active'));
+  approachContainer.classList.remove('has-active');
 }
 
-// Step card hover
 approachSteps.forEach(step => {
   step.addEventListener('mouseenter', () => activateStep(step.dataset.step));
   step.addEventListener('mouseleave', deactivateAll);
 });
 
-// Ring segment hover
 ringSegments.forEach(segment => {
   segment.addEventListener('mouseenter', () => activateStep(segment.dataset.step));
   segment.addEventListener('mouseleave', deactivateAll);
