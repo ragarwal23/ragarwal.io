@@ -1091,18 +1091,6 @@
     letter-spacing: 0.3px;
   }
 
-  .team-credentials {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    margin-top: auto;
-    padding-top: 20px;
-    flex-wrap: wrap;
-    min-height: 28px;
-    width: 100%;
-  }
-
   .credential-logo {
     height: 20px;
     width: auto;
@@ -1115,6 +1103,20 @@
 
   .credential-logo:hover {
     opacity: 1;
+  }
+
+  .team-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 60px;
+    flex-wrap: wrap;
+  }
+
+  .team-logos .credential-logo {
+    height: 28px;
+    max-width: 100px;
   }
 
   /* ─── CTA ─── */
@@ -1559,28 +1561,23 @@
       <div class="team-avatar"><img src="images/sam.jpeg" alt="Sam Garg"></div>
       <h3>Sam</h3>
       <div class="role">Founder</div>
-      <div class="team-credentials">
-        <img src="images/logos/mckinsey.svg" alt="McKinsey" class="credential-logo" title="McKinsey & Company">
-        <img src="images/logos/blackrock.svg" alt="BlackRock" class="credential-logo" title="BlackRock">
-        <img src="images/logos/nyu.svg" alt="NYU" class="credential-logo" title="New York University">
-      </div>
     </div>
     <div class="team-card reveal reveal-delay-1">
       <div class="team-avatar"><img src="images/bia.jpeg" alt="Beatriz Abramof"></div>
       <h3>Bea</h3>
       <div class="role">Chief of Staff</div>
-      <div class="team-credentials">
-        <img src="images/logos/mckinsey.svg" alt="McKinsey" class="credential-logo" title="McKinsey & Company">
-      </div>
     </div>
     <div class="team-card reveal reveal-delay-2">
       <div class="team-avatar"><img src="images/rachit.jpeg" alt="Rachit Agarwal"></div>
       <h3>Rachit</h3>
       <div class="role">Founding Engineer</div>
-      <div class="team-credentials">
-        <img src="images/logos/umich.svg" alt="University of Michigan" class="credential-logo" title="University of Michigan">
-      </div>
     </div>
+  </div>
+  <div class="team-logos reveal reveal-delay-3">
+    <img src="images/logos/mckinsey.svg" alt="McKinsey" class="credential-logo" title="McKinsey & Company">
+    <img src="images/logos/blackrock.svg" alt="BlackRock" class="credential-logo" title="BlackRock">
+    <img src="images/logos/nyu.svg" alt="NYU" class="credential-logo" title="New York University">
+    <img src="images/logos/umich.svg" alt="University of Michigan" class="credential-logo" title="University of Michigan">
   </div>
 </section>
 
