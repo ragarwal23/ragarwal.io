@@ -10,15 +10,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Mona+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#F4F4F2;
+    --bg:#F7F8FB;
     --bg-alt:#FFFFFF;
-    --navy:#0E1A2B;
-    --navy-deep:#0A1322;
-    --ink:#0E1A2B;
-    --ink-muted:#5A6679;
-    --line:#E4E4E0;
+    --navy:#0A2540;
+    --navy-deep:#061A30;
+    --ink:#1A1A2E;
+    --ink-muted:#4A5568;
+    --line:#E6EAF2;
     --white:#FFFFFF;
-    --accent:#0E1A2B;
+    --accent:#2E4BDB;
     --good:#0E7C4A;
     --bad:#9C2A2A;
     --pad: clamp(20px, 5vw, 80px);
@@ -67,14 +67,14 @@
   .nav-cta{display:flex;align-items:center;gap:10px}
   .btn{
     display:inline-flex;align-items:center;justify-content:center;
-    height:42px;padding:0 22px;border-radius:var(--radius-pill);
+    height:44px;padding:0 22px;border-radius:var(--radius-pill);
     font-family:'Inter';font-weight:600;font-size:14px;
-    border:1px solid var(--ink);transition:all .2s ease;cursor:pointer;
+    border:1px solid var(--navy);transition:all .2s ease;cursor:pointer;
   }
-  .btn-outline{background:transparent;color:var(--ink)}
-  .btn-outline:hover{background:var(--ink);color:var(--white)}
-  .btn-primary{background:var(--ink);color:var(--white)}
-  .btn-primary:hover{background:#000;border-color:#000}
+  .btn-outline{background:transparent;color:var(--navy)}
+  .btn-outline:hover{background:var(--navy);color:var(--white)}
+  .btn-primary{background:var(--navy);color:var(--white)}
+  .btn-primary:hover{background:#06192E;border-color:#06192E}
   .btn-lg{height:50px;padding:0 28px;font-size:15px}
   .btn-on-dark.btn-outline{border-color:var(--white);color:var(--white)}
   .btn-on-dark.btn-outline:hover{background:var(--white);color:var(--ink)}
@@ -90,6 +90,7 @@
     max-width:720px;margin:0 auto 36px;color:var(--ink-muted);
     font-size:clamp(16px,1.4vw,20px);line-height:1.55;
   }
+  .hero-ctas{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center}
 
   /* ---------- PRESS STRIP ---------- */
   .press{
@@ -495,6 +496,25 @@
   @media (max-width:520px){
     footer.footer-big .footer-grid{grid-template-columns:1fr}
   }
+
+  /* ---------- MOBILE STICKY CTA ---------- */
+  .mobile-cta{
+    display:none;position:fixed;bottom:16px;left:16px;right:16px;z-index:60;
+    background:var(--navy);color:var(--white);height:48px;border-radius:999px;
+    align-items:center;justify-content:center;gap:6px;
+    font-family:'Inter';font-weight:600;font-size:15px;
+    box-shadow:0 8px 24px rgba(0,0,0,.25);
+  }
+  @media (max-width:760px){
+    .mobile-cta.visible{display:inline-flex}
+  }
+
+  /* ---------- SCROLL FADE ---------- */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+  }
 </style>
 </head>
 <body>
@@ -519,7 +539,10 @@
   <div class="container">
     <h1>The AI-Native Growth & Pricing Advisory for Industrial & Tech Leaders</h1>
     <p class="sub">We combine top-tier strategy partners with AI systems to deliver faster, higher-value outcomes — and the capability stays with you.</p>
-    <a class="btn btn-primary btn-lg" href="#meet">Book a Meeting</a>
+    <div class="hero-ctas">
+      <a class="btn btn-primary btn-lg" href="#meet">Book a Meeting</a>
+      <a class="btn btn-outline btn-lg" href="#cases">See Case Studies</a>
+    </div>
   </div>
 </section>
 
@@ -542,20 +565,20 @@
 <section class="stat-band">
   <div class="stat-grid">
     <div class="stat">
-      <div class="num">40x typical ROI</div>
-      <div class="lab">On engagement value vs. fees</div>
+      <div class="num">40x</div>
+      <div class="lab">Typical ROI on engagement value vs. fees</div>
     </div>
     <div class="stat">
-      <div class="num">&lt;6 weeks</div>
-      <div class="lab">From kickoff to first answer</div>
+      <div class="num">&lt;6 wks</div>
+      <div class="lab">To first quantified answer</div>
     </div>
     <div class="stat">
       <div class="num">$500M+</div>
-      <div class="lab">Growth opportunities identified</div>
+      <div class="lab">In growth opportunities identified</div>
     </div>
     <div class="stat">
-      <div class="num">No upfront fees</div>
-      <div class="lab">On diagnostic scans</div>
+      <div class="num">25+ yrs</div>
+      <div class="lab">Combined MBB pedigree on the team</div>
     </div>
   </div>
 </section>
@@ -569,53 +592,53 @@
         <tr>
           <th></th>
           <th class="col-head col-us">Aristotle</th>
-          <th class="col-head">No Advisor</th>
           <th class="col-head">Big-3 (MBB)</th>
           <th class="col-head">Boutiques</th>
+          <th class="col-head">DIY / Internal</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td class="compare-row-label">Speed to Impact</td>
           <td class="col-us compare-cell"><strong>&lt;6 weeks</strong> to first answer</td>
-          <td class="compare-cell">Stalled, internal cycles drag</td>
           <td class="compare-cell"><strong>4–6 months</strong> typical engagement</td>
           <td class="compare-cell"><strong>3–6 months</strong>, variable rigor</td>
+          <td class="compare-cell">Stalled, internal cycles drag</td>
         </tr>
         <tr>
           <td class="compare-row-label">Capability Build</td>
           <td class="col-us compare-cell"><strong>AI tools live</strong> in your stack</td>
-          <td class="compare-cell">None — knowledge stays tribal</td>
           <td class="compare-cell">None — deck only, team leaves</td>
           <td class="compare-cell">Slides + spreadsheets</td>
+          <td class="compare-cell">None — knowledge stays tribal</td>
         </tr>
         <tr>
           <td class="compare-row-label">Fees</td>
           <td class="col-us compare-cell"><strong>Success-tied</strong> + no upfront on scans</td>
-          <td class="compare-cell">None</td>
           <td class="compare-cell">Seven-figure fixed fees</td>
           <td class="compare-cell">Fixed fees + small success</td>
+          <td class="compare-cell">No external fees</td>
         </tr>
         <tr>
           <td class="compare-row-label">Tooling Embedded</td>
           <td class="col-us compare-cell"><strong>Yes</strong> — you own the IP</td>
-          <td class="compare-cell">No</td>
           <td class="compare-cell">No — proprietary frameworks</td>
           <td class="compare-cell">Limited or none</td>
+          <td class="compare-cell">No</td>
         </tr>
         <tr>
           <td class="compare-row-label">Ongoing Iteration</td>
           <td class="col-us compare-cell"><strong>Quarterly</strong> AI-tool updates</td>
+          <td class="compare-cell">Re-engage to refresh</td>
+          <td class="compare-cell">Re-engage to refresh</td>
           <td class="compare-cell">Manual, slow</td>
-          <td class="compare-cell">Re-engage to refresh</td>
-          <td class="compare-cell">Re-engage to refresh</td>
         </tr>
         <tr>
           <td class="compare-row-label">Talent Pedigree</td>
           <td class="col-us compare-cell"><strong>Ex-MBB</strong> partners + AI engineers</td>
-          <td class="compare-cell">Internal team only</td>
           <td class="compare-cell">Senior partners, then juniors</td>
           <td class="compare-cell">Mixed</td>
+          <td class="compare-cell">Internal team only</td>
         </tr>
       </tbody>
     </table>
@@ -698,7 +721,7 @@
 
 <!-- ============ PRODUCT SHOWCASE ============ -->
 <section class="product">
-  <h2>Where <span class="grey">Strategy Meets</span> AI.</h2>
+  <h2>Where <span class="grey">Strategy Meets</span> AI Systems.</h2>
   <p class="lead">Our platform automates the heavy lifting so our strategy partners focus on positioning, decision-making, and embedding the capability.</p>
   <div class="product-grid">
     <div class="product-mock">
@@ -1107,6 +1130,41 @@
     </div>
   </div>
 </footer>
+
+<!-- ============ MOBILE STICKY CTA ============ -->
+<a class="mobile-cta" id="mobileCta" href="#meet">Book a Meeting →</a>
+
+<script>
+  // Scroll-fade reveal
+  (function(){
+    var targets = document.querySelectorAll('section > h2, .stat, .offering-card, .case-card, .insight-card, .leader-card, .sector, .funnel-row, .pillar, .compare, .product-mock, .capability, .cred-grid > div, .closing-card, details.qa-item');
+    targets.forEach(function(el){ el.classList.add('reveal'); });
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    targets.forEach(function(el){ io.observe(el); });
+  })();
+
+  // Mobile sticky CTA: show after hero scroll-past
+  (function(){
+    var cta = document.getElementById('mobileCta');
+    var hero = document.querySelector('.hero');
+    if (!cta || !hero) return;
+    function onScroll(){
+      var threshold = hero.offsetHeight * 0.8;
+      if (window.scrollY > threshold) cta.classList.add('visible');
+      else cta.classList.remove('visible');
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
 
 </body>
 </html>
