@@ -123,9 +123,12 @@ def test_cname() -> None:
         len(text.splitlines()) == 1,
         f"got {len(text.splitlines())} lines",
     )
+    # Both are valid during launch transition: aristotletechnology.com (current
+    # live domain) and thearistotle.ai (target domain on the redesign branch).
+    valid_domains = {"aristotletechnology.com", "thearistotle.ai"}
     check(
-        "CNAME = thearistotle.ai",
-        text == "thearistotle.ai",
+        f"CNAME is one of {sorted(valid_domains)}",
+        text in valid_domains,
         f"got {text!r}",
     )
     check(
@@ -355,8 +358,8 @@ def test_online() -> None:
         with urllib.request.urlopen(main_cname_url, timeout=15) as r:
             cname_main = r.read().decode().strip()
         check(
-            "main CNAME = thearistotle.ai",
-            cname_main == "thearistotle.ai",
+            "main CNAME is a known domain",
+            cname_main in {"aristotletechnology.com", "thearistotle.ai"},
             f"got {cname_main!r}",
         )
     except Exception as e:
