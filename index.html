@@ -4,289 +4,386 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="images/favicon.png">
-<title>Aristotle — AI-Enabled Consulting for Revenue Growth Management</title>
+<title>Aristotle — The AI-Native Growth &amp; Pricing Advisory for Industrial &amp; Tech Leaders</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- ─── NAVIGATION ─── -->
-<nav id="navbar">
-  <a href="#hero" class="nav-logo">Aristotle</a>
-  <ul class="nav-links">
-    <li><a href="#value">Approach</a></li>
-    <li><a href="#different">Why Us</a></li>
-    <li><a href="#path">Path to Growth</a></li>
-    <li><a href="#insights">Insights</a></li>
-    <li><a href="team.html">Team</a></li>
-    <li><a href="https://calendly.com/sam-aristotle/30min" target="_blank" class="nav-cta">Book a Meeting</a></li>
-  </ul>
-</nav>
-
-<!-- ─── HERO ─── -->
-<section class="hero" id="hero">
-  <div class="hero-inner">
-    <h1>Consulting that builds <span class="accent">capabilities.</span><br>Not dependencies.</h1>
-    <p class="hero-sub">MBB-grade insight, embedded in your team — so the capability stays after we leave.</p>
-    <div class="hero-ctas">
-      <a href="https://calendly.com/sam-aristotle/30min" target="_blank" class="btn-primary">Book a Meeting <span aria-hidden="true">→</span></a>
+<!-- ─── NAV ─── -->
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="logo">ARISTOTLE</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="insights.html">Insights</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="#cases">Case Studies</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-outline" href="https://calendly.com/sam-aristotle/30min" target="_blank">Request a Scan</a>
+      <a class="btn btn-primary" href="https://calendly.com/sam-aristotle/30min" target="_blank">Book a Meeting</a>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-controls="nav-links" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
     </div>
   </div>
+</nav>
 
-  <div class="hero-media">
-    <!-- TODO(media): Drop Chicago video into images/hero-chicago.mp4 and uncomment below.
-    <video autoplay muted loop playsinline poster="images/hero-chicago-poster.jpg">
+<!-- ─── HERO (Chicago video background) ─── -->
+<section class="hero" id="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <!-- TODO(media): drop the Chicago aerial/river MP4 into images/hero-chicago.mp4
+         then uncomment the <video> below. Poster image keeps something on screen
+         while the video loads on slow connections.
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+           poster="images/hero-chicago-poster.jpg">
       <source src="images/hero-chicago.mp4" type="video/mp4">
     </video>
     -->
-    <div class="hero-media-placeholder">Chicago — hero media slot</div>
+    <div class="hero-video-fallback"></div>
+    <div class="hero-overlay"></div>
   </div>
+  <div class="container hero-inner">
+    <h1>The AI-Native Growth &amp; Pricing Advisory for Industrial &amp; Tech Leaders</h1>
+    <p class="sub">We combine top-tier strategy partners with AI systems to deliver faster, higher-value outcomes — and the capability stays with you.</p>
+    <a class="btn btn-primary btn-lg" href="https://calendly.com/sam-aristotle/30min" target="_blank">Book a Meeting</a>
+  </div>
+</section>
 
-  <div class="hero-strip">
-    <div class="hero-strip-item">
-      <div class="hero-strip-stat">25%</div>
-      <div class="hero-strip-label">Higher value captured vs. status quo</div>
+<!-- ─── STAT BAND ─── -->
+<section class="stat-band" id="value">
+  <div class="stat-grid">
+    <div class="stat">
+      <div class="num">25%</div>
+      <div class="lab">Higher value captured vs. status quo</div>
     </div>
-    <div class="hero-strip-item">
-      <div class="hero-strip-stat">&lt;6 wks</div>
-      <div class="hero-strip-label">From kickoff to first results</div>
+    <div class="stat">
+      <div class="num">&lt;6 wks</div>
+      <div class="lab">From kickoff to first results</div>
     </div>
-    <div class="hero-strip-item">
-      <div class="hero-strip-stat">$2B+</div>
-      <div class="hero-strip-label">Growth opportunities identified to date</div>
+    <div class="stat">
+      <div class="num">$2B+</div>
+      <div class="lab">Growth opportunities identified to date</div>
     </div>
-    <div class="hero-strip-item">
-      <div class="hero-strip-stat">Tied to impact</div>
-      <div class="hero-strip-label">No seven-figure fixed fees</div>
+    <div class="stat">
+      <div class="num">Tied to impact</div>
+      <div class="lab">No seven-figure fixed fees</div>
     </div>
   </div>
 </section>
 
-<section class="logo-strip" aria-label="Prior firms our team has worked at">
-  <p class="logo-strip-caption">Decades of experience at the firms shaping global commerce</p>
-  <div class="logo-strip-grid">
-    <img src="images/logos/mckinsey.svg" alt="McKinsey & Company">
-    <img src="images/logos/nyu.svg" alt="NYU">
-    <img src="images/logos/umich.svg" alt="University of Michigan">
+<!-- ─── COMPARISON ─── -->
+<section class="section" id="different">
+  <h2>The Old Consulting Model Doesn&rsquo;t Work For You.<br><span class="grey">Ours Does.</span></h2>
+  <div class="compare-wrap">
+    <table class="compare">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="col-head col-us">Aristotle</th>
+          <th class="col-head">No Advisor</th>
+          <th class="col-head">Big-3 (MBB)</th>
+          <th class="col-head">Boutiques</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="compare-row-label">Speed to Impact</td>
+          <td class="col-us compare-cell"><strong>&lt;6 weeks</strong> to first answer</td>
+          <td class="compare-cell">Stalled, internal cycles drag</td>
+          <td class="compare-cell"><strong>4–6 months</strong> typical engagement</td>
+          <td class="compare-cell"><strong>3–6 months</strong>, variable rigor</td>
+        </tr>
+        <tr>
+          <td class="compare-row-label">Capability Build</td>
+          <td class="col-us compare-cell"><strong>AI tools live</strong> in your stack</td>
+          <td class="compare-cell">None — knowledge stays tribal</td>
+          <td class="compare-cell">None — deck only, team leaves</td>
+          <td class="compare-cell">Slides + spreadsheets</td>
+        </tr>
+        <tr>
+          <td class="compare-row-label">Fees</td>
+          <td class="col-us compare-cell"><strong>Success-tied</strong> + no upfront on scans</td>
+          <td class="compare-cell">None</td>
+          <td class="compare-cell">Seven-figure fixed fees</td>
+          <td class="compare-cell">Fixed fees + small success</td>
+        </tr>
+        <tr>
+          <td class="compare-row-label">Tooling Embedded</td>
+          <td class="col-us compare-cell"><strong>Yes</strong> — you own the IP</td>
+          <td class="compare-cell">No</td>
+          <td class="compare-cell">No — proprietary frameworks</td>
+          <td class="compare-cell">Limited or none</td>
+        </tr>
+        <tr>
+          <td class="compare-row-label">Ongoing Iteration</td>
+          <td class="col-us compare-cell"><strong>Quarterly</strong> AI-tool updates</td>
+          <td class="compare-cell">Manual, slow</td>
+          <td class="compare-cell">Re-engage to refresh</td>
+          <td class="compare-cell">Re-engage to refresh</td>
+        </tr>
+        <tr>
+          <td class="compare-row-label">Talent Pedigree</td>
+          <td class="col-us compare-cell"><strong>Ex-MBB</strong> partners + AI engineers</td>
+          <td class="compare-cell">Internal team only</td>
+          <td class="compare-cell">Senior partners, then juniors</td>
+          <td class="compare-cell">Mixed</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </section>
 
-<div class="section-divider"></div>
+<!-- ─── PATH TO COMPOUNDING GROWTH (funnel + pillars + platform) ─── -->
+<section class="path-merged" id="path">
+  <h2>The Path to <strong>Compounding Growth.</strong></h2>
 
-<!-- ─── VALUE PROPOSITION ─── -->
-<section class="value-prop" id="value">
-  <div class="value-grid">
-    <div class="value-content">
-      <div class="section-label reveal">Our Approach</div>
-      <h2 class="section-title reveal reveal-delay-1">AI-enabled consulting that<br>compounds over time</h2>
-      <p class="section-desc reveal reveal-delay-2">
-        Aristotle delivers AI-enabled consulting engagements in revenue growth management — then embeds the capability into your organization so your team can run, iterate, and expand.
-      </p>
-      <div class="value-stats reveal reveal-delay-3">
-        <div class="stat-card">
-          <div class="stat-number">40x</div>
-          <div class="stat-label">Typical ROI on engagement</div>
+  <div class="funnel-wrap">
+    <div class="funnel-list">
+      <div class="funnel-row">
+        <div class="label">500+ data points scanned</div>
+        <div class="step">01</div>
+        <div class="icons"></div>
+      </div>
+      <div class="funnel-row">
+        <div class="label">20+ prioritized growth plays surfaced</div>
+        <div class="step">02</div>
+        <div class="icons"></div>
+      </div>
+      <div class="funnel-row highlight">
+        <div class="label">2–3 priority initiatives piloted</div>
+        <div class="step">03</div>
+        <div class="icons"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      </div>
+      <div class="funnel-row">
+        <div class="label">AI tools live in your stack</div>
+        <div class="step">04</div>
+        <div class="icons"></div>
+      </div>
+      <div class="funnel-row">
+        <div class="label">Quarterly compounding iterations</div>
+        <div class="step">05</div>
+        <div class="icons"></div>
+      </div>
+      <div class="funnel-row">
+        <div class="label">$XXM in P&amp;L impact realized</div>
+        <div class="step">06</div>
+        <div class="icons"></div>
+      </div>
+    </div>
+    <div class="partner-cards">
+      <div class="partner-card">
+        <div class="avatar">SG</div>
+        <div>
+          <div class="ttl">Dedicated Partner</div>
+          <div class="sub">Ex-MBB strategy partner</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-number">80+</div>
-          <div class="stat-label">Growth targets identified per scan</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">$500M+</div>
-          <div class="stat-label">Growth opportunities identified</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">10x</div>
-          <div class="stat-label">Faster than traditional consulting</div>
+      </div>
+      <div class="partner-card">
+        <div class="avatar">AI</div>
+        <div>
+          <div class="ttl">Aristotle AI Agents</div>
+          <div class="sub">Runs analyses on demand</div>
         </div>
       </div>
     </div>
-    <div class="process-bar reveal reveal-delay-2">
-      <div class="process-step">
-        <div class="process-step-num">01</div>
-        <div class="process-step-title">Engage</div>
-        <div class="process-step-text">Diagnose the revenue lever with the highest ROI in weeks, not months.</div>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar">
+      <h4>Partner-Led Process</h4>
+      <p>Every engagement is run by a former McKinsey, BCG, or Bain partner — not a junior team.</p>
+    </div>
+    <div class="pillar">
+      <h4>AI Advantage</h4>
+      <p>Our AI does the manual work — surfacing growth plays and pricing leaks at scale.</p>
+    </div>
+    <div class="pillar">
+      <h4>Faster to Impact</h4>
+      <p>From kickoff to first quantified answer in under 6 weeks. Iterate from there.</p>
+    </div>
+    <div class="pillar">
+      <h4>Capability Embedded</h4>
+      <p>You keep the models. Your team runs them after we leave — and we update them quarterly.</p>
+    </div>
+  </div>
+
+  <!-- Platform sub-band (dark) — the four offerings as the interactive element -->
+  <div class="platform" id="offerings">
+    <h3 class="platform-h3">Where <span class="grey">Strategy Meets</span> AI.</h3>
+    <p class="platform-lead">Our platform automates the heavy lifting so our strategy partners focus on positioning, decision-making, and embedding the capability.</p>
+
+    <div class="product-grid">
+      <div class="product-mock" aria-label="Illustrative platform mock">
+        <div class="bar">
+          <div class="tabs">
+            <div class="tab active">Growth opportunities</div>
+            <div class="tab">Pricing leaks</div>
+          </div>
+          <div class="search">Find an opportunity</div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>End-market</th>
+              <th>Fit Score</th>
+              <th>Rationale</th>
+              <th>Plays</th>
+              <th>$ Potential</th>
+              <th>Δ vs LY</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Industrial Distribution</td>
+              <td><span class="score">9.4</span></td>
+              <td>Strong product-market fit; consolidating channels; price elasticity favorable.</td>
+              <td>• Channel rationalization<br>• SKU pruning<br>• Dynamic pricing</td>
+              <td><span class="pill good">$120M</span></td>
+              <td><span class="pill good">+18% YoY</span></td>
+            </tr>
+            <tr>
+              <td>Semi Cap Equipment</td>
+              <td><span class="score">8.7</span></td>
+              <td>Adjacent capability; high-margin segment; 3 ex-customers reactivatable.</td>
+              <td>• Reactivation<br>• Premium tier<br>• Bundling</td>
+              <td><span class="pill good">$80M</span></td>
+              <td><span class="pill good">+12% YoY</span></td>
+            </tr>
+            <tr>
+              <td>Specialty Chemicals</td>
+              <td><span class="score">8.2</span></td>
+              <td>Pricing power untapped; 6 SKUs underpriced by 8–15%.</td>
+              <td>• Re-pricing<br>• Discount controls</td>
+              <td><span class="pill good">$55M</span></td>
+              <td><span class="pill good">+9% YoY</span></td>
+            </tr>
+            <tr>
+              <td>Aerospace MRO</td>
+              <td><span class="score">7.8</span></td>
+              <td>Adjacent; high switching cost; 4 anchor accounts identified.</td>
+              <td>• Account-based pursuit<br>• Cross-sell</td>
+              <td><span class="pill good">$45M</span></td>
+              <td><span class="pill good">+7% YoY</span></td>
+            </tr>
+            <tr>
+              <td>Heavy Equipment Resale</td>
+              <td><span class="score">7.5</span></td>
+              <td>Fragmented; 80+ tuck-in targets; clear consolidation thesis.</td>
+              <td>• M&amp;A roll-up<br>• Digital channel</td>
+              <td><span class="pill good">$60M</span></td>
+              <td><span class="pill good">+11% YoY</span></td>
+            </tr>
+            <tr>
+              <td>Legacy POS Hardware</td>
+              <td><span class="score">5.1</span></td>
+              <td>Declining demand; commoditized; harvest only.</td>
+              <td>• Price-up<br>• Wind-down</td>
+              <td><span class="pill bad">−$8M</span></td>
+              <td><span class="pill bad">−4% YoY</span></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="process-step">
-        <div class="process-step-num">02</div>
-        <div class="process-step-title">Build</div>
-        <div class="process-step-text">Stand up the AI system unique to your data, your products, your buyers.</div>
-      </div>
-      <div class="process-step">
-        <div class="process-step-num">03</div>
-        <div class="process-step-title">Embed</div>
-        <div class="process-step-text">Hand the keys to your team. Train them to run, iterate, and extend.</div>
-      </div>
-      <div class="process-step">
-        <div class="process-step-num">04</div>
-        <div class="process-step-title">Iterate</div>
-        <div class="process-step-text">Returns compound as the system learns and your team applies it to new questions.</div>
+
+      <div class="capability-list" role="tablist" aria-label="Aristotle platform capabilities">
+        <button type="button" class="capability is-open" aria-expanded="true">
+          <span class="capability-ttl"><span class="arrow" aria-hidden="true">→</span> Opportunity Identification</span>
+          <span class="capability-body">We surface dozens of synergetic growth plays in days, not months — sized, scored, and tied to executable next steps.</span>
+        </button>
+        <button type="button" class="capability" aria-expanded="false">
+          <span class="capability-ttl"><span class="arrow" aria-hidden="true">→</span> Pricing Engine</span>
+          <span class="capability-body">Customer- and quote-level pricing models that surface leaks and recommend moves. Embedded so your team can re-run pricing refreshes every quarter.</span>
+        </button>
+        <button type="button" class="capability" aria-expanded="false">
+          <span class="capability-ttl"><span class="arrow" aria-hidden="true">→</span> Demand Forecasting</span>
+          <span class="capability-body">Customer-by-SKU forecasts that learn from every cycle. Built into your S&amp;OP flow and owned by your team after we leave.</span>
+        </button>
+        <button type="button" class="capability" aria-expanded="false">
+          <span class="capability-ttl"><span class="arrow" aria-hidden="true">→</span> Geospatial Mapping</span>
+          <span class="capability-body">Demand, competitors, and white space mapped at the ZIP, county, or trade-area level — built for industries where geography determines the play.</span>
+        </button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── PATH TO COMPOUNDING GROWTH ─── -->
-<section class="path" id="path">
-  <div class="path-header">
-    <div class="section-label reveal">Our Platform</div>
-    <h2 class="section-title reveal reveal-delay-1">Path to Compounding Growth</h2>
-    <p class="section-desc reveal reveal-delay-2">Four AI capabilities, applied in concert. Each one stands alone — together they make consulting compound.</p>
+<!-- ─── CREDIBILITY BAND ─── -->
+<section class="cred" id="expertise">
+  <h2>Decades of expertise backed by<br>technology that delivers.</h2>
+  <div class="cred-alumni" aria-label="Team alumni firms">
+    <span>McKinsey &amp; Company</span>
+    <span>BLACKSTONE</span>
   </div>
-
-  <div class="path-tabs" role="tablist">
-    <button class="path-tab active" role="tab" aria-selected="true" data-target="tab-opportunity">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      Opportunity Identification
-    </button>
-    <button class="path-tab" role="tab" aria-selected="false" data-target="tab-geospatial">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-7-7-12a7 7 0 1 1 14 0c0 5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-      Geospatial Mapping
-    </button>
-    <button class="path-tab" role="tab" aria-selected="false" data-target="tab-pricing">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 6H9a3 3 0 0 0 0 6h6a3 3 0 0 1 0 6H7"/></svg>
-      Pricing Engine
-    </button>
-    <button class="path-tab" role="tab" aria-selected="false" data-target="tab-forecast">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 7-9"/><path d="M14 7h6v6"/></svg>
-      Demand Forecasting
-    </button>
-  </div>
-
-  <div class="path-panels">
-    <div class="path-panel active" id="tab-opportunity" role="tabpanel">
-      <div class="path-panel-content">
-        <h3>Surface the growth no one's looked for.</h3>
-        <p>Scan markets, adjacencies, and acquisition targets at a depth that used to take a six-month engagement. Output: ranked opportunities with sizing and rationale.</p>
-        <div class="path-panel-meta">
-          <div class="path-panel-meta-label">Engaged via</div>
-          <div class="path-panel-meta-value">Growth Strategy · Commercial Due Diligence</div>
-        </div>
-      </div>
-      <div class="path-panel-visual">
-        <!-- TODO(media): screenshot or product mock of opportunity dashboard -->
-        <div class="path-panel-placeholder">Opportunity scan output</div>
-      </div>
+  <div class="cred-grid">
+    <div>
+      <div class="cred-num">$1B+</div>
+      <div class="cred-lab">in client impact delivered by our team</div>
     </div>
-
-    <div class="path-panel" id="tab-geospatial" role="tabpanel" hidden>
-      <div class="path-panel-content">
-        <h3>See your market the way it actually behaves.</h3>
-        <p>Map demand, competitors, and white space at the ZIP, county, or trade-area level. Built for industrials, retail, and services where geography determines the play.</p>
-        <div class="path-panel-meta">
-          <div class="path-panel-meta-label">Engaged via</div>
-          <div class="path-panel-meta-value">Growth Strategy · Commercial Due Diligence</div>
-        </div>
-      </div>
-      <div class="path-panel-visual">
-        <div class="path-panel-placeholder">Geospatial demand map</div>
-      </div>
+    <div>
+      <div class="cred-num">&lt;6 wks</div>
+      <div class="cred-lab">to first quantified answer on every engagement</div>
     </div>
-
-    <div class="path-panel" id="tab-pricing" role="tabpanel" hidden>
-      <div class="path-panel-content">
-        <h3>Capture the value you're leaving on the table.</h3>
-        <p>Customer- and quote-level pricing models that surface leaks and recommend moves. Then we embed it so the team can run pricing refreshes without us.</p>
-        <div class="path-panel-meta">
-          <div class="path-panel-meta-label">Engaged via</div>
-          <div class="path-panel-meta-value">Pricing</div>
-        </div>
-      </div>
-      <div class="path-panel-visual">
-        <div class="path-panel-placeholder">Pricing engine output</div>
-      </div>
-    </div>
-
-    <div class="path-panel" id="tab-forecast" role="tabpanel" hidden>
-      <div class="path-panel-content">
-        <h3>Forecasts that stay sharp after we leave.</h3>
-        <p>Customer-by-SKU forecasts that learn from every cycle. Built into your S&amp;OP flow, owned by your team.</p>
-        <div class="path-panel-meta">
-          <div class="path-panel-meta-label">Engaged via</div>
-          <div class="path-panel-meta-value">Demand Forecasting</div>
-        </div>
-      </div>
-      <div class="path-panel-visual">
-        <div class="path-panel-placeholder">Forecast accuracy dashboard</div>
-      </div>
+    <div>
+      <div class="cred-num">50+</div>
+      <div class="cred-lab">engagements led at Fortune 500 industrial and tech leaders</div>
     </div>
   </div>
 </section>
 
-<!-- ─── DIFFERENTIATORS ─── -->
-<section class="differentiators" id="different">
-  <div class="diff-header">
-    <div class="section-label reveal">Why Aristotle</div>
-    <h2 class="section-title reveal reveal-delay-1">How We Are Different</h2>
-    <p class="section-desc reveal reveal-delay-2">Knowledge walks out the door at traditional consulting. At Aristotle, we build capabilities and sustain impact.</p>
-  </div>
-  <div class="diff-table">
-    <div class="diff-row header reveal">
-      <div class="diff-cell diff-header-cell"></div>
-      <div class="diff-cell diff-header-cell">Traditional Consulting</div>
-      <div class="diff-cell diff-header-cell diff-header-aristotle">Aristotle</div>
+<!-- ─── SECTORS ─── -->
+<section class="sectors" id="sectors">
+  <h2>We Work With <strong>Leaders Across Various Sectors</strong></h2>
+  <div class="sector-grid">
+    <div class="sector">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l5 3V8l5 3V8l4 2v11"/><path d="M9 13v3M13 13v3M17 13v3"/></svg>
+      </div>
+      <h4>Industrials</h4>
+      <p>Manufacturing, distribution, heavy equipment</p>
     </div>
-    <div class="diff-row reveal reveal-delay-1">
-      <div class="diff-cell diff-label">Commercial Arrangements</div>
-      <div class="diff-cell diff-trad">Fixed fees. Seven figures.</div>
-      <div class="diff-cell diff-aristotle">Tied to impact.</div>
+    <div class="sector">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 5V2M15 5V2M9 22v-3M15 22v-3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>
+      </div>
+      <h4>Semis &amp; Hardware</h4>
+      <p>Fabless, design, photonics, sensors</p>
     </div>
-    <div class="diff-row reveal reveal-delay-2">
-      <div class="diff-cell diff-label">Sustained Value</div>
-      <div class="diff-cell diff-trad">No systems or capabilities are built.</div>
-      <div class="diff-cell diff-aristotle">AI systems unique to you.</div>
+    <div class="sector">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8l-4 4 4 4M17 8l4 4-4 4M14 4l-4 16"/></svg>
+      </div>
+      <h4>Tech &amp; SaaS</h4>
+      <p>Enterprise software, B2B platforms, data infra</p>
     </div>
-    <div class="diff-row reveal reveal-delay-3">
-      <div class="diff-cell diff-label">Sustained Knowledge</div>
-      <div class="diff-cell diff-trad">Teams leave. Decks get old. Analysis needs to be rebuilt.</div>
-      <div class="diff-cell diff-aristotle">On-going support. Current insights.</div>
+    <div class="sector">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+      </div>
+      <h4>Distribution &amp; Wholesale</h4>
+      <p>Multi-channel, specialty, B2B trade</p>
     </div>
-  </div>
-  <p class="diff-footer reveal">Knowledge walks out the door at traditional consulting.<br>At Aristotle, we build capabilities and sustain impact.</p>
-</section>
-
-<!-- ─── EXPERTISE ─── -->
-<section class="expertise" id="expertise">
-  <div class="expertise-header">
-    <div class="section-label">By the Numbers</div>
-    <h2 class="section-title">Decades of expertise. Backed by technology that delivers.</h2>
-  </div>
-
-  <div class="expertise-stats">
-    <div class="expertise-stat">
-      <div class="expertise-stat-num">$2B+</div>
-      <div class="expertise-stat-text">in growth opportunities identified in under a week</div>
+    <div class="sector">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 1 1 6 0"/></svg>
+      </div>
+      <h4>Consumer &amp; Retail</h4>
+      <p>DTC, specialty retail, branded goods</p>
     </div>
-    <div class="expertise-stat">
-      <div class="expertise-stat-num">40x</div>
-      <div class="expertise-stat-text">average ROI on a single Aristotle engagement</div>
-    </div>
-    <div class="expertise-stat">
-      <div class="expertise-stat-num">10x</div>
-      <div class="expertise-stat-text">faster than the traditional consulting cycle</div>
-    </div>
-  </div>
-
-  <div class="expertise-sectors">
-    <div class="expertise-sectors-label">Sectors we serve</div>
-    <div class="expertise-sectors-grid">
-      <div class="expertise-sector">Industrials &amp; Manufacturing</div>
-      <div class="expertise-sector">Semiconductors</div>
-      <div class="expertise-sector">Financial Services</div>
-      <div class="expertise-sector">Technology</div>
-      <div class="expertise-sector">Consumer &amp; Retail</div>
-      <div class="expertise-sector">Private Equity</div>
+    <div class="sector">
+      <div class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 6H9a3 3 0 0 0 0 6h6a3 3 0 0 1 0 6H7"/></svg>
+      </div>
+      <h4>PE &amp; M&amp;A Diligence</h4>
+      <p>Commercial diligence, value creation plans</p>
     </div>
   </div>
 </section>
 
 <!-- ─── CASE STUDIES ─── -->
-<section class="case-studies" id="cases">
-  <div class="cases-header">
-    <div class="section-label reveal">Proven Results</div>
-    <h2 class="section-title reveal reveal-delay-1">Case Studies</h2>
-  </div>
+<section class="cases" id="cases">
+  <h2>Case Studies</h2>
   <div class="cases-grid">
-    <div class="case-card reveal">
+    <div class="case-card">
       <span class="case-tag">Growth Strategy</span>
       <h3>Growth Strategy for $2B+ Industrials Manufacturer</h3>
       <div class="case-meta">Large Enterprise · Industrials · Corporate Strategy</div>
@@ -296,13 +393,13 @@
       </div>
       <div class="case-section">
         <div class="case-section-label">Action</div>
-        <div class="case-section-text">Developed customized framework to shortlist 10+ product categories across 30+ end-markets. Created detailed market map yielding 8+ growth plays. Assessed value chain dynamics and conducted M&A scan identifying 80+ targets.</div>
+        <div class="case-section-text">Developed customized framework to shortlist 10+ product categories across 30+ end-markets. Created detailed market map yielding 8+ growth plays. Assessed value chain dynamics and conducted M&amp;A scan identifying 80+ targets.</div>
       </div>
       <div class="case-result">
         <div class="case-result-text">$500M+ growth opportunities identified. 8+ acquisitions completed. $300M+ top-line impact delivered.</div>
       </div>
     </div>
-    <div class="case-card reveal reveal-delay-1">
+    <div class="case-card">
       <span class="case-tag">Pricing</span>
       <h3>Pricing System for $700M Fabless Semiconductor</h3>
       <div class="case-meta">Large Enterprise · Technology · Commercial Ops</div>
@@ -318,10 +415,10 @@
         <div class="case-result-text">$4M impact. 40x ROI.</div>
       </div>
     </div>
-    <div class="case-card reveal reveal-delay-2">
+    <div class="case-card">
       <span class="case-tag">Commercial Due Diligence</span>
-      <h3>CDD: Trucks & Heavy Equipment Resale Market</h3>
-      <div class="case-meta">Large Enterprise · Industrials · Strategy & Development</div>
+      <h3>CDD: Trucks &amp; Heavy Equipment Resale Market</h3>
+      <div class="case-meta">Large Enterprise · Industrials · Strategy &amp; Development</div>
       <div class="case-section">
         <div class="case-section-label">Problem</div>
         <div class="case-section-text">PE firm evaluating PortCo tuck-in acquisition of a logistics broker in the truck and construction equipment resale segment.</div>
@@ -334,7 +431,7 @@
         <div class="case-result-text">Delivered independent market study. PE green-lighted the acquisition.</div>
       </div>
     </div>
-    <div class="case-card reveal reveal-delay-3">
+    <div class="case-card">
       <span class="case-tag">Demand Forecasting</span>
       <h3>Demand Forecasting for $4B Semiconductor Co.</h3>
       <div class="case-meta">Large Enterprise · Technology · Operations</div>
@@ -353,134 +450,138 @@
   </div>
 </section>
 
-<!-- ─── INSIGHTS ─── -->
-<section class="insights" id="insights">
-  <div class="insights-header">
-    <div class="section-label">Insights</div>
-    <h2 class="section-title">Notes from the field</h2>
-    <p class="section-desc">Field-tested perspectives on revenue, pricing, and where AI is actually moving the needle.</p>
-  </div>
-  <div class="insights-grid">
-    <article class="insight-card">
-      <div class="insight-tag">Pricing</div>
-      <h3>Why your pricing model expires the day you ship it</h3>
-      <div class="insight-meta">Coming soon</div>
-    </article>
-    <article class="insight-card">
-      <div class="insight-tag">Growth Strategy</div>
-      <h3>Adjacency scans: the cheapest growth lever most companies skip</h3>
-      <div class="insight-meta">Coming soon</div>
-    </article>
-    <article class="insight-card">
-      <div class="insight-tag">AI in Consulting</div>
-      <h3>The hand-off problem: why consulting capabilities don't stick</h3>
-      <div class="insight-meta">Coming soon</div>
-    </article>
-  </div>
-  <!-- TODO(content): swap placeholder titles for real posts; link to /insights/<slug>.html when ready -->
-</section>
-
 <!-- ─── Q&A ─── -->
 <section class="qa" id="qa">
-  <div class="qa-header">
-    <div class="section-label">Q&amp;A</div>
-    <h2 class="section-title">Common questions</h2>
-  </div>
-
+  <h2>Q&amp;A</h2>
   <div class="qa-list">
     <details class="qa-item">
-      <summary>How is Aristotle different from a traditional consulting firm?</summary>
-      <div class="qa-answer">We deliver MBB-grade insight in weeks, not months — then we embed the AI systems and trained team so the capability stays after we leave. Traditional firms ship a deck and a bill; we ship a working system you own.</div>
+      <summary>What is AI-enabled consulting?</summary>
+      <p>A new operating model that combines top-tier strategy partners with AI tools that stay inside your stack — so your team can re-run the analysis, not pay for a refresh.</p>
     </details>
     <details class="qa-item">
-      <summary>What does "tied to impact" mean for fees?</summary>
-      <div class="qa-answer">Our commercials are structured around the outcome we deliver, not a fixed seven-figure engagement fee. We win when you win.</div>
+      <summary>How is this different from McKinsey, BCG, or Bain?</summary>
+      <p>Same caliber of analysis (our team comes from MBB), but tied to outcome-based fees and a durable AI capability handover, not a deck. We're faster, cheaper, and the capability stays.</p>
     </details>
     <details class="qa-item">
-      <summary>What size of company do you typically work with?</summary>
-      <div class="qa-answer"><!-- TODO(content): confirm revenue band --> Mid-market through enterprise — typically $200M–$5B in revenue, in industries where revenue decisions are driven by pricing, geography, or demand complexity.</div>
+      <summary>What's the engagement model?</summary>
+      <p>Diagnostic Scan (2 weeks, no upfront fee) → Transformation Sprint (8–12 weeks, blended fixed + success fee) → Compound (quarterly iterations on the AI tools).</p>
     </details>
     <details class="qa-item">
-      <summary>How quickly can we see results?</summary>
-      <div class="qa-answer">Initial findings in under six weeks. Most engagements show measurable revenue impact within the first quarter and compound from there as the embedded system iterates.</div>
+      <summary>How do your fees work?</summary>
+      <p>No upfront fees on diagnostic scans. Blended fixed + success fees on transformation engagements. Our incentives are aligned with yours.</p>
     </details>
     <details class="qa-item">
-      <summary>Who owns the AI system you build?</summary>
-      <div class="qa-answer">You do. Code, models, dashboards, and documentation all live in your environment. We provide ongoing support, but the capability is yours to run.</div>
+      <summary>Who owns the IP we build together?</summary>
+      <p>You. Models, dashboards, and playbooks all live in your tenancy. We hand over keys at the end of the engagement.</p>
     </details>
     <details class="qa-item">
       <summary>Is my data secure?</summary>
-      <div class="qa-answer">Yes. We work inside your security perimeter where possible, and use enterprise-grade controls otherwise. NDAs and DPAs are standard.</div>
+      <p>Yes. SOC 2 Type II controls, with all client data staying in your cloud. We work inside your tenancy — your data never leaves.</p>
     </details>
   </div>
 </section>
 
-<!-- ─── CTA ─── -->
-<section class="cta" id="contact">
-  <h2 class="section-title">Business decisions are too important for stale spreadsheets and consulting decks.</h2>
-  <p class="cta-sub">Book a 30-minute call. We'll show you what compounding consulting looks like for your team.</p>
-  <a href="https://calendly.com/sam-aristotle/30min" target="_blank" class="btn-primary">Book a Meeting <span aria-hidden="true">→</span></a>
+<!-- ─── CLOSING CTA ─── -->
+<section class="closing" id="contact">
+  <div class="closing-card">
+    <div>
+      <h2>Your Next $100M in Growth — Mapped in 30 Days.</h2>
+      <p>Meet a partner who has done this for Fortune 500 leaders. No upfront fees on diagnostic scans.</p>
+      <div class="cta">
+        <a class="btn btn-on-dark btn-primary btn-lg" href="https://calendly.com/sam-aristotle/30min" target="_blank">Book a Meeting</a>
+        <a class="btn btn-on-dark btn-outline btn-lg" href="https://calendly.com/sam-aristotle/30min" target="_blank">Request a Pricing Scan</a>
+      </div>
+    </div>
+    <div class="advisor-card">
+      <div class="advisor-head">
+        <div class="advisor-avatar"><img src="images/sam.jpeg" alt="Sam Garg, Founder"></div>
+        <div>
+          <div class="advisor-name">Dedicated Partner</div>
+          <div style="color:var(--ink-muted);font-size:13px;margin-top:2px">Ex-McKinsey strategy partner</div>
+        </div>
+      </div>
+      <dl class="advisor-meta">
+        <div class="cell">
+          <div class="l">Previous Role</div>
+          <div class="v">Partner, Strategy</div>
+        </div>
+        <div class="cell">
+          <div class="l">Firm</div>
+          <div class="v">McKinsey &amp; Company</div>
+        </div>
+        <div class="cell">
+          <div class="l">Engagements Led</div>
+          <div class="v">50+</div>
+        </div>
+        <div class="cell">
+          <div class="l">Impact Delivered</div>
+          <div class="v">$1B+</div>
+        </div>
+      </dl>
+    </div>
+  </div>
 </section>
 
 <!-- ─── FOOTER ─── -->
 <footer>
-  <div class="footer-logo">Aristotle</div>
-  <div class="footer-text">&copy; 2026 Aristotle. Chicago, IL.</div>
-  <ul class="footer-links">
-    <li><a href="team.html">Team</a></li>
-    <li><a href="#insights">Insights</a></li>
-    <li><a href="https://calendly.com/sam-aristotle/30min" target="_blank">Book a Meeting</a></li>
-    <li><a href="mailto:sam@aristotle.ai">Contact</a></li>
-  </ul>
+  <div class="row">
+    <div class="logo">ARISTOTLE</div>
+    <div class="links">
+      <a href="mailto:legal@aristotle.ai?subject=Privacy%20Policy">Privacy Policy</a>
+      <a href="mailto:legal@aristotle.ai?subject=Terms">Terms</a>
+    </div>
+    <div class="footer-lin"><a href="https://www.linkedin.com/company/aristotle-technology/" target="_blank" aria-label="Aristotle on LinkedIn">in</a></div>
+  </div>
+  <div class="copyright">Copyright &copy; 2026 Aristotle Technology, Inc.</div>
+  <div class="disclaimer">
+    Aristotle delivers AI-enabled consulting in growth, pricing, commercial diligence, and demand forecasting.
+    Engagements are subject to mutually agreed terms; outcomes vary by client.
+  </div>
 </footer>
-<!-- TODO(content): confirm sam@aristotle.ai or correct contact email -->
 
 <script>
-// ─── NAV SCROLL ───
-const nav = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-});
-
-// ─── REVEAL ON SCROLL ───
-const revealElements = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-revealElements.forEach(el => observer.observe(el));
-
-// ─── SMOOTH SCROLL ───
+// Smooth scroll for in-page anchors
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
-    e.preventDefault();
     const target = document.querySelector(this.getAttribute('href'));
     if (target) {
+      e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 });
 
-// ─── PATH TABS ───
-const pathTabs = document.querySelectorAll('.path-tab');
-const pathPanels = document.querySelectorAll('.path-panel');
-pathTabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    const targetId = tab.dataset.target;
-    pathTabs.forEach(t => {
-      const active = t === tab;
-      t.classList.toggle('active', active);
-      t.setAttribute('aria-selected', String(active));
+// Mobile nav toggle
+const navBtn = document.getElementById('nav-hamburger');
+const navLinks = document.getElementById('nav-links');
+if (navBtn && navLinks) {
+  navBtn.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navBtn.setAttribute('aria-expanded', String(isOpen));
+    navBtn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navBtn.setAttribute('aria-expanded', 'false');
+      navBtn.setAttribute('aria-label', 'Open menu');
     });
-    pathPanels.forEach(p => {
-      const show = p.id === targetId;
-      p.classList.toggle('active', show);
-      p.hidden = !show;
+  });
+}
+
+// Platform capability toggle — one open at a time, click again to close
+const capabilities = document.querySelectorAll('.capability-list .capability');
+capabilities.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const wasOpen = btn.classList.contains('is-open');
+    capabilities.forEach(b => {
+      b.classList.remove('is-open');
+      b.setAttribute('aria-expanded', 'false');
     });
+    if (!wasOpen) {
+      btn.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
   });
 });
 </script>

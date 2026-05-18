@@ -24,6 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "index.html"
 TEAM = ROOT / "team.html"
+INSIGHTS = ROOT / "insights.html"
 STYLES = ROOT / "styles.css"
 CNAME = ROOT / "CNAME"
 
@@ -47,8 +48,6 @@ def check(name: str, cond: bool, detail: str = "") -> None:
 
 
 def strip_comments(text: str) -> str:
-    """Return HTML with comments removed so placeholder markers inside comments
-    don't trip user-visible content checks."""
     return HTML_COMMENT_RE.sub("", text)
 
 
@@ -67,6 +66,8 @@ class IDCollector(html.parser.HTMLParser):
         self._in_h2 = False
         self._h2_buf: list[str] = []
         self.errors: list[str] = []
+        self.has_viewport = False
+        self.button_min_heights: list[str] = []
 
     def handle_starttag(self, tag, attrs):
         attr = dict(attrs)
@@ -80,6 +81,9 @@ class IDCollector(html.parser.HTMLParser):
         if tag == "h2":
             self._in_h2 = True
             self._h2_buf = []
+        if tag == "meta" and attr.get("name") == "viewport":
+            content = attr.get("content", "")
+            self.has_viewport = "width=device-width" in content
         if tag in {"div", "section", "nav", "footer", "header", "main", "article"}:
             self.tags_open.append(tag)
 
@@ -111,25 +115,19 @@ def test_files_exist() -> None:
     print("\n[1] File existence")
     check("index.html exists", INDEX.is_file())
     check("team.html exists", TEAM.is_file())
+    check("insights.html exists", INSIGHTS.is_file())
     check("styles.css exists", STYLES.is_file())
     check("CNAME exists", CNAME.is_file())
     check("images/ dir exists", (ROOT / "images").is_dir())
     for fname in ("favicon.png", "sam.jpeg", "bia.jpeg", "rachit.jpeg"):
         check(f"images/{fname} exists", (ROOT / "images" / fname).is_file())
-    for logo in ("mckinsey.svg", "nyu.svg", "umich.svg"):
-        check(f"images/logos/{logo} exists", (ROOT / "images" / "logos" / logo).is_file())
 
 
 def test_cname() -> None:
     print("\n[2] CNAME format")
-    raw = CNAME.read_bytes()
     text = CNAME.read_text(encoding="utf-8").strip()
-    check("CNAME is not empty", bool(text), repr(raw))
-    check(
-        "CNAME has exactly one domain",
-        len(text.splitlines()) == 1,
-        f"got {len(text.splitlines())} lines",
-    )
+    check("CNAME is not empty", bool(text))
+    check("CNAME has exactly one domain", len(text.splitlines()) == 1)
     valid_domains = {"aristotletechnology.com", "thearistotle.ai"}
     check(
         f"CNAME is one of {sorted(valid_domains)}",
@@ -137,8 +135,8 @@ def test_cname() -> None:
         f"got {text!r}",
     )
     check(
-        "CNAME has no leading/trailing whitespace on the domain",
-        not (text != text.strip() or text.startswith(" ") or text.endswith(" ")),
+        "CNAME has no trailing whitespace",
+        text == text.strip(),
     )
     check(
         "CNAME is valid domain syntax",
@@ -147,9 +145,9 @@ def test_cname() -> None:
     )
 
 
-def test_html_head(p: IDCollector) -> None:
-    print("\n[3] HTML head (index.html)")
-    text = INDEX.read_text(encoding="utf-8")
+def test_html_head(p: IDCollector, label: str, path: Path) -> None:
+    print(f"\n[3] HTML head ({label})")
+    text = path.read_text(encoding="utf-8")
     check("has DOCTYPE", text.lstrip().lower().startswith("<!doctype html>"))
     check("html lang attr present", 'lang="en"' in text)
     check("has <title>", "<title>" in text and "</title>" in text)
@@ -157,14 +155,14 @@ def test_html_head(p: IDCollector) -> None:
         "title mentions Aristotle",
         bool(re.search(r"<title>[^<]*Aristotle[^<]*</title>", text)),
     )
-    check("has meta viewport", 'name="viewport"' in text)
+    check("has meta viewport (device-width)", p.has_viewport)
     check("has favicon link", 'rel="icon"' in text)
     check("references favicon.png", "images/favicon.png" in text)
     check("links external styles.css", 'href="styles.css"' in text)
 
 
-def test_anchors(p: IDCollector) -> None:
-    print("\n[4] Anchor integrity (index.html)")
+def test_anchors(p: IDCollector, label: str) -> None:
+    print(f"\n[4] Anchor integrity ({label})")
     ids = set(p.ids)
     check(
         "no duplicate IDs",
@@ -179,7 +177,11 @@ def test_anchors(p: IDCollector) -> None:
         f"missing IDs: {sorted(set(missing))}",
     )
     check("no empty hrefs", "" not in p.hrefs)
-    check("no href='#' (lazy placeholder)", "#" not in p.hrefs, "found bare '#' link in index.html")
+    check(
+        "no href='#' (lazy placeholder)",
+        "#" not in p.hrefs,
+        f"found bare '#' link in {label}",
+    )
     check("no javascript: URLs", not any(h.lower().startswith("javascript:") for h in p.hrefs))
 
 
@@ -197,12 +199,12 @@ def test_required_sections(p: IDCollector) -> None:
     print("\n[6] Required sections present (index.html)")
     h2_text = " | ".join(p.section_h2s)
     expected_h2 = [
-        ("path", "Path to Compounding Growth"),
-        ("differentiators", "How We Are Different"),
-        ("expertise", "Decades of expertise"),
+        ("comparison", "Ours Does"),
+        ("path-merged", "Compounding Growth"),
+        ("credibility", "Decades of expertise"),
+        ("sectors", "Leaders Across Various Sectors"),
         ("cases", "Case Studies"),
-        ("insights", "Notes from the field"),
-        ("qa", "Common questions"),
+        ("qa", "Q&A"),
     ]
     for label, needle in expected_h2:
         check(
@@ -210,8 +212,17 @@ def test_required_sections(p: IDCollector) -> None:
             needle in h2_text,
             f"got: {h2_text}",
         )
+    # Platform sub-band is now an h3 inside the merged path section; check the file directly
+    raw = INDEX.read_text(encoding="utf-8")
+    check(
+        "platform sub-band h3 'Strategy Meets'",
+        bool(re.search(r"<h3[^>]*class=\"platform-h3\"[^>]*>.*?Strategy Meets.*?</h3>", raw, re.DOTALL)),
+    )
 
-    expected_ids = ["hero", "value", "path", "different", "expertise", "cases", "insights", "qa", "contact"]
+    expected_ids = [
+        "hero", "value", "different", "path", "offerings",
+        "expertise", "sectors", "cases", "qa", "contact",
+    ]
     actual_ids = set(p.ids)
     for sid in expected_ids:
         check(f"section id='{sid}' exists", sid in actual_ids)
@@ -221,13 +232,15 @@ def test_design_tokens() -> None:
     print("\n[7] Design tokens (styles.css)")
     text = STYLES.read_text(encoding="utf-8")
     expected = {
-        "--navy-deepest": r"--navy-deepest:\s*#[0-9A-Fa-f]{3,8}",
-        "--navy-deep": r"--navy-deep:\s*#[0-9A-Fa-f]{3,8}",
+        "--bg": r"--bg:\s*#[0-9A-Fa-f]{3,8}",
+        "--bg-alt": r"--bg-alt:\s*#[0-9A-Fa-f]{3,8}",
         "--navy": r"--navy:\s*#[0-9A-Fa-f]{3,8}",
-        "--blue-accent": r"--blue-accent:\s*#[0-9A-Fa-f]{3,8}",
-        "--blue-bright": r"--blue-bright:\s*#[0-9A-Fa-f]{3,8}",
+        "--navy-deep": r"--navy-deep:\s*#[0-9A-Fa-f]{3,8}",
+        "--ink": r"--ink:\s*#[0-9A-Fa-f]{3,8}",
+        "--ink-muted": r"--ink-muted:\s*#[0-9A-Fa-f]{3,8}",
+        "--line": r"--line:\s*#[0-9A-Fa-f]{3,8}",
         "--white": r"--white:\s*#[0-9A-Fa-f]{3,8}",
-        "--gold": r"--gold:\s*#[0-9A-Fa-f]{3,8}",
+        "--radius-pill": r"--radius-pill:\s*\d+px",
     }
     for name, pattern in expected.items():
         check(f"token defined: {name}", bool(re.search(pattern, text)))
@@ -238,36 +251,97 @@ def test_content_invariants() -> None:
     text = INDEX.read_text(encoding="utf-8")
     visible = strip_comments(text)
 
-    # Hero strip
-    check("hero strip: '25%'", "25%" in visible)
-    check("hero strip: '&lt;6 wks' or '<6 wks'", "&lt;6 wks" in visible or "<6 wks" in visible)
-    check("hero strip: '$2B+'", "$2B+" in visible)
-    check("hero strip: 'Tied to impact'", "Tied to impact" in visible)
-
-    # Value-prop stats
-    check("value stats: '40x'", "40x" in visible)
-    check("value stats: '80+'", "80+" in visible)
-    check("value stats: '$500M+'", "$500M+" in visible)
-    check("value stats: '10x'", "10x" in visible)
-
-    # Expertise stats
-    check("expertise: '$2B+'", "$2B+" in visible)
-
-    # Path-to-Growth tabs
-    for tab in ("Opportunity Identification", "Geospatial Mapping", "Pricing Engine", "Demand Forecasting"):
-        check(f"path tab present: {tab!r}", tab in visible)
-
-    # Hero CTA
+    # Hero
+    check(
+        "hero headline category claim",
+        "AI-Native Growth" in visible and "Industrial" in visible and "Tech Leaders" in visible,
+    )
     check("hero CTA: 'Book a Meeting'", "Book a Meeting" in visible)
 
-    # Comparison columns
-    check("comparison: 'Traditional Consulting'", "Traditional Consulting" in visible)
-    check("comparison: 'Aristotle' column", "diff-header-aristotle" in text)
+    # Hero video background slot
+    check(
+        "hero has video bg slot (.hero-bg)",
+        'class="hero-bg"' in text,
+    )
+    check(
+        "hero video TODO comment references hero-chicago.mp4",
+        "hero-chicago.mp4" in text,
+    )
+    check(
+        "hero has dark overlay for text readability",
+        'class="hero-overlay"' in text,
+    )
 
-    # Regressions
+    # Stat band — Sam's original values restored
+    check("stat band: '25%'", "25%" in visible)
+    check(
+        "stat band: '<6 wks' or '&lt;6 wks'",
+        "&lt;6 wks" in visible or "<6 wks" in visible,
+    )
+    check("stat band: '$2B+'", "$2B+" in visible)
+    check("stat band: 'Tied to impact'", "Tied to impact" in visible)
+
+    # Press strip removed (firms moved under credibility; only McKinsey + BLACKSTONE remain)
+    check("press strip removed (no <section class=\"press\">)", 'class="press"' not in text)
+    check("cred-alumni block present under credibility", 'class="cred-alumni"' in text)
+    check("alumni: McKinsey under credibility", "McKinsey" in visible)
+    check("alumni: BLACKSTONE under credibility", "BLACKSTONE" in visible)
+    # Removed alumni firms must not appear as alumni labels (we only check the
+    # cred-alumni block — these firms can still appear in body copy / Q&A naming MBB).
+    cred_alumni_match = re.search(r'<div class="cred-alumni"[^>]*>(.*?)</div>', text, re.DOTALL)
+    cred_alumni_text = cred_alumni_match.group(1) if cred_alumni_match else ""
+    for firm in ("BCG", "Bain", "Deloitte", "KKR"):
+        check(
+            f"removed alumni label not present in cred-alumni: {firm!r}",
+            firm not in cred_alumni_text,
+        )
+
+    # Path / funnel
+    check(
+        "funnel: 6 numbered steps",
+        all(f">0{n}<" in text or f">{n}<" in text for n in (1, 2, 3, 4, 5, 6)),
+    )
+    check("funnel highlight row present", "funnel-row highlight" in text)
+    check("partner card: 'Aristotle AI Agents'", "Aristotle AI Agents" in visible)
+    check("partner card: 'Dedicated Partner'", "Dedicated Partner" in visible)
+
+    # Pillars
+    for pillar in ("Partner-Led", "AI Advantage", "Faster to Impact", "Capability Embedded"):
+        check(f"pillar present: {pillar!r}", pillar in visible)
+
+    # Product showcase
+    check("product: 'Strategy Meets'", "Strategy Meets" in visible)
+    check("product capability: 'Opportunity Identification'", "Opportunity Identification" in visible)
+    check("product capability: 'Pricing Engine'", "Pricing Engine" in visible)
+    check("product capability: 'Demand Forecasting'", "Demand Forecasting" in visible)
+    check("product capability: 'Geospatial Mapping'", "Geospatial Mapping" in visible)
+
+    # Credibility band
+    check("cred: '$1B+'", "$1B+" in visible)
+    check("cred: '50+'", "50+" in visible)
+
+    # Sectors
+    for sector in ("Industrials", "Semis", "Tech &amp; SaaS",
+                   "Distribution", "Consumer", "PE"):
+        check(f"sector present: {sector!r}", sector in visible)
+
+    # Comparison columns
+    for col in ("Aristotle", "No Advisor", "Big-3 (MBB)", "Boutiques"):
+        check(f"comparison column: {col!r}", col in visible)
+
+    # Closing CTA
+    check(
+        "closing CTA headline mentions '$100M' and '30 Days'",
+        "$100M" in visible and "30 Days" in visible,
+    )
+    check("closing CTA: 'Request a Pricing Scan'", "Request a Pricing Scan" in visible)
+
+    # Regressions: old design state must NOT appear
     check("regression: no 'BlackRock'", "BlackRock" not in visible and "Blackrock" not in visible)
     check("regression: no old 'Start a Conversation' CTA", "Start a Conversation" not in visible)
     check("regression: no flywheel remnants", "flywheel" not in text.lower())
+    check("regression: no 'Playfair Display' headline font", "Playfair Display" not in text)
+    check("regression: no old logo-strip section in index", "logo-strip" not in text)
 
 
 def test_team_page(p: IDCollector) -> None:
@@ -277,28 +351,34 @@ def test_team_page(p: IDCollector) -> None:
     check("Sam Garg present", "Sam Garg" in visible)
     check("Beatriz Abramof present", "Beatriz Abramof" in visible)
     check("Rachit Agarwal present", "Rachit Agarwal" in visible)
-    check("team-bio-card count is 3", text.count('"team-bio-card"') == 3)
+    check("3 team cards", text.count('class="team-card') == 3 or text.count("team-bio-card") == 3)
     check("nav links back to index.html", 'href="index.html"' in text)
+    check("nav has Insights link", 'href="insights.html"' in text)
+
+
+def test_insights_page(p: IDCollector) -> None:
+    print("\n[8c] Insights page (insights.html)")
+    text = INSIGHTS.read_text(encoding="utf-8")
+    visible = strip_comments(text)
+    check("page title 'Notes from the field'", "Notes from the field" in visible)
+    insight_cards = text.count('class="insight-card"')
+    check(f"insight cards count >= 3 (got {insight_cards})", insight_cards >= 3)
+    check("nav links back to index.html", 'href="index.html"' in text)
+    check("nav has Team link", 'href="team.html"' in text)
 
 
 def test_structural_counts() -> None:
     print("\n[9] Structural counts (index.html)")
     text = INDEX.read_text(encoding="utf-8")
 
-    process_steps = len(re.findall(r'<div class="process-step">', text))
-    check(f"process bar has 4 steps (got {process_steps})", process_steps == 4)
+    funnel_rows = len(re.findall(r'class="funnel-row(?: highlight)?"', text))
+    check(f"funnel has 6 rows (got {funnel_rows})", funnel_rows == 6)
 
-    path_tabs = len(re.findall(r"<button class=\"path-tab", text))
-    check(f"path section has 4 tabs (got {path_tabs})", path_tabs == 4)
+    pillars = len(re.findall(r'<div class="pillar">', text))
+    check(f"pillars section has 4 cards (got {pillars})", pillars == 4)
 
-    path_panels = len(re.findall(r"<div class=\"path-panel(?: active)?\"", text))
-    check(f"path section has 4 panels (got {path_panels})", path_panels == 4)
-
-    hero_strip = len(re.findall(r'class="hero-strip-item"', text))
-    check(f"hero strip has 4 items (got {hero_strip})", hero_strip == 4)
-
-    stat_cards = len(re.findall(r'class="stat-card"', text))
-    check(f"value-prop has 4 stat cards (got {stat_cards})", stat_cards == 4)
+    stat_items = len(re.findall(r'<div class="stat">', text))
+    check(f"stat band has 4 items (got {stat_items})", stat_items == 4)
 
     qa_items = len(re.findall(r'<details class="qa-item">', text))
     check(f"Q&A has 6 entries (got {qa_items})", qa_items == 6)
@@ -306,31 +386,47 @@ def test_structural_counts() -> None:
     case_cards = len(re.findall(r'class="case-card', text))
     check(f"case studies has 4 cards (got {case_cards})", case_cards == 4)
 
-    insights = len(re.findall(r'<article class="insight-card">', text))
-    check(f"insights has 3 cards (got {insights})", insights == 3)
+    sectors = len(re.findall(r'<div class="sector">', text))
+    check(f"sectors grid has 6 tiles (got {sectors})", sectors == 6)
 
-    expertise_stats = len(re.findall(r'<div class="expertise-stat">', text))
-    check(f"expertise has 3 big stats (got {expertise_stats})", expertise_stats == 3)
+    cred_stats = len(re.findall(r'class="cred-num"', text))
+    check(f"credibility band has 3 numerals (got {cred_stats})", cred_stats == 3)
 
-    expertise_sectors = len(re.findall(r'<div class="expertise-sector">', text))
-    check(f"expertise has 6 sector tiles (got {expertise_sectors})", expertise_sectors == 6)
+    # Capabilities are interactive <button> elements now
+    capability_btns = len(re.findall(r'<button[^>]*class="capability(?:[^"]*)"', text))
+    check(f"platform has 4 capability buttons (got {capability_btns})", capability_btns == 4)
+    check(
+        "capabilities have aria-expanded for a11y",
+        text.count('aria-expanded="true"') >= 1
+        and text.count('aria-expanded="false"') >= 3,
+    )
+    check(
+        "capability bodies present (descriptions for all 4)",
+        text.count('class="capability-body"') == 4,
+    )
+    check(
+        "capability click handler wired in JS",
+        ".capability-list .capability" in text and "is-open" in text,
+    )
 
-    diff_data_rows = len(re.findall(r'<div class="diff-row reveal', text))
-    check(f"differentiators has 3 data rows (got {diff_data_rows})", diff_data_rows == 3)
+    compare_rows = len(re.findall(r"<tr>\s*<td class=\"compare-row-label\">", text))
+    check(f"comparison has 6 data rows (got {compare_rows})", compare_rows == 6)
 
-    logo_imgs = len(re.findall(r'<img src="images/logos/', text))
-    check(f"logo strip has at least 3 real logos (got {logo_imgs})", logo_imgs >= 3)
+    # Credibility alumni: exactly 2 labels (McKinsey + BLACKSTONE)
+    cred_alumni_match = re.search(r'<div class="cred-alumni"[^>]*>(.*?)</div>', text, re.DOTALL)
+    cred_alumni_inner = cred_alumni_match.group(1) if cred_alumni_match else ""
+    alumni_labels = len(re.findall(r"<span>", cred_alumni_inner))
+    check(
+        f"credibility alumni has 2 labels (got {alumni_labels})",
+        alumni_labels == 2,
+    )
 
 
 def test_no_visible_placeholders() -> None:
     print("\n[10] No visible placeholder text")
-    # Strip HTML comments first — intentional TODO markers live in comments and
-    # are documented in the plan. We only care about placeholders the user sees.
-    # Uppercase markers are matched exactly (PLACEHOLDER as a class-name token
-    # like `hero-media-placeholder` is fine; PLACEHOLDER as visible copy is not).
     case_insensitive = ["lorem ipsum"]
     case_sensitive = ["FIXME", "XXX:", "PLACEHOLDER", "TBD"]
-    for path in (INDEX, TEAM):
+    for path in (INDEX, TEAM, INSIGHTS):
         visible = strip_comments(path.read_text(encoding="utf-8"))
         for needle in case_insensitive:
             check(
@@ -348,14 +444,122 @@ def test_balanced_tags(p: IDCollector, where: str) -> None:
     print(f"\n[11] Tag balance ({where})")
     check("no unbalanced section/div/nav/footer", not p.tags_open, f"left open: {p.tags_open}")
     check("HTML parser had no errors", not p.errors, f"errors: {p.errors[:3]}")
-    text = (INDEX if where == "index.html" else TEAM).read_text(encoding="utf-8")
+    text = (INDEX if where == "index.html" else TEAM if where == "team.html" else INSIGHTS).read_text(encoding="utf-8")
     check("<style> tags balanced", text.count("<style>") == text.count("</style>"))
     check("<script> tags balanced", text.count("<script>") == text.count("</script>"))
 
 
+def test_mobile_friendly() -> None:
+    """Static checks that the site is set up to render correctly on mobile.
+
+    Cannot fully verify visual behavior without a headless browser, but these
+    catch the common regressions: missing viewport tag, no media queries,
+    wide tables not wrapped in horizontal-scroll containers, buttons too small
+    to tap, missing hamburger menu for narrow viewports.
+    """
+    print("\n[12] Mobile-friendliness")
+
+    css = STYLES.read_text(encoding="utf-8")
+
+    # 1. Meta viewport — verified per-page via IDCollector elsewhere; re-affirm
+    for path in (INDEX, TEAM, INSIGHTS):
+        text = path.read_text(encoding="utf-8")
+        check(
+            f"{path.name}: meta viewport with device-width",
+            'name="viewport"' in text and "width=device-width" in text,
+        )
+
+    # 2. CSS contains responsive breakpoints
+    media_queries = re.findall(r"@media\s*\([^)]*max-width:\s*(\d+)px", css)
+    breakpoints = sorted({int(m) for m in media_queries})
+    check(
+        f"styles.css declares max-width breakpoints (got {breakpoints})",
+        len(breakpoints) >= 2 and min(breakpoints) <= 640,
+        "expect at least 2 breakpoints, smallest <=640px",
+    )
+
+    # 3. prefers-reduced-motion guard
+    check(
+        "styles.css respects prefers-reduced-motion",
+        "@media (prefers-reduced-motion: reduce)" in css,
+    )
+
+    # 4. Touch targets — .btn min-height >= 44px
+    btn_match = re.search(r"\.btn\s*\{[^}]*min-height:\s*(\d+)px", css)
+    if btn_match:
+        check(
+            f".btn min-height >= 44px (got {btn_match.group(1)}px)",
+            int(btn_match.group(1)) >= 44,
+        )
+    else:
+        check(".btn defines min-height for touch target", False, "no min-height on .btn")
+
+    # 5. Wide tables are wrapped in horizontal-scroll containers
+    compare_block = re.search(r"\.compare-wrap\s*\{[^}]*\}", css, re.DOTALL)
+    check(
+        ".compare-wrap has overflow-x scroll",
+        bool(compare_block) and "overflow-x:" in compare_block.group(0),
+    )
+    product_block = re.search(r"\.product-mock\s*\{[^}]*\}", css, re.DOTALL)
+    check(
+        ".product-mock has overflow-x scroll",
+        bool(product_block) and "overflow-x:" in product_block.group(0),
+    )
+
+    # 6. Mobile nav: hamburger button must exist in HTML + CSS
+    for path in (INDEX, TEAM, INSIGHTS):
+        text = path.read_text(encoding="utf-8")
+        check(
+            f"{path.name}: hamburger button present",
+            "nav-hamburger" in text and 'aria-controls="nav-links"' in text,
+        )
+        check(
+            f"{path.name}: hamburger has aria-expanded",
+            'aria-expanded="false"' in text,
+        )
+    check(
+        ".nav-hamburger styled and toggleable in styles.css",
+        ".nav-hamburger" in css and ".nav-links.open" in css,
+    )
+
+    # 7. Section-level grids must collapse on mobile (must have grid-template-columns: 1fr
+    #    somewhere inside a max-width media query for stacked rendering)
+    mobile_blocks = re.findall(r"@media\s*\([^)]*max-width:[^)]*\)\s*\{[\s\S]*?(?:\}\s*\}|\}\s*$)", css)
+    has_single_col_collapse = any(
+        "grid-template-columns: 1fr" in block for block in mobile_blocks
+    )
+    check(
+        "CSS collapses grids to single column on mobile",
+        has_single_col_collapse,
+        "no `grid-template-columns: 1fr` inside any max-width media query",
+    )
+
+    # 8. No inline `width:` greater than 720px on any element
+    inline_widths = re.findall(r'style="[^"]*width:\s*(\d+)px', INDEX.read_text(encoding="utf-8"))
+    too_wide = [int(w) for w in inline_widths if int(w) > 720]
+    check(
+        "no overly-wide inline widths in index.html",
+        not too_wide,
+        f"got {too_wide}",
+    )
+
+    # 9. Body font-size readable on mobile (>=15px declared)
+    body_size = re.search(r"body\s*\{[^}]*font-size:\s*(\d+)px", css)
+    check(
+        f"body font-size >= 15px (got {body_size.group(1) if body_size else 'none'}px)",
+        bool(body_size) and int(body_size.group(1)) >= 15,
+    )
+
+    # 10. Hero h1 has overflow-wrap or word-break so long phrases don't overflow on narrow screens
+    hero_h1 = re.search(r"\.hero h1\s*\{[^}]*\}", css, re.DOTALL)
+    check(
+        ".hero h1 wraps long words on narrow viewports",
+        bool(hero_h1) and ("overflow-wrap" in hero_h1.group(0) or "word-break" in hero_h1.group(0)),
+    )
+
+
 def test_online() -> None:
-    print("\n[12] Online checks")
-    # Verify the styles.css link on raw GitHub is fetchable for this branch.
+    print("\n[13] Online checks")
     branch_url = (
         "https://raw.githubusercontent.com/ragarwal23/ragarwal.io/"
         "redesign-eilla/index.html"
@@ -381,7 +585,6 @@ def test_online() -> None:
     except Exception as e:
         check("main CNAME fetch", False, str(e))
 
-    # Best-effort live-site check.
     live = "https://thearistotle.ai/"
     try:
         with urllib.request.urlopen(live, timeout=10) as r:
@@ -394,7 +597,7 @@ def test_online() -> None:
             "headline marker missing",
         )
     except Exception as e:
-        print(f"  \033[33m![/m] live site {live} not yet reachable: {e}")
+        print(f"  \033[33m!\033[0m live site {live} not yet reachable: {e}")
 
 
 def main() -> int:
@@ -406,21 +609,28 @@ def main() -> int:
 
     index_p = parse(INDEX)
     team_p = parse(TEAM)
+    insights_p = parse(INSIGHTS)
 
     test_files_exist()
     test_cname()
-    test_html_head(index_p)
-    test_anchors(index_p)
+    test_html_head(index_p, "index.html", INDEX)
+    test_html_head(team_p, "team.html", TEAM)
+    test_html_head(insights_p, "insights.html", INSIGHTS)
+    test_anchors(index_p, "index.html")
     test_images(index_p, "index.html")
     test_images(team_p, "team.html")
+    test_images(insights_p, "insights.html")
     test_required_sections(index_p)
     test_design_tokens()
     test_content_invariants()
     test_team_page(team_p)
+    test_insights_page(insights_p)
     test_structural_counts()
     test_no_visible_placeholders()
     test_balanced_tags(index_p, "index.html")
     test_balanced_tags(team_p, "team.html")
+    test_balanced_tags(insights_p, "insights.html")
+    test_mobile_friendly()
     if args.online:
         test_online()
 
