@@ -254,7 +254,7 @@ def test_content_invariants() -> None:
     # Hero
     check(
         "hero headline category claim",
-        "AI-Native Growth" in visible and "Industrial" in visible and "Tech Leaders" in visible,
+        "AI-Native Growth" in visible and "Pricing Advisory" in visible,
     )
     check("hero CTA: 'Book a Meeting'", "Book a Meeting" in visible)
 
