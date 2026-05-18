@@ -398,35 +398,36 @@
 
   .diff-row {
     display: grid;
-    grid-template-columns: 200px 1fr 1fr;
+    grid-template-columns: 220px 1fr 1fr;
     gap: 0;
     border-bottom: 1px solid rgba(15, 27, 51, 0.08);
   }
 
   .diff-row.header {
-    border-bottom: 2px solid rgba(15, 27, 51, 0.12);
-    margin-bottom: 8px;
+    border-bottom: 2px solid rgba(15, 27, 51, 0.15);
+    margin-bottom: 0;
   }
 
   .diff-cell {
-    padding: 28px 32px;
+    padding: 32px 32px;
     font-size: 15px;
-    line-height: 1.5;
-    transition: all 0.3s;
+    line-height: 1.55;
   }
 
-  .diff-row:not(.header):hover .diff-cell {
-    background: rgba(65, 105, 225, 0.04);
+  .diff-row:not(.header) .diff-cell:last-child {
+    background: rgba(40, 81, 164, 0.06);
   }
 
   .diff-label {
     font-weight: 600;
     color: var(--navy);
     font-size: 14px;
+    letter-spacing: 0.02em;
   }
 
   .diff-trad {
     color: var(--gray-500);
+    font-weight: 400;
   }
 
   .diff-aristotle {
@@ -439,9 +440,11 @@
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--gray-400);
-    padding-bottom: 16px;
+    color: var(--navy);
+    padding-bottom: 20px;
   }
+
+  .diff-header-aristotle { background: rgba(40, 81, 164, 0.06); color: var(--blue-primary); }
 
   .diff-footer {
     text-align: center;
