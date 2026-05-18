@@ -98,7 +98,6 @@
 
   .nav-cta:hover {
     background: var(--blue-bright) !important;
-    transform: translateY(-1px);
   }
 
 /* ─── HERO ─── */
@@ -213,12 +212,13 @@
 .hero-strip-item:last-child { border-right: none; }
 
 .hero-strip-stat {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Inter', sans-serif;
   font-size: clamp(28px, 3.2vw, 40px);
   font-weight: 600;
   color: var(--white);
   margin-bottom: 8px;
   line-height: 1;
+  font-feature-settings: 'tnum' 1;
 }
 
 .hero-strip-label {
@@ -254,8 +254,6 @@
 
   .btn-primary:hover {
     background: var(--blue-bright);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(65, 105, 225, 0.3);
   }
 
   .btn-secondary {
@@ -358,17 +356,17 @@
   }
 
   .stat-card:hover {
-    background: rgba(255,255,255,0.06);
-    border-color: rgba(65, 105, 225, 0.3);
-    transform: translateY(-4px);
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(65, 105, 225, 0.18);
   }
 
   .stat-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 36px;
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
     font-weight: 600;
     color: var(--blue-bright);
     margin-bottom: 4px;
+    font-feature-settings: 'tnum' 1;
   }
 
   .stat-label {
@@ -589,8 +587,7 @@
   }
 
   .cta .btn-primary:hover {
-    box-shadow: 0 16px 48px rgba(0,0,0,0.2);
-    transform: translateY(-2px);
+    background: var(--gray-100);
   }
 
   /* ─── FOOTER ─── */
@@ -671,9 +668,6 @@
     .diff-cell { padding: 16px 20px; }
     footer { flex-direction: column; gap: 20px; text-align: center; }
   }
-
-  /* ─── COUNTER ANIMATION ─── */
-  .counter { display: inline-block; }
 
 /* ─── TEAM PAGE ─── */
 .nav-active { color: var(--white) !important; }

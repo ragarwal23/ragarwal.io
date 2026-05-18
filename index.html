@@ -92,11 +92,11 @@
       </p>
       <div class="value-stats reveal reveal-delay-3">
         <div class="stat-card">
-          <div class="stat-number counter" data-target="40" data-suffix="x">0x</div>
+          <div class="stat-number">40x</div>
           <div class="stat-label">Typical ROI on engagement</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number counter" data-target="80" data-suffix="+">0+</div>
+          <div class="stat-number">80+</div>
           <div class="stat-label">Growth targets identified per scan</div>
         </div>
         <div class="stat-card">
@@ -462,31 +462,6 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
 revealElements.forEach(el => observer.observe(el));
-
-// ─── COUNTER ANIMATION ───
-const counters = document.querySelectorAll('.counter[data-target]');
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const el = entry.target;
-      const target = parseInt(el.dataset.target);
-      const suffix = el.dataset.suffix || '';
-      let current = 0;
-      const increment = target / 40;
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          current = target;
-          clearInterval(timer);
-        }
-        el.textContent = Math.floor(current) + suffix;
-      }, 30);
-      counterObserver.unobserve(el);
-    }
-  });
-}, { threshold: 0.5 });
-
-counters.forEach(el => counterObserver.observe(el));
 
 // ─── SMOOTH SCROLL ───
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
