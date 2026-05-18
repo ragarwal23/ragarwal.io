@@ -1,1169 +1,488 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Aristotle — The AI-Native Growth & Pricing Advisory for Industrial & Tech Leaders</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="images/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Mona+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#F7F8FB;
-    --bg-alt:#FFFFFF;
-    --navy:#0A2540;
-    --navy-deep:#061A30;
-    --ink:#1A1A2E;
-    --ink-muted:#4A5568;
-    --line:#E6EAF2;
-    --white:#FFFFFF;
-    --accent:#2E4BDB;
-    --good:#0E7C4A;
-    --bad:#9C2A2A;
-    --pad: clamp(20px, 5vw, 80px);
-    --maxw: 1200px;
-    --radius: 12px;
-    --radius-pill: 999px;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
-  body{
-    font-family:'Inter','Mona Sans',system-ui,-apple-system,Segoe UI,sans-serif;
-    background:var(--bg);
-    color:var(--ink);
-    -webkit-font-smoothing:antialiased;
-    line-height:1.55;
-    font-size:17px;
-  }
-  a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
-  h1,h2,h3,h4{font-family:'Mona Sans','Inter',sans-serif;letter-spacing:-0.02em;margin:0;color:var(--ink)}
-  h1{font-weight:700;font-size:clamp(40px,6.4vw,96px);line-height:1.04}
-  h2{font-weight:700;font-size:clamp(32px,4vw,60px);line-height:1.08}
-  h3{font-weight:600;font-size:clamp(22px,2vw,30px);line-height:1.2}
-  .container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
-  .eyebrow{font-size:13px;font-weight:500;color:var(--ink-muted);letter-spacing:0.02em}
-
-  /* ---------- NAV ---------- */
-  .nav{
-    position:sticky;top:0;z-index:50;
-    background:rgba(244,244,242,0.85);
-    backdrop-filter:saturate(180%) blur(10px);
-    -webkit-backdrop-filter:saturate(180%) blur(10px);
-    border-bottom:1px solid rgba(228,228,224,0.6);
-  }
-  .nav-inner{
-    max-width:var(--maxw);margin:0 auto;padding:18px var(--pad);
-    display:flex;align-items:center;justify-content:space-between;
-  }
-  .logo{
-    font-family:'Mona Sans',sans-serif;font-weight:700;
-    letter-spacing:0.32em;font-size:22px;color:var(--ink);
-  }
-  .nav-links{display:flex;align-items:center;gap:28px}
-  .nav-links a{font-size:15px;font-weight:500;color:var(--ink);opacity:.85}
-  .nav-links a:hover{opacity:1}
-  .nav-cta{display:flex;align-items:center;gap:10px}
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;
-    height:44px;padding:0 22px;border-radius:var(--radius-pill);
-    font-family:'Inter';font-weight:600;font-size:14px;
-    border:1px solid var(--navy);transition:all .2s ease;cursor:pointer;
-  }
-  .btn-outline{background:transparent;color:var(--navy)}
-  .btn-outline:hover{background:var(--navy);color:var(--white)}
-  .btn-primary{background:var(--navy);color:var(--white)}
-  .btn-primary:hover{background:#06192E;border-color:#06192E}
-  .btn-lg{height:50px;padding:0 28px;font-size:15px}
-  .btn-on-dark.btn-outline{border-color:var(--white);color:var(--white)}
-  .btn-on-dark.btn-outline:hover{background:var(--white);color:var(--ink)}
-  .btn-on-dark.btn-primary{background:var(--white);color:var(--ink);border-color:var(--white)}
-
-  /* ---------- HERO ---------- */
-  .hero{
-    text-align:center;
-    padding:clamp(80px,12vw,160px) 0 clamp(60px,8vw,100px);
-  }
-  .hero h1{max-width:1100px;margin:0 auto 24px}
-  .hero p.sub{
-    max-width:720px;margin:0 auto 36px;color:var(--ink-muted);
-    font-size:clamp(16px,1.4vw,20px);line-height:1.55;
-  }
-  .hero-ctas{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center}
-
-  /* ---------- PRESS STRIP ---------- */
-  .press{
-    background:var(--bg);
-    padding:32px 0 16px;
-    text-align:center;
-  }
-  .press .eyebrow{margin-bottom:18px;display:block}
-  .press-logos{
-    display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
-    gap:48px;opacity:.6;
-  }
-  .press-logos span{
-    font-family:'Mona Sans',serif;font-weight:600;font-size:20px;
-    color:var(--ink);letter-spacing:0.02em;
-  }
-  .press-logos span:nth-child(1){font-style:italic;letter-spacing:0;font-family:'Inter'}
-  .press-logos span:nth-child(2){font-family:'Mona Sans';font-weight:700}
-  .press-logos span:nth-child(3){font-weight:500;letter-spacing:-0.02em}
-  .press-logos span:nth-child(4){font-family:'Mona Sans';font-weight:600}
-  .press-logos span:nth-child(5){font-family:'Mona Sans';font-weight:700;letter-spacing:0.1em}
-  .press-logos span:nth-child(6){font-weight:600;letter-spacing:0.06em}
-
-  /* ---------- STAT BAND ---------- */
-  .stat-band{
-    background:var(--navy);color:var(--white);
-    padding:48px 0;margin-top:60px;
-  }
-  .stat-grid{
-    max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);
-    display:grid;grid-template-columns:repeat(4,1fr);gap:32px;
-  }
-  .stat .num{
-    font-family:'Mona Sans',sans-serif;font-weight:700;font-size:clamp(28px,3vw,40px);
-    line-height:1;color:var(--white);
-  }
-  .stat .lab{font-size:14px;color:#B7BECB;margin-top:8px;line-height:1.4}
-
-  /* ---------- SECTION HEADINGS ---------- */
-  .section{padding:clamp(80px,10vw,140px) 0}
-  .section.tight{padding:clamp(60px,7vw,100px) 0}
-  .section h2{text-align:center;max-width:900px;margin:0 auto 60px}
-  .section h2 .grey{color:#8995A8;font-weight:400}
-
-  /* ---------- COMPARISON TABLE ---------- */
-  .compare-wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
-  .compare{
-    width:100%;border-collapse:separate;border-spacing:0;
-    background:var(--white);border-radius:var(--radius);
-    overflow:hidden;border:1px solid var(--line);
-  }
-  .compare th,.compare td{
-    padding:22px 22px;font-size:15px;text-align:left;vertical-align:top;
-    border-bottom:1px solid var(--line);
-  }
-  .compare th{
-    font-family:'Mona Sans',sans-serif;font-weight:600;font-size:18px;
-    background:var(--bg-alt);
-  }
-  .compare tr:last-child td{border-bottom:none}
-  .compare .col-us{background:var(--navy);color:var(--white)}
-  .compare .col-us th,.compare .col-us td{border-bottom:1px solid #1c2740}
-  .compare-row-label{width:22%;font-weight:600;color:var(--ink)}
-  .col-head{width:19.5%}
-  .compare-cell strong{font-weight:700;color:var(--ink)}
-  .compare .col-us strong{color:var(--white)}
-
-  /* ---------- FUNNEL ---------- */
-  .funnel-section{padding:clamp(80px,10vw,140px) 0;background:var(--bg)}
-  .funnel-wrap{
-    max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);
-    display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center;
-  }
-  .funnel-list{display:flex;flex-direction:column;gap:14px}
-  .funnel-row{
-    display:grid;grid-template-columns:1fr 60px 60px;
-    align-items:center;gap:16px;
-    padding:18px 22px;border-radius:var(--radius);background:var(--bg-alt);
-    border:1px solid var(--line);
-  }
-  .funnel-row.highlight{
-    background:var(--navy);color:var(--white);
-    border-color:var(--navy);
-  }
-  .funnel-row .label{font-size:15px;font-weight:500}
-  .funnel-row .step{font-family:'Mona Sans';font-weight:600;color:var(--ink-muted);font-size:14px}
-  .funnel-row.highlight .step{color:#B7BECB}
-  .funnel-row .icons{display:flex;gap:4px;justify-content:flex-end}
-  .funnel-row .icons .dot{width:18px;height:18px;border-radius:4px;background:#2A3656}
-  .partner-cards{display:flex;flex-direction:column;gap:14px}
-  .partner-card{
-    background:var(--navy);color:var(--white);
-    border-radius:var(--radius);padding:18px 20px;
-    display:flex;align-items:center;gap:14px;
-  }
-  .partner-card .avatar{
-    width:48px;height:48px;border-radius:50%;background:#3a4663;flex:none;
-    display:flex;align-items:center;justify-content:center;font-weight:700;
-  }
-  .partner-card .ttl{font-weight:600;font-size:16px}
-  .partner-card .sub{font-size:12px;color:#B7BECB;margin-top:2px}
-
-  /* ---------- PILLAR STRIP ---------- */
-  .pillars{
-    max-width:var(--maxw);margin:80px auto 0;padding:0 var(--pad);
-    display:grid;grid-template-columns:repeat(4,1fr);gap:32px;
-    border-top:1px solid var(--line);padding-top:48px;
-  }
-  .pillar h4{font-family:'Mona Sans';font-weight:700;font-size:22px;margin:0 0 10px}
-  .pillar p{margin:0;font-size:14px;color:var(--ink-muted);line-height:1.55}
-
-  /* ---------- PRODUCT SHOWCASE ---------- */
-  .product{
-    background:var(--navy);color:var(--white);
-    padding:clamp(80px,10vw,140px) 0;
-  }
-  .product h2{color:var(--white)}
-  .product h2 .grey{color:#8995A8}
-  .product .lead{
-    text-align:center;color:#B7BECB;max-width:720px;margin:0 auto 60px;
-    font-size:17px;line-height:1.55;
-  }
-  .product-grid{
-    max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);
-    display:grid;grid-template-columns:1.6fr 1fr;gap:48px;align-items:start;
-  }
-  .product-mock{
-    background:#0A1322;border-radius:var(--radius);
-    border:1px solid #1c2740;overflow:hidden;
-  }
-  .product-mock .bar{
-    background:#0A1322;border-bottom:1px solid #1c2740;
-    padding:10px 16px;display:flex;gap:14px;align-items:center;font-size:12px;color:#B7BECB;
-  }
-  .product-mock .bar .tabs{display:flex;gap:18px}
-  .product-mock .bar .tab{padding:4px 0;font-weight:600}
-  .product-mock .bar .tab.active{color:var(--white);border-bottom:2px solid var(--white)}
-  .product-mock .bar .search{margin-left:auto;background:#19243A;padding:4px 10px;border-radius:6px;color:#8995A8}
-  .product-mock table{width:100%;border-collapse:collapse;font-size:12px;color:#D5D9E2}
-  .product-mock th,.product-mock td{
-    text-align:left;padding:10px 14px;border-bottom:1px solid #19243A;vertical-align:top;
-  }
-  .product-mock th{color:#8995A8;font-weight:600;font-size:11px}
-  .product-mock td:first-child{font-weight:600;color:var(--white)}
-  .product-mock .pill{
-    display:inline-block;padding:2px 8px;border-radius:999px;
-    font-size:10px;font-weight:600;background:#19243A;color:#B7BECB;
-  }
-  .product-mock .pill.good{background:#0E2A1E;color:#5BD49C}
-  .product-mock .pill.bad{background:#2A1010;color:#FF7C7C}
-  .product-mock .score{font-weight:700;color:var(--white)}
-  .capability-list{display:flex;flex-direction:column;gap:0}
-  .capability{
-    padding:22px 0;border-bottom:1px solid #1c2740;
-  }
-  .capability:last-child{border-bottom:none}
-  .capability .ttl{
-    font-family:'Mona Sans';font-weight:700;font-size:22px;color:var(--white);
-    margin-bottom:6px;display:flex;align-items:center;gap:10px;
-  }
-  .capability .ttl .arrow{font-weight:700}
-  .capability.dim .ttl{color:#5A6679}
-  .capability p{margin:0;font-size:14px;color:#B7BECB;line-height:1.55}
-  .capability.dim p{display:none}
-
-  /* ---------- CREDIBILITY BAND ---------- */
-  .cred{padding:clamp(80px,10vw,140px) 0;text-align:center}
-  .cred h2{max-width:900px;margin:0 auto 60px}
-  .cred-grid{
-    max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);
-    display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
-  }
-  .cred-num{
-    font-family:'Mona Sans';font-weight:700;font-size:clamp(48px,6vw,80px);
-    line-height:1;letter-spacing:-0.04em;
-  }
-  .cred-lab{margin-top:14px;color:var(--ink-muted);font-size:15px;line-height:1.5;max-width:280px;margin-left:auto;margin-right:auto}
-
-  /* ---------- SECTORS ---------- */
-  .sectors{padding:clamp(80px,10vw,140px) 0}
-  .sectors h2{text-align:center;margin-bottom:60px}
-  .sector-grid{
-    max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);
-    display:grid;grid-template-columns:repeat(3,1fr);gap:32px 40px;
-  }
-  .sector{text-align:center}
-  .sector .icon{
-    width:64px;height:64px;background:var(--navy);color:var(--white);
-    border-radius:14px;margin:0 auto 18px;
-    display:flex;align-items:center;justify-content:center;font-size:28px;
-  }
-  .sector h4{font-family:'Mona Sans';font-weight:700;font-size:22px;margin:0 0 6px}
-  .sector p{margin:0;color:var(--ink-muted);font-size:14px}
-
-  /* ---------- Q&A ---------- */
-  .qa{padding:clamp(60px,7vw,100px) 0}
-  .qa h2{text-align:center;margin-bottom:48px;font-size:clamp(28px,3vw,40px)}
-  .qa-list{max-width:920px;margin:0 auto;padding:0 var(--pad)}
-  details.qa-item{
-    border-top:1px solid var(--line);padding:24px 4px;cursor:pointer;
-  }
-  details.qa-item:last-child{border-bottom:1px solid var(--line)}
-  details.qa-item summary{
-    display:flex;align-items:center;justify-content:space-between;
-    font-family:'Mona Sans';font-weight:600;font-size:18px;color:var(--ink);
-    list-style:none;
-  }
-  details.qa-item summary::-webkit-details-marker{display:none}
-  details.qa-item summary::after{
-    content:'+';font-size:24px;font-weight:400;color:var(--ink-muted);
-    transition:transform .2s ease;
-  }
-  details.qa-item[open] summary::after{content:'–';}
-  details.qa-item p{
-    margin:14px 0 0;color:var(--ink-muted);font-size:15px;line-height:1.6;
-  }
-
-  /* ---------- CLOSING CTA ---------- */
-  .closing{padding:clamp(40px,5vw,80px) var(--pad);max-width:var(--maxw);margin:0 auto 60px}
-  .closing-card{
-    background:var(--navy);color:var(--white);
-    border-radius:var(--radius);padding:clamp(40px,5vw,64px);
-    display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
-  }
-  .closing-card h2{color:var(--white);max-width:520px;text-align:left;margin:0 0 16px;font-size:clamp(28px,3vw,44px)}
-  .closing-card p{color:#B7BECB;margin:0 0 28px;font-size:16px;max-width:480px}
-  .closing-card .cta{display:flex;gap:12px;flex-wrap:wrap}
-  .advisor-card{
-    background:var(--white);color:var(--ink);
-    border-radius:var(--radius);padding:24px;
-    display:grid;grid-template-columns:1fr;gap:16px;
-  }
-  .advisor-head{display:flex;align-items:center;gap:16px}
-  .advisor-avatar{
-    width:72px;height:72px;border-radius:50%;background:#D5D9E2;flex:none;
-    background-image:linear-gradient(135deg,#3a4663,#0E1A2B);
-  }
-  .advisor-name{font-family:'Mona Sans';font-weight:700;font-size:22px}
-  .advisor-meta{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .advisor-meta .cell{background:var(--bg);padding:12px 14px;border-radius:8px}
-  .advisor-meta .cell .l{font-size:12px;color:var(--ink-muted)}
-  .advisor-meta .cell .v{font-weight:600;font-size:14px;margin-top:2px}
-
-  /* ---------- FOOTER ---------- */
-  footer{background:var(--navy);color:var(--white);padding:40px 0 24px;text-align:center}
-  footer .row{
-    max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);
-    display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;
-  }
-  footer .links{display:flex;justify-content:center;gap:24px;font-size:14px;color:#B7BECB}
-  footer .lin{font-size:18px;justify-self:end}
-  footer .disclaimer{
-    max-width:var(--maxw);margin:24px auto 0;padding:0 var(--pad);
-    font-size:11px;color:#8995A8;line-height:1.6;text-align:center;
-  }
-
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width: 900px){
-    .nav-links{display:none}
-    .stat-grid,.pillars,.sector-grid,.cred-grid{grid-template-columns:repeat(2,1fr)}
-    .funnel-wrap,.product-grid,.closing-card{grid-template-columns:1fr}
-    .compare{font-size:13px}
-    .compare th,.compare td{padding:14px 12px}
-  }
-  @media (max-width:520px){
-    .stat-grid,.pillars,.sector-grid,.cred-grid{grid-template-columns:1fr}
-  }
-
-  /* ---------- OFFERINGS ---------- */
-  .offerings{padding:clamp(80px,10vw,140px) 0;background:var(--bg)}
-  .offerings h2{text-align:center;margin-bottom:14px}
-  .offerings .lead{
-    text-align:center;color:var(--ink-muted);max-width:640px;
-    margin:0 auto 60px;font-size:17px;line-height:1.55;padding:0 var(--pad);
-  }
-  .offerings-grid{
-    max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);
-    display:grid;grid-template-columns:repeat(2,1fr);gap:24px;
-  }
-  .offering-card{
-    background:var(--bg-alt);border:1px solid var(--line);border-radius:var(--radius);
-    padding:32px;display:flex;flex-direction:column;gap:14px;
-    transition:transform .2s ease, box-shadow .2s ease;
-  }
-  .offering-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
-  .offering-card .icon{
-    width:44px;height:44px;border-radius:10px;background:var(--navy);color:var(--white);
-    display:flex;align-items:center;justify-content:center;font-size:20px;
-  }
-  .offering-card h4{font-family:'Mona Sans';font-weight:700;font-size:22px;margin:0}
-  .offering-card p{margin:0;color:var(--ink-muted);font-size:15px;line-height:1.55}
-  .offering-stat{
-    font-family:'Mona Sans';font-weight:700;font-size:14px;color:var(--ink);
-    background:var(--bg);border:1px solid var(--line);
-    padding:8px 12px;border-radius:8px;width:fit-content;
-  }
-  .offering-link{
-    margin-top:auto;font-weight:600;font-size:14px;color:var(--ink);
-    display:inline-flex;align-items:center;gap:6px;transition:gap .2s ease;
-  }
-  .offering-link:hover{gap:10px}
-
-  /* ---------- CASE STUDIES ---------- */
-  .cases{padding:clamp(80px,10vw,140px) 0;background:var(--bg-alt)}
-  .cases h2{text-align:center;margin-bottom:14px}
-  .cases .lead{text-align:center;color:var(--ink-muted);max-width:640px;margin:0 auto 60px;padding:0 var(--pad)}
-  .cases-grid{
-    max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);
-    display:grid;grid-template-columns:repeat(2,1fr);gap:24px;
-  }
-  .case-card{
-    background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);
-    padding:32px;display:flex;flex-direction:column;gap:14px;
-  }
-  .case-tag{
-    display:inline-flex;align-items:center;font-size:11px;font-weight:600;
-    padding:5px 12px;border-radius:999px;background:var(--navy);color:var(--white);
-    width:fit-content;letter-spacing:0.06em;text-transform:uppercase;
-  }
-  .case-card h4{font-family:'Mona Sans';font-weight:700;font-size:20px;margin:0;line-height:1.25}
-  .case-meta{font-size:11px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.06em}
-  .case-outcome{
-    font-family:'Mona Sans';font-weight:700;font-size:clamp(20px,2vw,26px);
-    color:var(--ink);line-height:1.2;letter-spacing:-0.02em;
-  }
-  .case-card .narrative{font-size:14px;color:var(--ink-muted);line-height:1.6;margin:0}
-  .case-card .why{
-    margin-top:auto;padding-top:14px;border-top:1px solid var(--line);
-    font-size:13px;font-weight:600;color:var(--ink);
-  }
-
-  /* ---------- INSIGHTS ---------- */
-  .insights{padding:clamp(80px,10vw,140px) 0;background:var(--bg)}
-  .insights h2{text-align:center;margin-bottom:14px}
-  .insights .lead{text-align:center;color:var(--ink-muted);max-width:600px;margin:0 auto 60px;padding:0 var(--pad)}
-  .insights-grid{
-    max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);
-    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
-  }
-  .insight-card{
-    background:var(--bg-alt);border:1px solid var(--line);border-radius:var(--radius);
-    padding:28px;display:flex;flex-direction:column;gap:12px;
-    transition:transform .2s ease, box-shadow .2s ease;
-  }
-  .insight-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
-  .insight-tag{font-size:11px;font-weight:600;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.06em}
-  .insight-card h4{font-family:'Mona Sans';font-weight:700;font-size:18px;margin:0;line-height:1.3}
-  .insight-card .meta{font-size:13px;color:var(--ink-muted);margin-top:auto}
-
-  /* ---------- LEADERS ---------- */
-  .leaders{padding:clamp(80px,10vw,140px) 0;background:var(--bg-alt)}
-  .leaders h2{text-align:center;margin-bottom:14px}
-  .leaders .lead{text-align:center;color:var(--ink-muted);max-width:640px;margin:0 auto 60px;padding:0 var(--pad)}
-  .leaders-grid{
-    max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);
-    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
-  }
-  .leader-card{
-    background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);
-    padding:28px;display:flex;flex-direction:column;gap:14px;
-  }
-  .leader-avatar{
-    width:96px;height:96px;border-radius:50%;flex:none;overflow:hidden;
-    background:linear-gradient(135deg,#3a4663,#0E1A2B);
-  }
-  .leader-avatar img{width:100%;height:100%;object-fit:cover;display:block}
-  .leader-name{font-family:'Mona Sans';font-weight:700;font-size:22px;margin:0}
-  .leader-role{font-size:13px;color:var(--ink-muted);margin-top:-6px}
-  .leader-creds{margin:6px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
-  .leader-creds li{font-size:14px;color:var(--ink);line-height:1.4;padding-left:14px;position:relative}
-  .leader-creds li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--ink)}
-  .leader-linkedin{font-size:13px;color:var(--ink-muted);margin-top:auto;font-weight:500}
-
-  /* ---------- FOOTER 4-COL ---------- */
-  footer.footer-big{padding:64px 0 24px}
-  footer.footer-big .footer-grid{
-    max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);
-    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:40px;text-align:left;
-  }
-  footer.footer-big .footer-brand .logo{color:var(--white);margin-bottom:14px;display:block;text-align:left}
-  footer.footer-big .footer-brand p{color:#B7BECB;font-size:13px;line-height:1.55;margin:0;max-width:240px}
-  footer.footer-big h5{
-    font-family:'Mona Sans';font-weight:700;font-size:13px;color:var(--white);
-    margin:0 0 14px;letter-spacing:0.06em;text-transform:uppercase;
-  }
-  footer.footer-big ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-  footer.footer-big ul a{color:#B7BECB;font-size:14px}
-  footer.footer-big ul a:hover{color:var(--white)}
-  footer.footer-big .footer-bottom{
-    max-width:var(--maxw);margin:48px auto 0;padding:24px var(--pad) 0;
-    border-top:1px solid #1c2740;display:flex;justify-content:space-between;
-    align-items:center;flex-wrap:wrap;gap:16px;
-  }
-  footer.footer-big .footer-bottom .copy{color:#B7BECB;font-size:13px}
-  footer.footer-big .footer-bottom .legal{display:flex;gap:18px}
-  footer.footer-big .footer-bottom .legal a{color:#B7BECB;font-size:13px}
-
-  @media (max-width:900px){
-    .offerings-grid,.cases-grid,.insights-grid,.leaders-grid{grid-template-columns:1fr}
-    footer.footer-big .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
-    footer.footer-big .footer-brand{grid-column:1 / -1}
-  }
-  @media (max-width:520px){
-    footer.footer-big .footer-grid{grid-template-columns:1fr}
-  }
-
-  /* ---------- MOBILE STICKY CTA ---------- */
-  .mobile-cta{
-    display:none;position:fixed;bottom:16px;left:16px;right:16px;z-index:60;
-    background:var(--navy);color:var(--white);height:48px;border-radius:999px;
-    align-items:center;justify-content:center;gap:6px;
-    font-family:'Inter';font-weight:600;font-size:15px;
-    box-shadow:0 8px 24px rgba(0,0,0,.25);
-  }
-  @media (max-width:760px){
-    .mobile-cta.visible{display:inline-flex}
-  }
-
-  /* ---------- SCROLL FADE ---------- */
-  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
-  .reveal.in{opacity:1;transform:none}
-  @media (prefers-reduced-motion: reduce){
-    .reveal{opacity:1;transform:none;transition:none}
-  }
-</style>
+<title>Aristotle — AI-Enabled Consulting for Revenue Growth Management</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- ============ NAV ============ -->
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="logo">ARISTOTLE</div>
-    <div class="nav-links">
-      <a href="#insights">Insights</a>
-      <a href="#offerings">Offerings ▾</a>
-    </div>
-    <div class="nav-cta">
-      <a class="btn btn-outline" href="#scan">Request a Scan</a>
-      <a class="btn btn-primary" href="#meet">Book a Meeting</a>
-    </div>
-  </div>
+<!-- ─── NAVIGATION ─── -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Aristotle</a>
+  <ul class="nav-links">
+    <li><a href="#value">Approach</a></li>
+    <li><a href="#different">Why Us</a></li>
+    <li><a href="#path">Path to Growth</a></li>
+    <li><a href="#insights">Insights</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="https://calendly.com/sam-aristotle/30min" target="_blank" class="nav-cta">Book a Meeting</a></li>
+  </ul>
 </nav>
 
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="container">
-    <h1>The AI-Native Growth & Pricing Advisory for Industrial & Tech Leaders</h1>
-    <p class="sub">We combine top-tier strategy partners with AI systems to deliver faster, higher-value outcomes — and the capability stays with you.</p>
+<!-- ─── HERO ─── -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <h1>Consulting that builds <span class="accent">capabilities.</span><br>Not dependencies.</h1>
+    <p class="hero-sub">MBB-grade insight, embedded in your team — so the capability stays after we leave.</p>
     <div class="hero-ctas">
-      <a class="btn btn-primary btn-lg" href="#meet">Book a Meeting</a>
-      <a class="btn btn-outline btn-lg" href="#cases">See Case Studies</a>
+      <a href="https://calendly.com/sam-aristotle/30min" target="_blank" class="btn-primary">Book a Meeting <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+
+  <div class="hero-media">
+    <!-- TODO(media): Drop Chicago video into images/hero-chicago.mp4 and uncomment below.
+    <video autoplay muted loop playsinline poster="images/hero-chicago-poster.jpg">
+      <source src="images/hero-chicago.mp4" type="video/mp4">
+    </video>
+    -->
+    <div class="hero-media-placeholder">Chicago — hero media slot</div>
+  </div>
+
+  <div class="hero-strip">
+    <div class="hero-strip-item">
+      <div class="hero-strip-stat">25%</div>
+      <div class="hero-strip-label">Higher value captured vs. status quo</div>
+    </div>
+    <div class="hero-strip-item">
+      <div class="hero-strip-stat">&lt;6 wks</div>
+      <div class="hero-strip-label">From kickoff to first results</div>
+    </div>
+    <div class="hero-strip-item">
+      <div class="hero-strip-stat">$2B+</div>
+      <div class="hero-strip-label">Growth opportunities identified to date</div>
+    </div>
+    <div class="hero-strip-item">
+      <div class="hero-strip-stat">Tied to impact</div>
+      <div class="hero-strip-label">No seven-figure fixed fees</div>
     </div>
   </div>
 </section>
 
-<!-- ============ PRESS STRIP ============ -->
-<section class="press">
-  <div class="container">
-    <span class="eyebrow">Team alumni</span>
-    <div class="press-logos">
-      <span>McKinsey &amp; Company</span>
-      <span>BCG</span>
-      <span>Bain &amp; Co.</span>
-      <span>Deloitte</span>
-      <span>BLACKSTONE</span>
-      <span>KKR</span>
-    </div>
+<section class="logo-strip" aria-label="Prior firms our team has worked at">
+  <p class="logo-strip-caption">Decades of experience at the firms shaping global commerce</p>
+  <div class="logo-strip-grid">
+    <img src="images/logos/mckinsey.svg" alt="McKinsey & Company">
+    <img src="images/logos/nyu.svg" alt="NYU">
+    <img src="images/logos/umich.svg" alt="University of Michigan">
   </div>
 </section>
 
-<!-- ============ STAT BAND ============ -->
-<section class="stat-band">
-  <div class="stat-grid">
-    <div class="stat">
-      <div class="num">40x</div>
-      <div class="lab">Typical ROI on engagement value vs. fees</div>
-    </div>
-    <div class="stat">
-      <div class="num">&lt;6 wks</div>
-      <div class="lab">To first quantified answer</div>
-    </div>
-    <div class="stat">
-      <div class="num">$500M+</div>
-      <div class="lab">In growth opportunities identified</div>
-    </div>
-    <div class="stat">
-      <div class="num">25+ yrs</div>
-      <div class="lab">Combined MBB pedigree on the team</div>
-    </div>
-  </div>
-</section>
+<div class="section-divider"></div>
 
-<!-- ============ COMPARISON ============ -->
-<section class="section">
-  <h2>The Old Consulting Model Doesn’t Work For You.<br><span class="grey">Ours Does.</span></h2>
-  <div class="compare-wrap">
-    <table class="compare">
-      <thead>
-        <tr>
-          <th></th>
-          <th class="col-head col-us">Aristotle</th>
-          <th class="col-head">Big-3 (MBB)</th>
-          <th class="col-head">Boutiques</th>
-          <th class="col-head">DIY / Internal</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="compare-row-label">Speed to Impact</td>
-          <td class="col-us compare-cell"><strong>&lt;6 weeks</strong> to first answer</td>
-          <td class="compare-cell"><strong>4–6 months</strong> typical engagement</td>
-          <td class="compare-cell"><strong>3–6 months</strong>, variable rigor</td>
-          <td class="compare-cell">Stalled, internal cycles drag</td>
-        </tr>
-        <tr>
-          <td class="compare-row-label">Capability Build</td>
-          <td class="col-us compare-cell"><strong>AI tools live</strong> in your stack</td>
-          <td class="compare-cell">None — deck only, team leaves</td>
-          <td class="compare-cell">Slides + spreadsheets</td>
-          <td class="compare-cell">None — knowledge stays tribal</td>
-        </tr>
-        <tr>
-          <td class="compare-row-label">Fees</td>
-          <td class="col-us compare-cell"><strong>Success-tied</strong> + no upfront on scans</td>
-          <td class="compare-cell">Seven-figure fixed fees</td>
-          <td class="compare-cell">Fixed fees + small success</td>
-          <td class="compare-cell">No external fees</td>
-        </tr>
-        <tr>
-          <td class="compare-row-label">Tooling Embedded</td>
-          <td class="col-us compare-cell"><strong>Yes</strong> — you own the IP</td>
-          <td class="compare-cell">No — proprietary frameworks</td>
-          <td class="compare-cell">Limited or none</td>
-          <td class="compare-cell">No</td>
-        </tr>
-        <tr>
-          <td class="compare-row-label">Ongoing Iteration</td>
-          <td class="col-us compare-cell"><strong>Quarterly</strong> AI-tool updates</td>
-          <td class="compare-cell">Re-engage to refresh</td>
-          <td class="compare-cell">Re-engage to refresh</td>
-          <td class="compare-cell">Manual, slow</td>
-        </tr>
-        <tr>
-          <td class="compare-row-label">Talent Pedigree</td>
-          <td class="col-us compare-cell"><strong>Ex-MBB</strong> partners + AI engineers</td>
-          <td class="compare-cell">Senior partners, then juniors</td>
-          <td class="compare-cell">Mixed</td>
-          <td class="compare-cell">Internal team only</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- ============ FUNNEL ============ -->
-<section class="funnel-section">
-  <h2>The Path to <strong>Compounding Growth.</strong></h2>
-  <div class="funnel-wrap">
-    <div class="funnel-list">
-      <div class="funnel-row">
-        <div class="label">500+ data points scanned</div>
-        <div class="step">01</div>
-        <div class="icons"></div>
-      </div>
-      <div class="funnel-row">
-        <div class="label">20+ prioritized growth plays surfaced</div>
-        <div class="step">02</div>
-        <div class="icons"></div>
-      </div>
-      <div class="funnel-row highlight">
-        <div class="label">2–3 priority initiatives piloted</div>
-        <div class="step">03</div>
-        <div class="icons"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-      </div>
-      <div class="funnel-row">
-        <div class="label">AI tools live in your stack</div>
-        <div class="step">04</div>
-        <div class="icons"></div>
-      </div>
-      <div class="funnel-row">
-        <div class="label">Quarterly compounding iterations</div>
-        <div class="step">05</div>
-        <div class="icons"></div>
-      </div>
-      <div class="funnel-row">
-        <div class="label">$XXM in P&amp;L impact realized</div>
-        <div class="step">06</div>
-        <div class="icons"></div>
-      </div>
-    </div>
-    <div class="partner-cards">
-      <div class="partner-card">
-        <div class="avatar">SG</div>
-        <div>
-          <div class="ttl">Dedicated Partner</div>
-          <div class="sub">Ex-MBB strategy partner</div>
+<!-- ─── VALUE PROPOSITION ─── -->
+<section class="value-prop" id="value">
+  <div class="value-grid">
+    <div class="value-content">
+      <div class="section-label reveal">Our Approach</div>
+      <h2 class="section-title reveal reveal-delay-1">AI-enabled consulting that<br>compounds over time</h2>
+      <p class="section-desc reveal reveal-delay-2">
+        Aristotle delivers AI-enabled consulting engagements in revenue growth management — then embeds the capability into your organization so your team can run, iterate, and expand.
+      </p>
+      <div class="value-stats reveal reveal-delay-3">
+        <div class="stat-card">
+          <div class="stat-number">40x</div>
+          <div class="stat-label">Typical ROI on engagement</div>
         </div>
-      </div>
-      <div class="partner-card">
-        <div class="avatar">AI</div>
-        <div>
-          <div class="ttl">Aristotle AI Agents</div>
-          <div class="sub">Runs analyses on demand</div>
+        <div class="stat-card">
+          <div class="stat-number">80+</div>
+          <div class="stat-label">Growth targets identified per scan</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">$500M+</div>
+          <div class="stat-label">Growth opportunities identified</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">10x</div>
+          <div class="stat-label">Faster than traditional consulting</div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="pillars">
-    <div class="pillar">
-      <h4>Partner-Led Process</h4>
-      <p>Every engagement is run by a former McKinsey, BCG, or Bain partner — not a junior team.</p>
-    </div>
-    <div class="pillar">
-      <h4>AI Advantage</h4>
-      <p>Our AI does the manual work — surfacing growth plays and pricing leaks at scale.</p>
-    </div>
-    <div class="pillar">
-      <h4>Faster to Impact</h4>
-      <p>From kickoff to first quantified answer in under 6 weeks. Iterate from there.</p>
-    </div>
-    <div class="pillar">
-      <h4>Capability Embedded</h4>
-      <p>You keep the models. Your team runs them after we leave — and we update them quarterly.</p>
+    <div class="process-bar reveal reveal-delay-2">
+      <div class="process-step">
+        <div class="process-step-num">01</div>
+        <div class="process-step-title">Engage</div>
+        <div class="process-step-text">Diagnose the revenue lever with the highest ROI in weeks, not months.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">02</div>
+        <div class="process-step-title">Build</div>
+        <div class="process-step-text">Stand up the AI system unique to your data, your products, your buyers.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">03</div>
+        <div class="process-step-title">Embed</div>
+        <div class="process-step-text">Hand the keys to your team. Train them to run, iterate, and extend.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">04</div>
+        <div class="process-step-title">Iterate</div>
+        <div class="process-step-text">Returns compound as the system learns and your team applies it to new questions.</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============ PRODUCT SHOWCASE ============ -->
-<section class="product">
-  <h2>Where <span class="grey">Strategy Meets</span> AI Systems.</h2>
-  <p class="lead">Our platform automates the heavy lifting so our strategy partners focus on positioning, decision-making, and embedding the capability.</p>
-  <div class="product-grid">
-    <div class="product-mock">
-      <div class="bar">
-        <div class="tabs">
-          <div class="tab active">Growth opportunities</div>
-          <div class="tab">Pricing leaks</div>
+<!-- ─── PATH TO COMPOUNDING GROWTH ─── -->
+<section class="path" id="path">
+  <div class="path-header">
+    <div class="section-label reveal">Our Platform</div>
+    <h2 class="section-title reveal reveal-delay-1">Path to Compounding Growth</h2>
+    <p class="section-desc reveal reveal-delay-2">Four AI capabilities, applied in concert. Each one stands alone — together they make consulting compound.</p>
+  </div>
+
+  <div class="path-tabs" role="tablist">
+    <button class="path-tab active" role="tab" aria-selected="true" data-target="tab-opportunity">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      Opportunity Identification
+    </button>
+    <button class="path-tab" role="tab" aria-selected="false" data-target="tab-geospatial">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-7-7-12a7 7 0 1 1 14 0c0 5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Geospatial Mapping
+    </button>
+    <button class="path-tab" role="tab" aria-selected="false" data-target="tab-pricing">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 6H9a3 3 0 0 0 0 6h6a3 3 0 0 1 0 6H7"/></svg>
+      Pricing Engine
+    </button>
+    <button class="path-tab" role="tab" aria-selected="false" data-target="tab-forecast">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 7-9"/><path d="M14 7h6v6"/></svg>
+      Demand Forecasting
+    </button>
+  </div>
+
+  <div class="path-panels">
+    <div class="path-panel active" id="tab-opportunity" role="tabpanel">
+      <div class="path-panel-content">
+        <h3>Surface the growth no one's looked for.</h3>
+        <p>Scan markets, adjacencies, and acquisition targets at a depth that used to take a six-month engagement. Output: ranked opportunities with sizing and rationale.</p>
+        <div class="path-panel-meta">
+          <div class="path-panel-meta-label">Engaged via</div>
+          <div class="path-panel-meta-value">Growth Strategy · Commercial Due Diligence</div>
         </div>
-        <div class="search">Find an opportunity</div>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>End-market</th>
-            <th>Fit Score</th>
-            <th>Rationale</th>
-            <th>Plays</th>
-            <th>$ Potential</th>
-            <th>Δ vs LY</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Industrial Distribution</td>
-            <td><span class="score">9.4</span></td>
-            <td>Strong product-market fit; consolidating channels; price elasticity favorable.</td>
-            <td>• Channel rationalization<br>• SKU pruning<br>• Dynamic pricing</td>
-            <td><span class="pill good">$120M</span></td>
-            <td><span class="pill good">+18% YoY</span></td>
-          </tr>
-          <tr>
-            <td>Semi Cap Equipment</td>
-            <td><span class="score">8.7</span></td>
-            <td>Adjacent capability; high-margin segment; 3 ex-customers reactivatable.</td>
-            <td>• Reactivation<br>• Premium tier<br>• Bundling</td>
-            <td><span class="pill good">$80M</span></td>
-            <td><span class="pill good">+12% YoY</span></td>
-          </tr>
-          <tr>
-            <td>Specialty Chemicals</td>
-            <td><span class="score">8.2</span></td>
-            <td>Pricing power untapped; 6 SKUs underpriced by 8–15%.</td>
-            <td>• Re-pricing<br>• Discount controls</td>
-            <td><span class="pill good">$55M</span></td>
-            <td><span class="pill good">+9% YoY</span></td>
-          </tr>
-          <tr>
-            <td>Aerospace MRO</td>
-            <td><span class="score">7.8</span></td>
-            <td>Adjacent; high switching cost; 4 anchor accounts identified.</td>
-            <td>• Account-based pursuit<br>• Cross-sell</td>
-            <td><span class="pill good">$45M</span></td>
-            <td><span class="pill good">+7% YoY</span></td>
-          </tr>
-          <tr>
-            <td>Heavy Equipment Resale</td>
-            <td><span class="score">7.5</span></td>
-            <td>Fragmented; 80+ tuck-in targets; clear consolidation thesis.</td>
-            <td>• M&amp;A roll-up<br>• Digital channel</td>
-            <td><span class="pill good">$60M</span></td>
-            <td><span class="pill good">+11% YoY</span></td>
-          </tr>
-          <tr>
-            <td>Legacy POS Hardware</td>
-            <td><span class="score">5.1</span></td>
-            <td>Declining demand; commoditized; harvest only.</td>
-            <td>• Price-up<br>• Wind-down</td>
-            <td><span class="pill bad">–$8M</span></td>
-            <td><span class="pill bad">–4% YoY</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="path-panel-visual">
+        <!-- TODO(media): screenshot or product mock of opportunity dashboard -->
+        <div class="path-panel-placeholder">Opportunity scan output</div>
+      </div>
     </div>
-    <div class="capability-list">
-      <div class="capability">
-        <div class="ttl"><span class="arrow">→</span> Opportunity Identification</div>
-        <p>We surface dozens of synergetic growth plays in days, not months.</p>
+
+    <div class="path-panel" id="tab-geospatial" role="tabpanel" hidden>
+      <div class="path-panel-content">
+        <h3>See your market the way it actually behaves.</h3>
+        <p>Map demand, competitors, and white space at the ZIP, county, or trade-area level. Built for industrials, retail, and services where geography determines the play.</p>
+        <div class="path-panel-meta">
+          <div class="path-panel-meta-label">Engaged via</div>
+          <div class="path-panel-meta-value">Growth Strategy · Commercial Due Diligence</div>
+        </div>
       </div>
-      <div class="capability dim">
-        <div class="ttl">Pricing Engine</div>
+      <div class="path-panel-visual">
+        <div class="path-panel-placeholder">Geospatial demand map</div>
       </div>
-      <div class="capability dim">
-        <div class="ttl">Demand Forecasting</div>
+    </div>
+
+    <div class="path-panel" id="tab-pricing" role="tabpanel" hidden>
+      <div class="path-panel-content">
+        <h3>Capture the value you're leaving on the table.</h3>
+        <p>Customer- and quote-level pricing models that surface leaks and recommend moves. Then we embed it so the team can run pricing refreshes without us.</p>
+        <div class="path-panel-meta">
+          <div class="path-panel-meta-label">Engaged via</div>
+          <div class="path-panel-meta-value">Pricing</div>
+        </div>
       </div>
-      <div class="capability dim">
-        <div class="ttl">Diligence Co-pilot</div>
+      <div class="path-panel-visual">
+        <div class="path-panel-placeholder">Pricing engine output</div>
+      </div>
+    </div>
+
+    <div class="path-panel" id="tab-forecast" role="tabpanel" hidden>
+      <div class="path-panel-content">
+        <h3>Forecasts that stay sharp after we leave.</h3>
+        <p>Customer-by-SKU forecasts that learn from every cycle. Built into your S&amp;OP flow, owned by your team.</p>
+        <div class="path-panel-meta">
+          <div class="path-panel-meta-label">Engaged via</div>
+          <div class="path-panel-meta-value">Demand Forecasting</div>
+        </div>
+      </div>
+      <div class="path-panel-visual">
+        <div class="path-panel-placeholder">Forecast accuracy dashboard</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ OFFERINGS ============ -->
-<section class="offerings" id="offerings">
-  <h2>Our Offerings</h2>
-  <p class="lead">Four practice areas, each anchored in an outcome — and each leaving a durable AI tool inside your stack.</p>
-  <div class="offerings-grid">
-    <div class="offering-card">
-      <div class="icon">↗</div>
-      <h4>Growth Strategy</h4>
-      <p>Identify where to play and how to win — with a quantified opportunity map and an AI-powered growth tracker that updates as the market moves.</p>
-      <div class="offering-stat">$500M+ growth opportunities identified</div>
-      <a class="offering-link" href="#cases">View case study →</a>
+<!-- ─── DIFFERENTIATORS ─── -->
+<section class="differentiators" id="different">
+  <div class="diff-header">
+    <div class="section-label reveal">Why Aristotle</div>
+    <h2 class="section-title reveal reveal-delay-1">How We Are Different</h2>
+    <p class="section-desc reveal reveal-delay-2">Knowledge walks out the door at traditional consulting. At Aristotle, we build capabilities and sustain impact.</p>
+  </div>
+  <div class="diff-table">
+    <div class="diff-row header reveal">
+      <div class="diff-cell diff-header-cell"></div>
+      <div class="diff-cell diff-header-cell">Traditional Consulting</div>
+      <div class="diff-cell diff-header-cell diff-header-aristotle">Aristotle</div>
     </div>
-    <div class="offering-card">
-      <div class="icon">$</div>
-      <h4>Pricing</h4>
-      <p>Recover 3–7% of revenue left on the table — and embed a pricing engine that recalibrates every quarter.</p>
-      <div class="offering-stat">40x ROI on a recent engagement</div>
-      <a class="offering-link" href="#cases">View case study →</a>
+    <div class="diff-row reveal reveal-delay-1">
+      <div class="diff-cell diff-label">Commercial Arrangements</div>
+      <div class="diff-cell diff-trad">Fixed fees. Seven figures.</div>
+      <div class="diff-cell diff-aristotle">Tied to impact.</div>
     </div>
-    <div class="offering-card">
-      <div class="icon">⌕</div>
-      <h4>Commercial Due Diligence</h4>
-      <p>MBB-grade commercial diligence in 4–6 weeks — TAM/SAM/SOM models you keep and update post-close.</p>
-      <div class="offering-stat">Independent market study · PE-grade</div>
-      <a class="offering-link" href="#cases">View case study →</a>
+    <div class="diff-row reveal reveal-delay-2">
+      <div class="diff-cell diff-label">Sustained Value</div>
+      <div class="diff-cell diff-trad">No systems or capabilities are built.</div>
+      <div class="diff-cell diff-aristotle">AI systems unique to you.</div>
     </div>
-    <div class="offering-card">
-      <div class="icon">▥</div>
-      <h4>Demand Forecasting</h4>
-      <p>Lift forecast accuracy 5–15% — with always-on demand models tuned to your 6,000+ SKUs.</p>
-      <div class="offering-stat">$150M unlock · +10% accuracy</div>
-      <a class="offering-link" href="#cases">View case study →</a>
+    <div class="diff-row reveal reveal-delay-3">
+      <div class="diff-cell diff-label">Sustained Knowledge</div>
+      <div class="diff-cell diff-trad">Teams leave. Decks get old. Analysis needs to be rebuilt.</div>
+      <div class="diff-cell diff-aristotle">On-going support. Current insights.</div>
+    </div>
+  </div>
+  <p class="diff-footer reveal">Knowledge walks out the door at traditional consulting.<br>At Aristotle, we build capabilities and sustain impact.</p>
+</section>
+
+<!-- ─── EXPERTISE ─── -->
+<section class="expertise" id="expertise">
+  <div class="expertise-header">
+    <div class="section-label">By the Numbers</div>
+    <h2 class="section-title">Decades of expertise. Backed by technology that delivers.</h2>
+  </div>
+
+  <div class="expertise-stats">
+    <div class="expertise-stat">
+      <div class="expertise-stat-num">$2B+</div>
+      <div class="expertise-stat-text">in growth opportunities identified in under a week</div>
+    </div>
+    <div class="expertise-stat">
+      <div class="expertise-stat-num">40x</div>
+      <div class="expertise-stat-text">average ROI on a single Aristotle engagement</div>
+    </div>
+    <div class="expertise-stat">
+      <div class="expertise-stat-num">10x</div>
+      <div class="expertise-stat-text">faster than the traditional consulting cycle</div>
+    </div>
+  </div>
+
+  <div class="expertise-sectors">
+    <div class="expertise-sectors-label">Sectors we serve</div>
+    <div class="expertise-sectors-grid">
+      <div class="expertise-sector">Industrials &amp; Manufacturing</div>
+      <div class="expertise-sector">Semiconductors</div>
+      <div class="expertise-sector">Financial Services</div>
+      <div class="expertise-sector">Technology</div>
+      <div class="expertise-sector">Consumer &amp; Retail</div>
+      <div class="expertise-sector">Private Equity</div>
     </div>
   </div>
 </section>
 
-<!-- ============ CREDIBILITY ============ -->
-<section class="cred">
-  <h2>Decades of Expertise Backed by<br>Technology That Delivers.</h2>
-  <div class="cred-grid">
-    <div>
-      <div class="cred-num">$1B+</div>
-      <div class="cred-lab">in client impact delivered by our team</div>
-    </div>
-    <div>
-      <div class="cred-num">&lt;6 wks</div>
-      <div class="cred-lab">to first quantified answer on every engagement</div>
-    </div>
-    <div>
-      <div class="cred-num">50+</div>
-      <div class="cred-lab">engagements led at Fortune 500 industrial and tech leaders</div>
-    </div>
+<!-- ─── CASE STUDIES ─── -->
+<section class="case-studies" id="cases">
+  <div class="cases-header">
+    <div class="section-label reveal">Proven Results</div>
+    <h2 class="section-title reveal reveal-delay-1">Case Studies</h2>
   </div>
-</section>
-
-<!-- ============ SECTORS ============ -->
-<section class="sectors">
-  <h2>We Work With <strong>Leaders Across Various Sectors</strong></h2>
-  <div class="sector-grid">
-    <div class="sector">
-      <div class="icon">⚙</div>
-      <h4>Industrials</h4>
-      <p>Manufacturing, distribution, heavy equipment</p>
-    </div>
-    <div class="sector">
-      <div class="icon">▣</div>
-      <h4>Semis &amp; Hardware</h4>
-      <p>Fabless, design, photonics, sensors</p>
-    </div>
-    <div class="sector">
-      <div class="icon">◐</div>
-      <h4>Tech &amp; SaaS</h4>
-      <p>Enterprise software, B2B platforms, data infra</p>
-    </div>
-    <div class="sector">
-      <div class="icon">▤</div>
-      <h4>Distribution &amp; Wholesale</h4>
-      <p>Multi-channel, specialty, B2B trade</p>
-    </div>
-    <div class="sector">
-      <div class="icon">◈</div>
-      <h4>Consumer &amp; Retail</h4>
-      <p>DTC, specialty retail, branded goods</p>
-    </div>
-    <div class="sector">
-      <div class="icon">$</div>
-      <h4>PE &amp; M&amp;A Diligence</h4>
-      <p>Commercial diligence, value creation plans</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CASE STUDIES ============ -->
-<section class="cases" id="cases">
-  <h2>Proven Results</h2>
-  <p class="lead">A sample of engagements led by our team for industrial and tech leaders.</p>
   <div class="cases-grid">
-    <div class="case-card">
+    <div class="case-card reveal">
       <span class="case-tag">Growth Strategy</span>
-      <h4>$2B+ Industrials Manufacturer</h4>
-      <div class="case-meta">Industrials · Corporate Strategy</div>
-      <p class="narrative">A new CSO needed to unlock growth across three non-adjacent BUs in a low-growth industry. We built a custom framework, mapped 30+ end-markets, and identified 80+ M&amp;A targets.</p>
-      <div class="case-outcome">$500M+ opportunities · 8+ acquisitions · $300M+ top-line</div>
-      <div class="why">Why it mattered: re-platformed a stagnant portfolio into a growth story.</div>
+      <h3>Growth Strategy for $2B+ Industrials Manufacturer</h3>
+      <div class="case-meta">Large Enterprise · Industrials · Corporate Strategy</div>
+      <div class="case-section">
+        <div class="case-section-label">Problem</div>
+        <div class="case-section-text">New CSO needed to identify right end-markets and products to unlock growth across three non-adjacent business units in a low-growth industry.</div>
+      </div>
+      <div class="case-section">
+        <div class="case-section-label">Action</div>
+        <div class="case-section-text">Developed customized framework to shortlist 10+ product categories across 30+ end-markets. Created detailed market map yielding 8+ growth plays. Assessed value chain dynamics and conducted M&A scan identifying 80+ targets.</div>
+      </div>
+      <div class="case-result">
+        <div class="case-result-text">$500M+ growth opportunities identified. 8+ acquisitions completed. $300M+ top-line impact delivered.</div>
+      </div>
     </div>
-    <div class="case-card">
+    <div class="case-card reveal reveal-delay-1">
       <span class="case-tag">Pricing</span>
-      <h4>$700M Fabless Semiconductor</h4>
-      <div class="case-meta">Technology · Commercial Ops</div>
-      <p class="narrative">Built customer + product segmentation, identified quote-level pricing leaks, developed Price × Volume curves for top SKUs, and designed the pricing-refresh process.</p>
-      <div class="case-outcome">$4M impact · 40x ROI</div>
-      <div class="why">Why it mattered: pricing system became a permanent capability, not a one-time fix.</div>
+      <h3>Pricing System for $700M Fabless Semiconductor</h3>
+      <div class="case-meta">Large Enterprise · Technology · Commercial Ops</div>
+      <div class="case-section">
+        <div class="case-section-label">Problem</div>
+        <div class="case-section-text">Needed a system of records for pricing with insights to update price-books and quote-level pricing adjustments.</div>
+      </div>
+      <div class="case-section">
+        <div class="case-section-label">Action</div>
+        <div class="case-section-text">Built customer and product segmentation, identified pricing discrepancies at quote level, developed Price x Volume curves for top SKUs, and designed process flow for pricing refresh.</div>
+      </div>
+      <div class="case-result">
+        <div class="case-result-text">$4M impact. 40x ROI.</div>
+      </div>
     </div>
-    <div class="case-card">
+    <div class="case-card reveal reveal-delay-2">
       <span class="case-tag">Commercial Due Diligence</span>
-      <h4>Trucks &amp; Heavy Equipment Resale</h4>
-      <div class="case-meta">Industrials · PE Diligence</div>
-      <p class="narrative">PE firm evaluating a PortCo tuck-in. We mapped competitive landscape and value chain, built bottom-up TAM/SAM/SOM, and quantified growth + synergies.</p>
-      <div class="case-outcome">Independent market study · PE green-lit acquisition</div>
-      <div class="why">Why it mattered: PE conviction backed by an MBB-grade thesis in 6 weeks.</div>
+      <h3>CDD: Trucks & Heavy Equipment Resale Market</h3>
+      <div class="case-meta">Large Enterprise · Industrials · Strategy & Development</div>
+      <div class="case-section">
+        <div class="case-section-label">Problem</div>
+        <div class="case-section-text">PE firm evaluating PortCo tuck-in acquisition of a logistics broker in the truck and construction equipment resale segment.</div>
+      </div>
+      <div class="case-section">
+        <div class="case-section-label">Action</div>
+        <div class="case-section-text">Mapped competitive landscape and value chain, evaluated TargetCo positioning, built bottom-up TAM/SAM/SOM sizing, and quantified growth opportunities and synergies.</div>
+      </div>
+      <div class="case-result">
+        <div class="case-result-text">Delivered independent market study. PE green-lighted the acquisition.</div>
+      </div>
     </div>
-    <div class="case-card">
+    <div class="case-card reveal reveal-delay-3">
       <span class="case-tag">Demand Forecasting</span>
-      <h4>$4B Semiconductor Co.</h4>
-      <div class="case-meta">Technology · Operations</div>
-      <p class="narrative">Segmented portfolio at the customer × product level, baselined forecasting, built algorithms for underperforming segments, and created a revenue optimization model.</p>
-      <div class="case-outcome">$150M unlock · +10% accuracy · $25M inventory reduction</div>
-      <div class="why">Why it mattered: replaced spreadsheet-driven planning with always-on demand models.</div>
+      <h3>Demand Forecasting for $4B Semiconductor Co.</h3>
+      <div class="case-meta">Large Enterprise · Technology · Operations</div>
+      <div class="case-section">
+        <div class="case-section-label">Problem</div>
+        <div class="case-section-text">Post-COVID supply shocks left the company unable to forecast demand or optimally allocate supply across 6,000+ customer-SKU pairs.</div>
+      </div>
+      <div class="case-section">
+        <div class="case-section-label">Action</div>
+        <div class="case-section-text">Segmented portfolio at customer x product level, baselined forecasting, built algorithms for underperforming segments, and created revenue optimization model.</div>
+      </div>
+      <div class="case-result">
+        <div class="case-result-text">$150M unlock. +10% forecast accuracy. $25M inventory reduction.</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============ INSIGHTS ============ -->
+<!-- ─── INSIGHTS ─── -->
 <section class="insights" id="insights">
-  <h2>Insights</h2>
-  <p class="lead">Field notes from the front lines of AI-enabled strategy.</p>
-  <div class="insights-grid">
-    <div class="insight-card">
-      <div class="insight-tag">Pricing</div>
-      <h4>The 7% You're Leaving on the Table — And How AI Finds It</h4>
-      <div class="meta">8 min read · Coming soon</div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-tag">Growth</div>
-      <h4>Why End-Market Selection Is the Single Highest-Leverage Decision</h4>
-      <div class="meta">6 min read · Coming soon</div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-tag">Diligence</div>
-      <h4>Commercial Diligence in 6 Weeks: What Has to Change</h4>
-      <div class="meta">5 min read · Coming soon</div>
-    </div>
+  <div class="insights-header">
+    <div class="section-label">Insights</div>
+    <h2 class="section-title">Notes from the field</h2>
+    <p class="section-desc">Field-tested perspectives on revenue, pricing, and where AI is actually moving the needle.</p>
   </div>
+  <div class="insights-grid">
+    <article class="insight-card">
+      <div class="insight-tag">Pricing</div>
+      <h3>Why your pricing model expires the day you ship it</h3>
+      <div class="insight-meta">Coming soon</div>
+    </article>
+    <article class="insight-card">
+      <div class="insight-tag">Growth Strategy</div>
+      <h3>Adjacency scans: the cheapest growth lever most companies skip</h3>
+      <div class="insight-meta">Coming soon</div>
+    </article>
+    <article class="insight-card">
+      <div class="insight-tag">AI in Consulting</div>
+      <h3>The hand-off problem: why consulting capabilities don't stick</h3>
+      <div class="insight-meta">Coming soon</div>
+    </article>
+  </div>
+  <!-- TODO(content): swap placeholder titles for real posts; link to /insights/<slug>.html when ready -->
 </section>
 
-<!-- ============ Q&A ============ -->
-<section class="qa">
-  <h2>Q&amp;A</h2>
+<!-- ─── Q&A ─── -->
+<section class="qa" id="qa">
+  <div class="qa-header">
+    <div class="section-label">Q&amp;A</div>
+    <h2 class="section-title">Common questions</h2>
+  </div>
+
   <div class="qa-list">
     <details class="qa-item">
-      <summary>What is AI-enabled consulting?</summary>
-      <p>A new operating model that combines top-tier strategy partners with AI tools that stay inside your stack — so your team can re-run the analysis, not pay for a refresh.</p>
+      <summary>How is Aristotle different from a traditional consulting firm?</summary>
+      <div class="qa-answer">We deliver MBB-grade insight in weeks, not months — then we embed the AI systems and trained team so the capability stays after we leave. Traditional firms ship a deck and a bill; we ship a working system you own.</div>
     </details>
     <details class="qa-item">
-      <summary>How is this different from McKinsey, BCG, or Bain?</summary>
-      <p>Same caliber of analysis (our team comes from MBB), but tied to outcome-based fees and a durable AI capability handover, not a deck. We're faster, cheaper, and the capability stays.</p>
+      <summary>What does "tied to impact" mean for fees?</summary>
+      <div class="qa-answer">Our commercials are structured around the outcome we deliver, not a fixed seven-figure engagement fee. We win when you win.</div>
     </details>
     <details class="qa-item">
-      <summary>What's the engagement model?</summary>
-      <p>Diagnostic Scan (2 weeks, no upfront fee) → Transformation Sprint (8–12 weeks, blended fixed + success fee) → Compound (quarterly iterations on the AI tools).</p>
+      <summary>What size of company do you typically work with?</summary>
+      <div class="qa-answer"><!-- TODO(content): confirm revenue band --> Mid-market through enterprise — typically $200M–$5B in revenue, in industries where revenue decisions are driven by pricing, geography, or demand complexity.</div>
     </details>
     <details class="qa-item">
-      <summary>How do your fees work?</summary>
-      <p>No upfront fees on diagnostic scans. Blended fixed + success fees on transformation engagements. Our incentives are aligned with yours.</p>
+      <summary>How quickly can we see results?</summary>
+      <div class="qa-answer">Initial findings in under six weeks. Most engagements show measurable revenue impact within the first quarter and compound from there as the embedded system iterates.</div>
     </details>
     <details class="qa-item">
-      <summary>Who owns the IP we build together?</summary>
-      <p>You. Models, dashboards, and playbooks all live in your tenancy. We hand over keys at the end of the engagement.</p>
+      <summary>Who owns the AI system you build?</summary>
+      <div class="qa-answer">You do. Code, models, dashboards, and documentation all live in your environment. We provide ongoing support, but the capability is yours to run.</div>
     </details>
     <details class="qa-item">
       <summary>Is my data secure?</summary>
-      <p>Yes. SOC 2 Type II controls, with all client data staying in your cloud. We work inside your tenancy — your data never leaves.</p>
+      <div class="qa-answer">Yes. We work inside your security perimeter where possible, and use enterprise-grade controls otherwise. NDAs and DPAs are standard.</div>
     </details>
   </div>
 </section>
 
-<!-- ============ LEADERSHIP ============ -->
-<section class="leaders" id="team">
-  <h2>Who We Are</h2>
-  <p class="lead">Operators and strategists who've done this for Fortune 500 leaders.</p>
-  <div class="leaders-grid">
-    <div class="leader-card">
-      <div class="leader-avatar"><img src="images/sam.jpeg" alt="Sam Garg"></div>
-      <h3 class="leader-name">Sam Garg</h3>
-      <div class="leader-role">Founder</div>
-      <ul class="leader-creds">
-        <li>ex-McKinsey · Strategy</li>
-        <li>50+ engagements led</li>
-        <li>$1B+ in client impact</li>
-      </ul>
-      <div class="leader-linkedin">LinkedIn ↗</div>
-    </div>
-    <div class="leader-card">
-      <div class="leader-avatar"><img src="images/bia.jpeg" alt="Beatriz Abramof"></div>
-      <h3 class="leader-name">Bia Abramof</h3>
-      <div class="leader-role">Chief of Staff</div>
-      <ul class="leader-creds">
-        <li>NYU Stern</li>
-        <li>Operating across growth, pricing &amp; diligence</li>
-        <li>Builds the AI tools clients keep</li>
-      </ul>
-      <div class="leader-linkedin">LinkedIn ↗</div>
-    </div>
-    <div class="leader-card">
-      <div class="leader-avatar"><img src="images/rachit.jpeg" alt="Rachit Agarwal"></div>
-      <h3 class="leader-name">Rachit Agarwal</h3>
-      <div class="leader-role">Founding Engineer</div>
-      <ul class="leader-creds">
-        <li>University of Michigan</li>
-        <li>Owns the AI platform &amp; data infrastructure</li>
-        <li>Ships dashboards into client stacks</li>
-      </ul>
-      <div class="leader-linkedin">LinkedIn ↗</div>
-    </div>
-  </div>
+<!-- ─── CTA ─── -->
+<section class="cta" id="contact">
+  <h2 class="section-title">Business decisions are too important for stale spreadsheets and consulting decks.</h2>
+  <p class="cta-sub">Book a 30-minute call. We'll show you what compounding consulting looks like for your team.</p>
+  <a href="https://calendly.com/sam-aristotle/30min" target="_blank" class="btn-primary">Book a Meeting <span aria-hidden="true">→</span></a>
 </section>
 
-<!-- ============ CLOSING CTA ============ -->
-<section class="closing">
-  <div class="closing-card">
-    <div>
-      <h2>Your Next $100M in Growth — Mapped in 30 Days.</h2>
-      <p>Meet a partner who has done this for Fortune 500 leaders. No upfront fees on diagnostic scans.</p>
-      <div class="cta">
-        <a class="btn btn-on-dark btn-primary btn-lg" href="#meet">Book a Meeting</a>
-        <a class="btn btn-on-dark btn-outline btn-lg" href="#scan">Request a Pricing Scan</a>
-      </div>
-    </div>
-    <div class="advisor-card">
-      <div class="advisor-head">
-        <div class="advisor-avatar"></div>
-        <div>
-          <div class="advisor-name">Dedicated Partner</div>
-          <div style="color:var(--ink-muted);font-size:13px;margin-top:2px">Ex-McKinsey strategy partner</div>
-        </div>
-      </div>
-      <div class="advisor-meta">
-        <div class="cell">
-          <div class="l">Previous Role</div>
-          <div class="v">Partner, Strategy</div>
-        </div>
-        <div class="cell">
-          <div class="l">Firm</div>
-          <div class="v">McKinsey &amp; Company</div>
-        </div>
-        <div class="cell">
-          <div class="l">Engagements Led</div>
-          <div class="v">50+</div>
-        </div>
-        <div class="cell">
-          <div class="l">Impact Delivered</div>
-          <div class="v">$1B+</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FOOTER ============ -->
-<footer class="footer-big">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <div class="logo">ARISTOTLE</div>
-      <p>AI-Enabled Consulting · Lasting Capabilities · Recurring Impact.</p>
-    </div>
-    <div>
-      <h5>Company</h5>
-      <ul>
-        <li><a href="#team">About</a></li>
-        <li><a href="#team">Team</a></li>
-        <li><a href="#careers">Careers</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Offerings</h5>
-      <ul>
-        <li><a href="#offerings">Growth Strategy</a></li>
-        <li><a href="#offerings">Pricing</a></li>
-        <li><a href="#offerings">Commercial Diligence</a></li>
-        <li><a href="#offerings">Demand Forecasting</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Resources</h5>
-      <ul>
-        <li><a href="#insights">Insights</a></li>
-        <li><a href="#cases">Case Studies</a></li>
-        <li><a href="#meet">Contact</a></li>
-        <li><a href="#linkedin">LinkedIn</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Legal</h5>
-      <ul>
-        <li><a href="#privacy">Privacy Policy</a></li>
-        <li><a href="#terms">Terms</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="copy">© 2026 Aristotle Technology, Inc.</div>
-    <div class="legal">
-      <a href="#privacy">Privacy</a>
-      <a href="#terms">Terms</a>
-    </div>
-  </div>
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">Aristotle</div>
+  <div class="footer-text">&copy; 2026 Aristotle. Chicago, IL.</div>
+  <ul class="footer-links">
+    <li><a href="team.html">Team</a></li>
+    <li><a href="#insights">Insights</a></li>
+    <li><a href="https://calendly.com/sam-aristotle/30min" target="_blank">Book a Meeting</a></li>
+    <li><a href="mailto:sam@aristotle.ai">Contact</a></li>
+  </ul>
 </footer>
-
-<!-- ============ MOBILE STICKY CTA ============ -->
-<a class="mobile-cta" id="mobileCta" href="#meet">Book a Meeting →</a>
+<!-- TODO(content): confirm sam@aristotle.ai or correct contact email -->
 
 <script>
-  // Scroll-fade reveal
-  (function(){
-    var targets = document.querySelectorAll('section > h2, .stat, .offering-card, .case-card, .insight-card, .leader-card, .sector, .funnel-row, .pillar, .compare, .product-mock, .capability, .cred-grid > div, .closing-card, details.qa-item');
-    targets.forEach(function(el){ el.classList.add('reveal'); });
-    if (!('IntersectionObserver' in window)) {
-      targets.forEach(function(el){ el.classList.add('in'); });
-      return;
-    }
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.12 });
-    targets.forEach(function(el){ io.observe(el); });
-  })();
+// ─── NAV SCROLL ───
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
 
-  // Mobile sticky CTA: show after hero scroll-past
-  (function(){
-    var cta = document.getElementById('mobileCta');
-    var hero = document.querySelector('.hero');
-    if (!cta || !hero) return;
-    function onScroll(){
-      var threshold = hero.offsetHeight * 0.8;
-      if (window.scrollY > threshold) cta.classList.add('visible');
-      else cta.classList.remove('visible');
+// ─── REVEAL ON SCROLL ───
+const revealElements = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
     }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  })();
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+revealElements.forEach(el => observer.observe(el));
+
+// ─── SMOOTH SCROLL ───
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ─── PATH TABS ───
+const pathTabs = document.querySelectorAll('.path-tab');
+const pathPanels = document.querySelectorAll('.path-panel');
+pathTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const targetId = tab.dataset.target;
+    pathTabs.forEach(t => {
+      const active = t === tab;
+      t.classList.toggle('active', active);
+      t.setAttribute('aria-selected', String(active));
+    });
+    pathPanels.forEach(p => {
+      const show = p.id === targetId;
+      p.classList.toggle('active', show);
+      p.hidden = !show;
+    });
+  });
+});
 </script>
 
 </body>
