@@ -166,36 +166,89 @@
   <p class="diff-footer reveal">Knowledge walks out the door at traditional consulting.<br>At Aristotle, we build capabilities and sustain impact.</p>
 </section>
 
-<!-- ─── OFFERINGS ─── -->
-<section class="offerings" id="offerings">
-  <div class="offerings-header">
-    <div class="section-label reveal">What We Do</div>
-    <h2 class="section-title reveal reveal-delay-1">Our Offerings</h2>
+<!-- ─── PATH TO COMPOUNDING GROWTH ─── -->
+<section class="path" id="path">
+  <div class="path-header">
+    <div class="section-label reveal">Our Platform</div>
+    <h2 class="section-title reveal reveal-delay-1">Path to Compounding Growth</h2>
+    <p class="section-desc reveal reveal-delay-2">Four AI capabilities, applied in concert. Each one stands alone — together they make consulting compound.</p>
   </div>
-  <div class="offerings-grid">
-    <div class="offering-card reveal">
-      <div class="offering-icon">📈</div>
-      <h3>Growth Strategy</h3>
-      <p>Build an organic and/or inorganic growth strategy — where to play, how to win, and what initiatives (or acquisitions) will drive results.</p>
-      <a href="#contact" class="offering-link">Learn more <span class="arrow">→</span></a>
+
+  <div class="path-tabs" role="tablist">
+    <button class="path-tab active" role="tab" aria-selected="true" data-target="tab-opportunity">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      Opportunity Identification
+    </button>
+    <button class="path-tab" role="tab" aria-selected="false" data-target="tab-geospatial">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-7-7-12a7 7 0 1 1 14 0c0 5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Geospatial Mapping
+    </button>
+    <button class="path-tab" role="tab" aria-selected="false" data-target="tab-pricing">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 6H9a3 3 0 0 0 0 6h6a3 3 0 0 1 0 6H7"/></svg>
+      Pricing Engine
+    </button>
+    <button class="path-tab" role="tab" aria-selected="false" data-target="tab-forecast">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 7-9"/><path d="M14 7h6v6"/></svg>
+      Demand Forecasting
+    </button>
+  </div>
+
+  <div class="path-panels">
+    <div class="path-panel active" id="tab-opportunity" role="tabpanel">
+      <div class="path-panel-content">
+        <h3>Surface the growth no one's looked for.</h3>
+        <p>Scan markets, adjacencies, and acquisition targets at a depth that used to take a six-month engagement. Output: ranked opportunities with sizing and rationale.</p>
+        <div class="path-panel-meta">
+          <div class="path-panel-meta-label">Engaged via</div>
+          <div class="path-panel-meta-value">Growth Strategy · Commercial Due Diligence</div>
+        </div>
+      </div>
+      <div class="path-panel-visual">
+        <!-- TODO(media): screenshot or product mock of opportunity dashboard -->
+        <div class="path-panel-placeholder">Opportunity scan output</div>
+      </div>
     </div>
-    <div class="offering-card reveal reveal-delay-1">
-      <div class="offering-icon">💰</div>
-      <h3>Pricing</h3>
-      <p>Set and optimize pricing and discounting to capture value — then embed tools to keep decisions current as conditions change.</p>
-      <a href="#contact" class="offering-link">Learn more <span class="arrow">→</span></a>
+
+    <div class="path-panel" id="tab-geospatial" role="tabpanel" hidden>
+      <div class="path-panel-content">
+        <h3>See your market the way it actually behaves.</h3>
+        <p>Map demand, competitors, and white space at the ZIP, county, or trade-area level. Built for industrials, retail, and services where geography determines the play.</p>
+        <div class="path-panel-meta">
+          <div class="path-panel-meta-label">Engaged via</div>
+          <div class="path-panel-meta-value">Growth Strategy · Commercial Due Diligence</div>
+        </div>
+      </div>
+      <div class="path-panel-visual">
+        <div class="path-panel-placeholder">Geospatial demand map</div>
+      </div>
     </div>
-    <div class="offering-card reveal reveal-delay-2">
-      <div class="offering-icon">🔍</div>
-      <h3>Commercial Due Diligence</h3>
-      <p>Underwrite growth and risk with MBB-grade diligence — combining market intelligence, bottom-up market size models and detailed growth assessment.</p>
-      <a href="#contact" class="offering-link">Learn more <span class="arrow">→</span></a>
+
+    <div class="path-panel" id="tab-pricing" role="tabpanel" hidden>
+      <div class="path-panel-content">
+        <h3>Capture the value you're leaving on the table.</h3>
+        <p>Customer- and quote-level pricing models that surface leaks and recommend moves. Then we embed it so the team can run pricing refreshes without us.</p>
+        <div class="path-panel-meta">
+          <div class="path-panel-meta-label">Engaged via</div>
+          <div class="path-panel-meta-value">Pricing</div>
+        </div>
+      </div>
+      <div class="path-panel-visual">
+        <div class="path-panel-placeholder">Pricing engine output</div>
+      </div>
     </div>
-    <div class="offering-card reveal reveal-delay-3">
-      <div class="offering-icon">📊</div>
-      <h3>Demand Forecasting</h3>
-      <p>Build accurate, always-updated forecasts that improve planning, inventory, and revenue performance over time.</p>
-      <a href="#contact" class="offering-link">Learn more <span class="arrow">→</span></a>
+
+    <div class="path-panel" id="tab-forecast" role="tabpanel" hidden>
+      <div class="path-panel-content">
+        <h3>Forecasts that stay sharp after we leave.</h3>
+        <p>Customer-by-SKU forecasts that learn from every cycle. Built into your S&amp;OP flow, owned by your team.</p>
+        <div class="path-panel-meta">
+          <div class="path-panel-meta-label">Engaged via</div>
+          <div class="path-panel-meta-value">Demand Forecasting</div>
+        </div>
+      </div>
+      <div class="path-panel-visual">
+        <div class="path-panel-placeholder">Forecast accuracy dashboard</div>
+      </div>
     </div>
   </div>
 </section>
@@ -369,6 +422,25 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  });
+});
+
+// ─── PATH TABS ───
+const pathTabs = document.querySelectorAll('.path-tab');
+const pathPanels = document.querySelectorAll('.path-panel');
+pathTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const targetId = tab.dataset.target;
+    pathTabs.forEach(t => {
+      const active = t === tab;
+      t.classList.toggle('active', active);
+      t.setAttribute('aria-selected', String(active));
+    });
+    pathPanels.forEach(p => {
+      const show = p.id === targetId;
+      p.classList.toggle('active', show);
+      p.hidden = !show;
+    });
   });
 });
 </script>

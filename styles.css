@@ -452,101 +452,6 @@
     line-height: 1.6;
   }
 
-  /* ─── OFFERINGS ─── */
-  .offerings {
-    background: var(--navy-deep);
-  }
-
-  .offerings-header {
-    text-align: center;
-    margin-bottom: 72px;
-  }
-
-  .offerings-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .offering-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 16px;
-    padding: 40px 32px;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    position: relative;
-    overflow: hidden;
-    cursor: default;
-  }
-
-  .offering-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--blue-accent), var(--blue-bright));
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-
-  .offering-card:hover {
-    background: rgba(255,255,255,0.06);
-    border-color: rgba(65, 105, 225, 0.3);
-    transform: translateY(-8px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  }
-
-  .offering-card:hover::before { opacity: 1; }
-
-  .offering-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: rgba(65, 105, 225, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 24px;
-    font-size: 20px;
-  }
-
-  .offering-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    line-height: 1.3;
-  }
-
-  .offering-card p {
-    font-size: 14px;
-    color: var(--gray-400);
-    line-height: 1.7;
-    margin-bottom: 28px;
-  }
-
-  .offering-link {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--blue-bright);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: gap 0.3s;
-  }
-
-  .offering-link:hover { gap: 12px; }
-
-  .offering-link .arrow {
-    transition: transform 0.3s;
-    font-size: 16px;
-  }
-
   /* ─── CASE STUDIES ─── */
   .case-studies {
     background: var(--navy-deepest);
@@ -802,7 +707,6 @@
     section { padding: 80px 40px; }
     nav { padding: 0 40px; }
     .value-grid { grid-template-columns: 1fr; gap: 60px; }
-    .offerings-grid { grid-template-columns: repeat(2, 1fr); }
     .cases-grid { grid-template-columns: 1fr; }
   }
 
@@ -812,7 +716,6 @@
     .nav-links { display: none; }
     .hero { padding: 100px 24px 60px; }
     .hero-ctas { flex-direction: column; }
-    .offerings-grid { grid-template-columns: 1fr; }
     .team-grid { grid-template-columns: 1fr; gap: 32px; }
     .diff-row { grid-template-columns: 1fr; }
     .diff-header-cell:first-child { display: none; }
@@ -1008,4 +911,126 @@
 
 @media (max-width: 768px) {
   .process-bar { grid-template-columns: 1fr; }
+}
+
+/* ─── PATH TO GROWTH ─── */
+.path {
+  background: var(--navy-deep);
+}
+
+.path-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.path-header .section-desc { margin: 16px auto 0; }
+
+.path-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto 56px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.path-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 28px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--gray-400);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  margin-bottom: -1px;
+}
+
+.path-tab:hover { color: var(--gray-200); }
+
+.path-tab.active {
+  color: var(--white);
+  border-bottom-color: var(--blue-accent);
+}
+
+.path-panels {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.path-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  animation: fadeUp 0.5s ease-out;
+}
+
+.path-panel[hidden] { display: none; }
+
+.path-panel-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.path-panel-content p {
+  font-size: 16px;
+  color: var(--gray-300);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.path-panel-meta {
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.path-panel-meta-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: 6px;
+}
+
+.path-panel-meta-value {
+  font-size: 14px;
+  color: var(--blue-bright);
+  font-weight: 500;
+}
+
+.path-panel-visual {
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy-deepest) 100%);
+  border: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.path-panel-placeholder {
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+@media (max-width: 1024px) {
+  .path-tabs { flex-wrap: wrap; }
+  .path-panel { grid-template-columns: 1fr; gap: 32px; }
+}
+
+@media (max-width: 768px) {
+  .path-tab { padding: 14px 16px; font-size: 13px; }
+  .path-tab svg { width: 16px; height: 16px; }
 }
