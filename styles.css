@@ -1037,3 +1037,95 @@
   .path-tab { padding: 14px 16px; font-size: 13px; }
   .path-tab svg { width: 16px; height: 16px; }
 }
+
+/* ─── EXPERTISE ─── */
+.expertise {
+  background: var(--gray-100);
+  color: var(--navy-deep);
+}
+
+.expertise-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.expertise-header .section-label { color: var(--blue-primary); }
+
+.expertise-header .section-title {
+  color: var(--navy-deep);
+  max-width: 820px;
+  margin: 20px auto 0;
+}
+
+.expertise-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto 96px;
+  border-top: 1px solid rgba(15, 27, 51, 0.1);
+  border-bottom: 1px solid rgba(15, 27, 51, 0.1);
+}
+
+.expertise-stat {
+  padding: 56px 32px;
+  text-align: center;
+  border-right: 1px solid rgba(15, 27, 51, 0.1);
+}
+
+.expertise-stat:last-child { border-right: none; }
+
+.expertise-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 5.5vw, 72px);
+  font-weight: 600;
+  color: var(--blue-primary);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.expertise-stat-text {
+  font-size: 15px;
+  color: var(--gray-500);
+  line-height: 1.5;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+.expertise-sectors {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.expertise-sectors-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  margin-bottom: 28px;
+}
+
+.expertise-sectors-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+.expertise-sector {
+  padding: 18px 16px;
+  background: var(--white);
+  border: 1px solid rgba(15, 27, 51, 0.08);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--navy);
+}
+
+@media (max-width: 1024px) {
+  .expertise-stats { grid-template-columns: 1fr; }
+  .expertise-stat { border-right: none; border-bottom: 1px solid rgba(15, 27, 51, 0.1); }
+  .expertise-stat:last-child { border-bottom: none; }
+  .expertise-sectors-grid { grid-template-columns: repeat(2, 1fr); }
+}
