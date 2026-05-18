@@ -997,3 +997,52 @@
   .team-page-grid { grid-template-columns: 1fr; gap: 32px; max-width: 480px; margin: 0 auto; }
   .team-page { padding: 140px 24px 80px; }
 }
+
+/* ─── LOGO STRIP ─── */
+.logo-strip {
+  background: var(--navy-deepest);
+  padding: 80px 60px;
+  text-align: center;
+}
+
+.logo-strip-caption {
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: 36px;
+}
+
+.logo-strip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 56px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.logo-strip-grid img {
+  height: 28px;
+  width: auto;
+  opacity: 0.55;
+  filter: grayscale(100%) brightness(2);
+  transition: opacity 0.3s, filter 0.3s;
+}
+
+.logo-strip-grid img:hover { opacity: 1; filter: none; }
+
+.logo-strip-placeholder {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: var(--gray-400);
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .logo-strip { padding: 56px 24px; }
+  .logo-strip-grid { gap: 32px; }
+  .logo-strip-grid img { height: 22px; }
+}
