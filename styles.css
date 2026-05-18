@@ -49,7 +49,7 @@ h1, h2, h3, h4 {
   color: var(--ink);
 }
 h1 { font-weight: 700; font-size: clamp(40px, 6.4vw, 96px); line-height: 1.04; }
-h2 { font-weight: 700; font-size: clamp(32px, 4vw, 60px); line-height: 1.08; }
+h2 { font-weight: 700; font-size: clamp(28px, 3.2vw, 44px); line-height: 1.1; }
 h3 { font-weight: 600; font-size: clamp(22px, 2vw, 30px); line-height: 1.2; }
 
 .container { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
@@ -69,7 +69,8 @@ h3 { font-weight: 600; font-size: clamp(22px, 2vw, 30px); line-height: 1.2; }
 }
 .logo {
   font-family: 'Playfair Display', 'Mona Sans', Georgia, serif;
-  font-weight: 900; font-size: 28px;
+  font-weight: 900;
+  font-size: clamp(28px, 3vw, 38px);
   letter-spacing: -0.005em;
   color: var(--ink);
   line-height: 1;
