@@ -191,8 +191,9 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
   transform-origin: 50% 55%;
   animation: hero-drift 28s ease-in-out infinite alternate;
   will-change: transform;
-  /* Tuned for the dusk-over-Lake-Michigan clip — already moody, so just a touch of contrast lift. */
-  filter: saturate(0.92) contrast(1.06) brightness(1.0);
+  /* Tuned for the sunny daytime aerial — drop brightness so white text stays legible
+     against the bright sky, keep enough saturation that the clip still reads warm/happy. */
+  filter: saturate(0.88) contrast(1.06) brightness(0.85);
 }
 @keyframes hero-drift {
   from { transform: scale(1.06) translate3d(0, 0, 0); }
@@ -208,10 +209,15 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
 }
 .hero-overlay {
   position: absolute; inset: 0;
-  /* Lighter than before — dusk footage is already dark; we don't need to flatten it further.
-     Middle stop sits at 50% (where the headline now lives) with a small bump for safer readability. */
+  /* Sunny daytime clip needs a stronger top scrim so the white nav reads against bright clouds.
+     Headline mid-band stays modest so the sunny vibe survives in the part of the frame the user
+     actually focuses on. Bottom scrim protects the stat labels over the water/park band. */
   background:
-    linear-gradient(180deg, rgba(10, 19, 34, 0.40) 0%, rgba(10, 19, 34, 0.22) 50%, rgba(10, 19, 34, 0.52) 100%),
+    linear-gradient(180deg,
+      rgba(10, 19, 34, 0.60) 0%,
+      rgba(10, 19, 34, 0.48) 12%,
+      rgba(10, 19, 34, 0.26) 48%,
+      rgba(10, 19, 34, 0.52) 100%),
     linear-gradient(0deg, rgba(14, 26, 43, 0.08), rgba(14, 26, 43, 0.08));
 }
 .hero-vignette {
@@ -339,7 +345,7 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
   letter-spacing: 0.14em;
   font-size: 11px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.62);
+  color: rgba(255, 255, 255, 0.75);
   margin-top: 14px;
   line-height: 1.5;
 }
