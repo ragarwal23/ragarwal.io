@@ -393,21 +393,22 @@ def test_structural_counts() -> None:
     cred_stats = len(re.findall(r'class="cred-num"', text))
     check(f"credibility band has 3 numerals (got {cred_stats})", cred_stats == 3)
 
-    # Capabilities are interactive <button> elements now
-    capability_btns = len(re.findall(r'<button[^>]*class="capability(?:[^"]*)"', text))
-    check(f"platform has 4 capability buttons (got {capability_btns})", capability_btns == 4)
+    # Platform pillars are 4 tabbed <button>s, one per capability area
+    pillar_tabs = len(re.findall(r'<button[^>]*class="pillar-tab(?:[^"]*)"', text))
+    check(f"platform has 4 pillar tabs (got {pillar_tabs})", pillar_tabs == 4)
     check(
-        "capabilities have aria-expanded for a11y",
-        text.count('aria-expanded="true"') >= 1
-        and text.count('aria-expanded="false"') >= 3,
+        "pillar tabs have aria-selected for a11y",
+        text.count('aria-selected="true"') >= 1
+        and text.count('aria-selected="false"') >= 3,
+    )
+    pillar_panels = len(re.findall(r'class="pillar-panel(?:\s[^"]*)?"', text))
+    check(
+        f"pillar panels present (one per tab, got {pillar_panels})",
+        pillar_panels == 4,
     )
     check(
-        "capability bodies present (descriptions for all 4)",
-        text.count('class="capability-body"') == 4,
-    )
-    check(
-        "capability click handler wired in JS",
-        ".capability-list .capability" in text and "is-open" in text,
+        "pillar deck handler wired in JS",
+        ".pillar-tab" in text and "activatePillar" in text,
     )
 
     compare_rows = len(re.findall(r"<tr>\s*<td class=\"compare-row-label\">", text))
