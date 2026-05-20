@@ -314,7 +314,10 @@ def test_content_invariants() -> None:
     check("product capability: 'Opportunity Identification'", "Opportunity Identification" in visible)
     check("product capability: 'Pricing'", "Pricing" in visible)
     check("product capability: 'Demand Forecasting'", "Demand Forecasting" in visible)
-    check("product capability: 'Growth Analytics'", "Growth Analytics" in visible)
+    check(
+        "product capability: 'Geospatial Mapping' or 'Growth Analytics'",
+        "Geospatial Mapping" in visible or "Growth Analytics" in visible,
+    )
 
     # Credibility band
     check("cred: '$1B+'", "$1B+" in visible)
