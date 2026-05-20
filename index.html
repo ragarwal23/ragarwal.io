@@ -10,19 +10,21 @@
 <body>
 
 <!-- ─── NAV ─── -->
-<nav class="nav" id="navbar">
+<nav class="nav nav--over-hero" id="navbar">
   <div class="nav-inner">
     <a href="#hero" class="logo">Aristotle</a>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="insights.html">Insights</a></li>
-      <li><a href="team.html">Team</a></li>
-      <li><a href="#cases">Case Studies</a></li>
-    </ul>
-    <div class="nav-cta">
-      <a class="btn btn-outline" href="https://calendly.com/sam-aristotle/1-1-catch-up" target="_blank">Book a Meeting</a>
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-controls="nav-links" aria-expanded="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-      </button>
+    <div class="nav-right">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="insights.html">Insights</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="#cases">Case Studies</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="btn btn-outline" href="https://calendly.com/sam-aristotle/1-1-catch-up" target="_blank">Book a Meeting</a>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-controls="nav-links" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 </nav>
@@ -30,42 +32,43 @@
 <!-- ─── HERO (Chicago video background) ─── -->
 <section class="hero" id="hero">
   <div class="hero-bg" aria-hidden="true">
-    <!-- TODO(media): drop the Chicago aerial/river MP4 into images/hero-chicago.mp4
-         then uncomment the <video> below. Poster image keeps something on screen
-         while the video loads on slow connections.
-    <video class="hero-video" autoplay muted loop playsinline preload="metadata"
-           poster="images/hero-chicago-poster.jpg">
+    <div class="hero-video-fallback"></div>
+    <video class="hero-video" autoplay muted loop playsinline preload="auto"
+           disablepictureinpicture disableremoteplayback
+           x-webkit-airplay="deny">
       <source src="images/hero-chicago.mp4" type="video/mp4">
     </video>
-    -->
-    <div class="hero-video-fallback"></div>
     <div class="hero-overlay"></div>
+    <div class="hero-vignette"></div>
   </div>
-  <div class="container hero-inner">
-    <h1>The AI-Native Growth &amp; Pricing Advisory</h1>
-    <p class="sub">We combine top-tier strategy partners with AI systems to deliver faster, higher-value outcomes — and the capability stays with you.</p>
-    <a class="btn btn-primary btn-lg" href="https://calendly.com/sam-aristotle/1-1-catch-up" target="_blank">Book a Meeting</a>
-  </div>
-</section>
-
-<!-- ─── STAT BAND ─── -->
-<section class="stat-band" id="value">
-  <div class="stat-grid">
-    <div class="stat">
-      <div class="num">25%</div>
-      <div class="lab">Higher value captured vs. status quo</div>
+  <div class="hero-stack">
+    <div class="container hero-inner">
+      <h1>The AI-Native Growth &amp; Pricing Advisory</h1>
+      <p class="sub">We combine top-tier strategy partners with AI systems to deliver faster, higher-value outcomes — and the capability stays with you.</p>
+      <a class="btn btn-primary btn-lg" href="https://calendly.com/sam-aristotle/1-1-catch-up" target="_blank">
+        Book a Meeting
+        <span class="btn-arrow" aria-hidden="true">→</span>
+      </a>
     </div>
-    <div class="stat">
-      <div class="num">&lt;6 wks</div>
-      <div class="lab">From kickoff to first results</div>
-    </div>
-    <div class="stat">
-      <div class="num">$2B+</div>
-      <div class="lab">Growth opportunities identified to date</div>
-    </div>
-    <div class="stat">
-      <div class="num">Tied to impact</div>
-      <div class="lab">No seven-figure fixed fees</div>
+    <div class="stat-band stat-band--hero" id="value">
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="num">25%</div>
+          <div class="lab">Higher value captured vs. status quo</div>
+        </div>
+        <div class="stat">
+          <div class="num"><span class="num-op">&lt;</span>6 wks</div>
+          <div class="lab">From kickoff to first results</div>
+        </div>
+        <div class="stat">
+          <div class="num">$2B+</div>
+          <div class="lab">Growth opportunities identified to date</div>
+        </div>
+        <div class="stat">
+          <div class="num">Tied to impact</div>
+          <div class="lab">No seven-figure fixed fees</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -211,96 +214,148 @@
     <h3 class="platform-h3">Where <span class="grey">Strategy Meets</span> AI.</h3>
     <p class="platform-lead">Our platform automates the heavy lifting so our strategy partners focus on positioning, decision-making, and embedding the capability.</p>
 
-    <div class="product-grid">
-      <div class="product-mock" aria-label="Illustrative platform mock">
-        <div class="bar">
-          <div class="tabs">
-            <div class="tab active">Growth opportunities</div>
-            <div class="tab">Pricing leaks</div>
-          </div>
-          <div class="search">Find an opportunity</div>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>End-market</th>
-              <th>Fit Score</th>
-              <th>Rationale</th>
-              <th>Plays</th>
-              <th>$ Potential</th>
-              <th>Δ vs LY</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Industrial Distribution</td>
-              <td><span class="score">9.4</span></td>
-              <td>Strong product-market fit; consolidating channels; price elasticity favorable.</td>
-              <td>• Channel rationalization<br>• SKU pruning<br>• Dynamic pricing</td>
-              <td><span class="pill good">$120M</span></td>
-              <td><span class="pill good">+18% YoY</span></td>
-            </tr>
-            <tr>
-              <td>Semi Cap Equipment</td>
-              <td><span class="score">8.7</span></td>
-              <td>Adjacent capability; high-margin segment; 3 ex-customers reactivatable.</td>
-              <td>• Reactivation<br>• Premium tier<br>• Bundling</td>
-              <td><span class="pill good">$80M</span></td>
-              <td><span class="pill good">+12% YoY</span></td>
-            </tr>
-            <tr>
-              <td>Specialty Chemicals</td>
-              <td><span class="score">8.2</span></td>
-              <td>Pricing power untapped; 6 SKUs underpriced by 8–15%.</td>
-              <td>• Re-pricing<br>• Discount controls</td>
-              <td><span class="pill good">$55M</span></td>
-              <td><span class="pill good">+9% YoY</span></td>
-            </tr>
-            <tr>
-              <td>Aerospace MRO</td>
-              <td><span class="score">7.8</span></td>
-              <td>Adjacent; high switching cost; 4 anchor accounts identified.</td>
-              <td>• Account-based pursuit<br>• Cross-sell</td>
-              <td><span class="pill good">$45M</span></td>
-              <td><span class="pill good">+7% YoY</span></td>
-            </tr>
-            <tr>
-              <td>Heavy Equipment Resale</td>
-              <td><span class="score">7.5</span></td>
-              <td>Fragmented; 80+ tuck-in targets; clear consolidation thesis.</td>
-              <td>• M&amp;A roll-up<br>• Digital channel</td>
-              <td><span class="pill good">$60M</span></td>
-              <td><span class="pill good">+11% YoY</span></td>
-            </tr>
-            <tr>
-              <td>Legacy POS Hardware</td>
-              <td><span class="score">5.1</span></td>
-              <td>Declining demand; commoditized; harvest only.</td>
-              <td>• Price-up<br>• Wind-down</td>
-              <td><span class="pill bad">−$8M</span></td>
-              <td><span class="pill bad">−4% YoY</span></td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="pillar-deck">
+      <div class="pillar-tabs" role="tablist" aria-label="Aristotle platform pillars">
+        <button type="button" class="pillar-tab is-active" role="tab"
+                id="pillar-tab-opportunity" aria-controls="pillar-panel-opportunity"
+                aria-selected="true" data-pillar="opportunity">Opportunity Identification</button>
+        <button type="button" class="pillar-tab" role="tab"
+                id="pillar-tab-pricing" aria-controls="pillar-panel-pricing"
+                aria-selected="false" tabindex="-1" data-pillar="pricing">Pricing Engine</button>
+        <button type="button" class="pillar-tab" role="tab"
+                id="pillar-tab-forecasting" aria-controls="pillar-panel-forecasting"
+                aria-selected="false" tabindex="-1" data-pillar="forecasting">Demand Forecasting</button>
+        <button type="button" class="pillar-tab" role="tab"
+                id="pillar-tab-geospatial" aria-controls="pillar-panel-geospatial"
+                aria-selected="false" tabindex="-1" data-pillar="geospatial">Geospatial Mapping</button>
       </div>
 
-      <div class="capability-list" role="tablist" aria-label="Aristotle platform capabilities">
-        <button type="button" class="capability is-open" aria-expanded="true">
-          <span class="capability-ttl"><span class="arrow" aria-hidden="true">→</span> Opportunity Identification</span>
-          <span class="capability-body">We surface dozens of synergetic growth plays in days, not months — sized, scored, and tied to executable next steps.</span>
-        </button>
-        <button type="button" class="capability" aria-expanded="false">
-          <span class="capability-ttl"><span class="arrow" aria-hidden="true">→</span> Pricing Engine</span>
-          <span class="capability-body">Customer- and quote-level pricing models that surface leaks and recommend moves. Embedded so your team can re-run pricing refreshes every quarter.</span>
-        </button>
-        <button type="button" class="capability" aria-expanded="false">
-          <span class="capability-ttl"><span class="arrow" aria-hidden="true">→</span> Demand Forecasting</span>
-          <span class="capability-body">Customer-by-SKU forecasts that learn from every cycle. Built into your S&amp;OP flow and owned by your team after we leave.</span>
-        </button>
-        <button type="button" class="capability" aria-expanded="false">
-          <span class="capability-ttl"><span class="arrow" aria-hidden="true">→</span> Geospatial Mapping</span>
-          <span class="capability-body">Demand, competitors, and white space mapped at the ZIP, county, or trade-area level — built for industries where geography determines the play.</span>
-        </button>
+      <div class="pillar-panels">
+        <!-- Opportunity Identification -->
+        <div class="pillar-panel is-active" role="tabpanel"
+             id="pillar-panel-opportunity" aria-labelledby="pillar-tab-opportunity"
+             data-pillar="opportunity">
+          <div class="carousel" data-current="0">
+            <button type="button" class="carousel-prev" aria-label="Previous slide">‹</button>
+            <div class="carousel-viewport">
+              <div class="carousel-track">
+                <div class="carousel-slide">
+                  <img class="slide-image" src="images/decks/opportunity/slide_1.png" alt="Value-chain map: used construction equipment resale, with TAM by stage and Target co. presence">
+                </div>
+                <div class="carousel-slide">
+                  <img class="slide-image" src="images/decks/opportunity/slide_2.png" alt="Sizing the opportunity: TAM waterfall by value-chain step, stacked by Construction and Trucks &amp; Trailers, showing $3.8B SAM and $17.1B TAM">
+                </div>
+                <div class="carousel-slide">
+                  <img class="slide-image" src="images/decks/opportunity/slide_3.png" alt="Opportunity identification — additional slide from deck">
+                </div>
+              </div>
+            </div>
+            <button type="button" class="carousel-next" aria-label="Next slide">›</button>
+            <div class="carousel-dots" aria-label="Slide navigation">
+              <button type="button" class="carousel-dot is-active" aria-label="Slide 1" data-index="0"></button>
+              <button type="button" class="carousel-dot" aria-label="Slide 2" data-index="1"></button>
+              <button type="button" class="carousel-dot" aria-label="Slide 3" data-index="2"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing Engine -->
+        <div class="pillar-panel" role="tabpanel"
+             id="pillar-panel-pricing" aria-labelledby="pillar-tab-pricing"
+             data-pillar="pricing" hidden>
+          <div class="carousel" data-current="0">
+            <button type="button" class="carousel-prev" aria-label="Previous slide">‹</button>
+            <div class="carousel-viewport">
+              <div class="carousel-track">
+                <div class="carousel-slide">
+                  <img class="slide-image" src="images/decks/pricing/slide_1.png" alt="Price discrepancy analysis: quote-level price dispersion within homogeneous groups, illustrated with a Price Index scatter and red/yellow/grey flag categories">
+                </div>
+                <div class="carousel-slide">
+                  <img class="slide-image" src="images/decks/pricing/slide_2.png" alt="Price increase guardrails framework: recommended price uplift by Pricing Customer Bucket and share of quote revenue, for flagged and unflagged quotes">
+                </div>
+              </div>
+            </div>
+            <button type="button" class="carousel-next" aria-label="Next slide">›</button>
+            <div class="carousel-dots" aria-label="Slide navigation">
+              <button type="button" class="carousel-dot is-active" aria-label="Slide 1" data-index="0"></button>
+              <button type="button" class="carousel-dot" aria-label="Slide 2" data-index="1"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demand Forecasting -->
+        <div class="pillar-panel" role="tabpanel"
+             id="pillar-panel-forecasting" aria-labelledby="pillar-tab-forecasting"
+             data-pillar="forecasting" hidden>
+          <div class="carousel" data-current="0">
+            <button type="button" class="carousel-prev" aria-label="Previous slide">‹</button>
+            <div class="carousel-viewport">
+              <div class="carousel-track">
+                <div class="carousel-slide">
+                  <div class="slide-placeholder">
+                    <div class="placeholder-eyebrow">Slide 1 · Placeholder</div>
+                    <div class="placeholder-body">Accuracy Baseline<br><span>by customer × SKU</span></div>
+                  </div>
+                </div>
+                <div class="carousel-slide">
+                  <div class="slide-placeholder">
+                    <div class="placeholder-eyebrow">Slide 2 · Placeholder</div>
+                    <div class="placeholder-body">Segment-Specific Models<br><span>built for underperformers</span></div>
+                  </div>
+                </div>
+                <div class="carousel-slide">
+                  <div class="slide-placeholder">
+                    <div class="placeholder-eyebrow">Slide 3 · Placeholder</div>
+                    <div class="placeholder-body">S&amp;OP Integration<br><span>embedded in the planning cycle</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="carousel-next" aria-label="Next slide">›</button>
+            <div class="carousel-dots" aria-label="Slide navigation">
+              <button type="button" class="carousel-dot is-active" aria-label="Slide 1" data-index="0"></button>
+              <button type="button" class="carousel-dot" aria-label="Slide 2" data-index="1"></button>
+              <button type="button" class="carousel-dot" aria-label="Slide 3" data-index="2"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Geospatial Mapping -->
+        <div class="pillar-panel" role="tabpanel"
+             id="pillar-panel-geospatial" aria-labelledby="pillar-tab-geospatial"
+             data-pillar="geospatial" hidden>
+          <div class="carousel" data-current="0">
+            <button type="button" class="carousel-prev" aria-label="Previous slide">‹</button>
+            <div class="carousel-viewport">
+              <div class="carousel-track">
+                <div class="carousel-slide">
+                  <div class="slide-placeholder">
+                    <div class="placeholder-eyebrow">Slide 1 · Placeholder</div>
+                    <div class="placeholder-body">Market Heatmap<br><span>demand &amp; competitor density</span></div>
+                  </div>
+                </div>
+                <div class="carousel-slide">
+                  <div class="slide-placeholder">
+                    <div class="placeholder-eyebrow">Slide 2 · Placeholder</div>
+                    <div class="placeholder-body">Trade-Area Analysis<br><span>from market study deck</span></div>
+                  </div>
+                </div>
+                <div class="carousel-slide">
+                  <div class="slide-placeholder">
+                    <div class="placeholder-eyebrow">Slide 3 · Placeholder</div>
+                    <div class="placeholder-body">White Space by Territory<br><span>where to expand next</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="carousel-next" aria-label="Next slide">›</button>
+            <div class="carousel-dots" aria-label="Slide navigation">
+              <button type="button" class="carousel-dot is-active" aria-label="Slide 1" data-index="0"></button>
+              <button type="button" class="carousel-dot" aria-label="Slide 2" data-index="1"></button>
+              <button type="button" class="carousel-dot" aria-label="Slide 3" data-index="2"></button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -549,6 +604,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+// Transparent-over-hero nav: add .is-scrolled once we've scrolled past a threshold
+const navEl = document.getElementById('navbar');
+if (navEl && navEl.classList.contains('nav--over-hero')) {
+  const updateNavState = () => {
+    navEl.classList.toggle('is-scrolled', window.scrollY > 24);
+  };
+  updateNavState();
+  window.addEventListener('scroll', updateNavState, { passive: true });
+}
+
 // Mobile nav toggle
 const navBtn = document.getElementById('nav-hamburger');
 const navLinks = document.getElementById('nav-links');
@@ -567,21 +632,69 @@ if (navBtn && navLinks) {
   });
 }
 
-// Platform capability toggle — one open at a time, click again to close
-const capabilities = document.querySelectorAll('.capability-list .capability');
-capabilities.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const wasOpen = btn.classList.contains('is-open');
-    capabilities.forEach(b => {
-      b.classList.remove('is-open');
-      b.setAttribute('aria-expanded', 'false');
+// Pillar deck — tab switching across the 4 pillars + carousel per panel
+const pillarDeck = document.querySelector('.pillar-deck');
+if (pillarDeck) {
+  const tabs = Array.from(pillarDeck.querySelectorAll('.pillar-tab'));
+  const panels = Array.from(pillarDeck.querySelectorAll('.pillar-panel'));
+
+  function activatePillar(pillar) {
+    tabs.forEach(t => {
+      const isActive = t.dataset.pillar === pillar;
+      t.classList.toggle('is-active', isActive);
+      t.setAttribute('aria-selected', String(isActive));
+      t.setAttribute('tabindex', isActive ? '0' : '-1');
     });
-    if (!wasOpen) {
-      btn.classList.add('is-open');
-      btn.setAttribute('aria-expanded', 'true');
-    }
+    panels.forEach(p => {
+      const isActive = p.dataset.pillar === pillar;
+      p.classList.toggle('is-active', isActive);
+      if (isActive) p.removeAttribute('hidden'); else p.setAttribute('hidden', '');
+    });
+  }
+
+  tabs.forEach((tab, idx) => {
+    tab.addEventListener('click', () => activatePillar(tab.dataset.pillar));
+    tab.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault();
+      const dir = e.key === 'ArrowRight' ? 1 : -1;
+      const next = tabs[(idx + dir + tabs.length) % tabs.length];
+      next.focus();
+      activatePillar(next.dataset.pillar);
+    });
   });
-});
+
+  panels.forEach(panel => {
+    const carousel = panel.querySelector('.carousel');
+    if (!carousel) return;
+    const track = carousel.querySelector('.carousel-track');
+    const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+    const prevBtn = carousel.querySelector('.carousel-prev');
+    const nextBtn = carousel.querySelector('.carousel-next');
+    const dots = Array.from(carousel.querySelectorAll('.carousel-dot'));
+    let current = 0;
+
+    function go(index) {
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === slides.length - 1;
+      carousel.dataset.current = String(current);
+    }
+
+    prevBtn.addEventListener('click', () => go(current - 1));
+    nextBtn.addEventListener('click', () => go(current + 1));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => go(i)));
+
+    carousel.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+    });
+
+    go(0);
+  });
+}
 </script>
 
 </body>
