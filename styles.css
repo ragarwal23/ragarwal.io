@@ -184,7 +184,8 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
   transform-origin: 50% 55%;
   animation: hero-drift 28s ease-in-out infinite alternate;
   will-change: transform;
-  filter: saturate(0.78) contrast(1.04) brightness(0.92);
+  /* Tuned for the dusk-over-Lake-Michigan clip — already moody, so just a touch of contrast lift. */
+  filter: saturate(0.92) contrast(1.06) brightness(1.0);
 }
 @keyframes hero-drift {
   from { transform: scale(1.06) translate3d(0, 0, 0); }
@@ -200,17 +201,18 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
 }
 .hero-overlay {
   position: absolute; inset: 0;
+  /* Lighter than before — dusk footage is already dark; we don't need to flatten it further. */
   background:
-    linear-gradient(180deg, rgba(10, 19, 34, 0.55) 0%, rgba(10, 19, 34, 0.30) 38%, rgba(10, 19, 34, 0.62) 100%),
-    linear-gradient(0deg, rgba(14, 26, 43, 0.18), rgba(14, 26, 43, 0.18));
+    linear-gradient(180deg, rgba(10, 19, 34, 0.42) 0%, rgba(10, 19, 34, 0.16) 42%, rgba(10, 19, 34, 0.52) 100%),
+    linear-gradient(0deg, rgba(14, 26, 43, 0.08), rgba(14, 26, 43, 0.08));
 }
 .hero-vignette {
   position: absolute; inset: 0;
   pointer-events: none;
   /* Two-stop vignette: soft dimmer right behind the headline, corner falloff with brightest point pushed up. */
   background:
-    radial-gradient(60% 36% at 50% 38%, rgba(6, 11, 24, 0.32) 0%, transparent 70%),
-    radial-gradient(120% 90% at 50% 30%, transparent 38%, rgba(6, 11, 24, 0.62) 100%);
+    radial-gradient(60% 36% at 50% 38%, rgba(6, 11, 24, 0.24) 0%, transparent 72%),
+    radial-gradient(120% 90% at 50% 30%, transparent 40%, rgba(6, 11, 24, 0.54) 100%);
 }
 .hero-inner { position: relative; z-index: 1; }
 .hero h1 {
