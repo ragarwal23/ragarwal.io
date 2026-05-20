@@ -1,5 +1,6 @@
-/* Match aristotle-fe-mirror platform typography: Playfair Display + Helvetica Neue system stack.
-   Weight 900 is loaded only for the .logo wordmark, treated as a brand-mark exception. */
+/* Site typography: Playfair Display across body + headings (Georgia / Times New Roman
+   fallbacks). Weight 900 is loaded only for the .logo wordmark, treated as a brand-mark
+   exception against the otherwise uniform weight-400-to-700 hierarchy. */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&display=swap');
 
 :root {
@@ -32,7 +33,7 @@ html, body { margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
   background: var(--bg);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
@@ -131,7 +132,7 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
   min-height: 44px; padding: 10px 22px; border-radius: var(--radius-pill);
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 600; font-size: 14px;
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; font-weight: 600; font-size: 14px;
   border: 1px solid var(--ink); transition: all 0.2s ease; cursor: pointer;
   gap: 8px; white-space: nowrap; text-decoration: none;
 }
@@ -279,7 +280,7 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
   font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; font-weight: 600; font-size: 20px;
   color: var(--ink); letter-spacing: 0.02em;
 }
-.press-logos span:nth-child(1) { font-style: italic; letter-spacing: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+.press-logos span:nth-child(1) { font-style: italic; letter-spacing: 0; font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; }
 .press-logos span:nth-child(2) { font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; font-weight: 700; }
 .press-logos span:nth-child(3) { font-weight: 500; letter-spacing: -0.02em; }
 .press-logos span:nth-child(4) { font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; font-weight: 600; }
@@ -312,7 +313,7 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
 }
 /* Thin sans-serif glyph for the math operator in "<6 wks" so it doesn't clash with Playfair. */
 .stat .num .num-op {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
   font-weight: 300;
   font-size: 0.7em;
   margin-right: 0.06em;
@@ -574,6 +575,19 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
   object-fit: contain;
   display: block;
 }
+/* Slides containing an image get a uniform 16:9 white frame so mixed-AR
+   screenshots (e.g. a 4:3 chat capture next to a 16:9 output) sit at
+   matching proportions inside the dark band. */
+.carousel-slide:has(.slide-image) {
+  aspect-ratio: 16 / 9;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.carousel-slide:has(.slide-image) .slide-image {
+  width: 100%; height: 100%;
+  max-height: none;
+}
 .slide-placeholder {
   width: 100%; aspect-ratio: 16 / 9;
   max-height: 70vh;
@@ -594,7 +608,7 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
 }
 .placeholder-body span {
   display: block; margin-top: 8px;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
   font-weight: 400; font-size: 13px; color: #5A6679;
   letter-spacing: 0.01em;
 }
@@ -647,6 +661,15 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
   .pillar-tab.is-active::after { left: 16px; right: 16px; }
   .carousel { grid-template-columns: 36px 1fr 36px; gap: 8px; }
   .slide-image { max-height: 60vh; }
+  /* Drop the fixed 16:9 frame on mobile so screenshot text stays legible. */
+  .carousel-slide:has(.slide-image) { aspect-ratio: auto; }
+  .carousel-slide:has(.slide-image) .slide-image { height: auto; max-height: 60vh; }
+  /* Tabs scroll horizontally on narrow viewports — fade the right edge so
+     the user perceives there are more pillars off-screen. */
+  .pillar-tabs {
+    -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 32px), transparent 100%);
+            mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 32px), transparent 100%);
+  }
 }
 @media (max-width: 600px) {
   .carousel-prev, .carousel-next { width: 36px; height: 36px; font-size: 18px; }
