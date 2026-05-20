@@ -164,8 +164,15 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-top: clamp(120px, 16vh, 200px);
+}
+/* Headline group takes the available space above the stat band and centers its children
+   vertically — keeps the H1 anchored to the page, not to the video.
+   Children stretch to full width by default; their own max-width + margin auto handle h-centering. */
+.hero .hero-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .hero-bg {
   position: absolute;
@@ -184,7 +191,8 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
   transform-origin: 50% 55%;
   animation: hero-drift 28s ease-in-out infinite alternate;
   will-change: transform;
-  filter: saturate(0.78) contrast(1.04) brightness(0.92);
+  /* Tuned for the dusk-over-Lake-Michigan clip — already moody, so just a touch of contrast lift. */
+  filter: saturate(0.92) contrast(1.06) brightness(1.0);
 }
 @keyframes hero-drift {
   from { transform: scale(1.06) translate3d(0, 0, 0); }
@@ -200,17 +208,19 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
 }
 .hero-overlay {
   position: absolute; inset: 0;
+  /* Lighter than before — dusk footage is already dark; we don't need to flatten it further.
+     Middle stop sits at 50% (where the headline now lives) with a small bump for safer readability. */
   background:
-    linear-gradient(180deg, rgba(10, 19, 34, 0.55) 0%, rgba(10, 19, 34, 0.30) 38%, rgba(10, 19, 34, 0.62) 100%),
-    linear-gradient(0deg, rgba(14, 26, 43, 0.18), rgba(14, 26, 43, 0.18));
+    linear-gradient(180deg, rgba(10, 19, 34, 0.40) 0%, rgba(10, 19, 34, 0.22) 50%, rgba(10, 19, 34, 0.52) 100%),
+    linear-gradient(0deg, rgba(14, 26, 43, 0.08), rgba(14, 26, 43, 0.08));
 }
 .hero-vignette {
   position: absolute; inset: 0;
   pointer-events: none;
-  /* Two-stop vignette: soft dimmer right behind the headline, corner falloff with brightest point pushed up. */
+  /* Focal dimmer centered on the headline (50% 50%); corner falloff frames the composition. */
   background:
-    radial-gradient(60% 36% at 50% 38%, rgba(6, 11, 24, 0.32) 0%, transparent 70%),
-    radial-gradient(120% 90% at 50% 30%, transparent 38%, rgba(6, 11, 24, 0.62) 100%);
+    radial-gradient(70% 42% at 50% 50%, rgba(6, 11, 24, 0.30) 0%, transparent 72%),
+    radial-gradient(120% 100% at 50% 42%, transparent 42%, rgba(6, 11, 24, 0.55) 100%);
 }
 .hero-inner { position: relative; z-index: 1; }
 .hero h1 {
@@ -231,6 +241,8 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
 .hero .btn-primary {
   background: var(--white); color: var(--ink); border-color: var(--white);
   box-shadow: inset 0 0 0 1px rgba(14, 26, 43, 0.08), 0 8px 24px -10px rgba(0, 0, 0, 0.35);
+  /* Keep the pill content-width; flex parent would otherwise stretch it across the column. */
+  align-self: center;
 }
 .hero .btn-primary:hover { background: #f0f0eb; color: var(--ink); border-color: #f0f0eb; }
 .btn-arrow {
@@ -512,7 +524,7 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
   max-height: 200px; opacity: 1; margin-top: 4px;
 }
 
-/* ─── PILLAR DECK (Where Strategy Meets AI) ─── */
+/* ─── PILLAR DECK (Where Growth Meets AI) ─── */
 .pillar-deck {
   max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad);
 }
@@ -731,6 +743,7 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
 .case-card {
   padding: 36px 32px; background: var(--bg); border: 1px solid var(--line);
   border-radius: var(--radius); transition: transform 0.3s, border-color 0.3s;
+  display: flex; flex-direction: column;
 }
 .case-card:hover { transform: translateY(-2px); border-color: var(--ink); }
 .case-tag {
@@ -752,8 +765,12 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
 }
 .case-section-text { font-size: 14px; color: var(--ink-muted); line-height: 1.6; }
 .case-result {
-  margin-top: 20px; padding: 14px 18px; background: var(--navy); color: var(--white);
+  margin-top: auto; padding: 14px 18px; background: var(--navy); color: var(--white);
   border-radius: 8px;
+  /* Reserve room for two lines of result text so single-line cards (e.g. "$4M impact. 40x ROI.")
+     match the height of multi-line cards. 14px font * 1.5 line-height * 2 lines + 14px*2 padding. */
+  min-height: 70px;
+  display: flex; align-items: center;
 }
 .case-result-text { font-size: 14px; font-weight: 700; line-height: 1.5; color: var(--white); }
 
