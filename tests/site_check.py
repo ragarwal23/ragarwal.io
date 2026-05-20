@@ -198,9 +198,9 @@ def test_images(p: IDCollector, where: str) -> None:
 def test_required_sections(p: IDCollector) -> None:
     print("\n[6] Required sections present (index.html)")
     h2_text = " | ".join(p.section_h2s)
+    # Path-merged section removed; platform now lives in its own section without an H2.
     expected_h2 = [
         ("comparison", "Ours Does"),
-        ("path-merged", "Compounding Growth"),
         ("credibility", "Decades of expertise"),
         ("sectors", "Leaders Across Various Sectors"),
         ("cases", "Case Studies"),
@@ -220,7 +220,7 @@ def test_required_sections(p: IDCollector) -> None:
     )
 
     expected_ids = [
-        "hero", "value", "different", "path", "offerings",
+        "hero", "value", "different", "offerings",
         "expertise", "sectors", "cases", "qa", "contact",
     ]
     actual_ids = set(p.ids)
@@ -296,14 +296,8 @@ def test_content_invariants() -> None:
             firm not in cred_alumni_text,
         )
 
-    # Path / funnel
-    check(
-        "funnel: 6 numbered steps",
-        all(f">0{n}<" in text or f">{n}<" in text for n in (1, 2, 3, 4, 5, 6)),
-    )
-    check("funnel highlight row present", "funnel-row highlight" in text)
-    check("partner card: 'Aristotle AI Agents'", "Aristotle AI Agents" in visible)
-    check("partner card: 'Dedicated Partner'", "Dedicated Partner" in visible)
+    # Path-merged section was removed; the funnel + partner cards no longer exist.
+    # The pillars survived the cleanup and now sit under the platform section.
 
     # Pillars
     for pillar in ("Partner-Led", "AI Advantage", "Faster to Impact", "Capability Embedded"):
@@ -374,9 +368,6 @@ def test_insights_page(p: IDCollector) -> None:
 def test_structural_counts() -> None:
     print("\n[9] Structural counts (index.html)")
     text = INDEX.read_text(encoding="utf-8")
-
-    funnel_rows = len(re.findall(r'class="funnel-row(?: highlight)?"', text))
-    check(f"funnel has 6 rows (got {funnel_rows})", funnel_rows == 6)
 
     pillars = len(re.findall(r'<div class="pillar">', text))
     check(f"pillars section has 4 cards (got {pillars})", pillars == 4)
