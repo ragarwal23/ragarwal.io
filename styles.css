@@ -733,6 +733,7 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
 .case-card {
   padding: 36px 32px; background: var(--bg); border: 1px solid var(--line);
   border-radius: var(--radius); transition: transform 0.3s, border-color 0.3s;
+  display: flex; flex-direction: column;
 }
 .case-card:hover { transform: translateY(-2px); border-color: var(--ink); }
 .case-tag {
@@ -754,8 +755,12 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
 }
 .case-section-text { font-size: 14px; color: var(--ink-muted); line-height: 1.6; }
 .case-result {
-  margin-top: 20px; padding: 14px 18px; background: var(--navy); color: var(--white);
+  margin-top: auto; padding: 14px 18px; background: var(--navy); color: var(--white);
   border-radius: 8px;
+  /* Reserve room for two lines of result text so single-line cards (e.g. "$4M impact. 40x ROI.")
+     match the height of multi-line cards. 14px font * 1.5 line-height * 2 lines + 14px*2 padding. */
+  min-height: 70px;
+  display: flex; align-items: center;
 }
 .case-result-text { font-size: 14px; font-weight: 700; line-height: 1.5; color: var(--white); }
 
