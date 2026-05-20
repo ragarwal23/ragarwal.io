@@ -193,7 +193,7 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
   will-change: transform;
   /* Tuned for the sunny daytime aerial — drop brightness so white text stays legible
      against the bright sky, keep enough saturation that the clip still reads warm/happy. */
-  filter: saturate(0.88) contrast(1.06) brightness(0.85);
+  filter: saturate(0.88) contrast(1.06) brightness(0.92);
 }
 @keyframes hero-drift {
   from { transform: scale(1.06) translate3d(0, 0, 0); }
