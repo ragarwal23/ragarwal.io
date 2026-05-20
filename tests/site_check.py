@@ -215,8 +215,8 @@ def test_required_sections(p: IDCollector) -> None:
     # Platform sub-band is now an h3 inside the merged path section; check the file directly
     raw = INDEX.read_text(encoding="utf-8")
     check(
-        "platform sub-band h3 'Strategy Meets'",
-        bool(re.search(r"<h3[^>]*class=\"platform-h3\"[^>]*>.*?Strategy Meets.*?</h3>", raw, re.DOTALL)),
+        "platform sub-band h3 'Growth Meets'",
+        bool(re.search(r"<h3[^>]*class=\"platform-h3\"[^>]*>.*?Growth Meets.*?</h3>", raw, re.DOTALL)),
     )
 
     expected_ids = [
@@ -254,7 +254,7 @@ def test_content_invariants() -> None:
     # Hero
     check(
         "hero headline category claim",
-        "AI-Native Growth" in visible and "Pricing Advisory" in visible,
+        "AI-native growth" in visible and "pricing advisory" in visible,
     )
     check("hero CTA: 'Book a Meeting'", "Book a Meeting" in visible)
 
@@ -272,11 +272,11 @@ def test_content_invariants() -> None:
         'class="hero-overlay"' in text,
     )
 
-    # Stat band — Sam's original values restored
-    check("stat band: '25%'", "25%" in visible)
+    # Stat band — refreshed claims (40x ROI, <1 month, $2B+, Tied to impact)
+    check("stat band: '40x'", "40x" in visible)
     check(
-        "stat band: '<6 wks' or '&lt;6 wks'",
-        "&lt;6 wks" in visible or "<6 wks" in visible,
+        "stat band: '<1 month' or '&lt;1 month'",
+        "&lt;1 month" in visible or "<1 month" in visible,
     )
     check("stat band: '$2B+'", "$2B+" in visible)
     check("stat band: 'Tied to impact'", "Tied to impact" in visible)
@@ -310,11 +310,11 @@ def test_content_invariants() -> None:
         check(f"pillar present: {pillar!r}", pillar in visible)
 
     # Product showcase
-    check("product: 'Strategy Meets'", "Strategy Meets" in visible)
+    check("product: 'Growth Meets'", "Growth Meets" in visible)
     check("product capability: 'Opportunity Identification'", "Opportunity Identification" in visible)
-    check("product capability: 'Pricing Engine'", "Pricing Engine" in visible)
+    check("product capability: 'Pricing'", "Pricing" in visible)
     check("product capability: 'Demand Forecasting'", "Demand Forecasting" in visible)
-    check("product capability: 'Geospatial Mapping'", "Geospatial Mapping" in visible)
+    check("product capability: 'Growth Analytics'", "Growth Analytics" in visible)
 
     # Credibility band
     check("cred: '$1B+'", "$1B+" in visible)
