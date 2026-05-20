@@ -421,9 +421,9 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
 
 /* ─── PILLARS ─── */
 .pillars {
-  max-width: var(--maxw); margin: 80px auto 0; padding: 0 var(--pad) 0;
+  max-width: var(--maxw); margin: 0 auto;
+  padding: clamp(60px, 8vw, 100px) var(--pad);
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
-  border-top: 1px solid var(--line); padding-top: 48px;
 }
 .pillar h4 { font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 22px; margin: 0 0 10px; color: var(--ink); }
 .pillar p { margin: 0; font-size: 14px; color: var(--ink-muted); line-height: 1.55; }
@@ -740,6 +740,7 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
   max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad);
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
 }
+.cases-cta { text-align: center; margin-top: 48px; padding: 0 var(--pad); }
 .case-card {
   padding: 36px 32px; background: var(--bg); border: 1px solid var(--line);
   border-radius: var(--radius); transition: transform 0.3s, border-color 0.3s;
