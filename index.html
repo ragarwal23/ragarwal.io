@@ -240,13 +240,13 @@
             <div class="carousel-viewport">
               <div class="carousel-track">
                 <div class="carousel-slide">
-                  <img class="slide-image" src="images/decks/opportunity/slide_1.png" alt="Value-chain map: used construction equipment resale, with TAM by stage and Target co. presence">
+                  <img class="slide-image" src="images/decks/opportunity/slide_1.png" alt="Value-chain map for used construction equipment resale: 8 stages from Extraction to Post-sale transportation, with TAM ($Bn and % of GTV) per stage and Target co. presence checks. Total TAM $17.1B; Target co. covers 5 of 8 stages.">
                 </div>
                 <div class="carousel-slide">
-                  <img class="slide-image" src="images/decks/opportunity/slide_2.png" alt="Sizing the opportunity: TAM waterfall by value-chain step, stacked by Construction and Trucks &amp; Trailers, showing $3.8B SAM and $17.1B TAM">
+                  <img class="slide-image" src="images/decks/opportunity/slide_2.png" alt="Market-sizing breakdown for used construction equipment resale: TAM $17.1B → SAM $3.8B → SOM $0.3-0.8B, with side-by-side definitions across geography, segments, channels, value-chain steps, and service coordinators.">
                 </div>
                 <div class="carousel-slide">
-                  <img class="slide-image" src="images/decks/opportunity/slide_3.png" alt="Opportunity identification — additional slide from deck">
+                  <img class="slide-image" src="images/decks/opportunity/slide_3.png" alt="TAM waterfall by value-chain stage, $Bn, stacked by Construction (light) and Trucks &amp; Trailers (dark): $3.8B serviceable market across pre-sale transportation, storage, inspection, make-ready, and post-sale transportation; adjacent Resale/Auction layer is $13.3B; total TAM $17.1B.">
                 </div>
               </div>
             </div>
@@ -268,10 +268,10 @@
             <div class="carousel-viewport">
               <div class="carousel-track">
                 <div class="carousel-slide">
-                  <img class="slide-image" src="images/decks/pricing/slide_1.png" alt="Price discrepancy analysis: quote-level price dispersion within homogeneous groups, illustrated with a Price Index scatter and red/yellow/grey flag categories">
+                  <img class="slide-image" src="images/decks/pricing/slide_1.png" alt="Price discrepancy analysis methodology: Price Index = Quoted Dist Cost ÷ Book Price × 100. Scatter plot shows quote-level price dispersion within homogeneous groups, with red/yellow/grey flags marking quotes below comparable higher-volume pricing, at-par pricing, and significant in-group dispersion.">
                 </div>
                 <div class="carousel-slide">
-                  <img class="slide-image" src="images/decks/pricing/slide_2.png" alt="Price increase guardrails framework: recommended price uplift by Pricing Customer Bucket and share of quote revenue, for flagged and unflagged quotes">
+                  <img class="slide-image" src="images/decks/pricing/slide_2.png" alt="Price increase guardrails framework with worked example: flagged quotes get price uplifts capped by Pricing Customer Bucket and share of quote revenue; unflagged quotes get 2-5% uplift on Bucket 3 customers only. Worked example for a single customer's three quotes yields a 19% total recommended uplift.">
                 </div>
               </div>
             </div>
@@ -637,6 +637,7 @@ const pillarDeck = document.querySelector('.pillar-deck');
 if (pillarDeck) {
   const tabs = Array.from(pillarDeck.querySelectorAll('.pillar-tab'));
   const panels = Array.from(pillarDeck.querySelectorAll('.pillar-panel'));
+  const resetCarouselByPillar = {};
 
   function activatePillar(pillar) {
     tabs.forEach(t => {
@@ -650,6 +651,10 @@ if (pillarDeck) {
       p.classList.toggle('is-active', isActive);
       if (isActive) p.removeAttribute('hidden'); else p.setAttribute('hidden', '');
     });
+    // Reset the newly-active pillar's carousel to slide 0 so users always
+    // re-enter a pillar at its first slide.
+    const reset = resetCarouselByPillar[pillar];
+    if (reset) reset();
   }
 
   tabs.forEach((tab, idx) => {
@@ -692,6 +697,7 @@ if (pillarDeck) {
       else if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
     });
 
+    resetCarouselByPillar[panel.dataset.pillar] = () => go(0);
     go(0);
   });
 }

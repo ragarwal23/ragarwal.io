@@ -647,6 +647,12 @@ h3 { font-weight: 600; font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; }
   .pillar-tab.is-active::after { left: 16px; right: 16px; }
   .carousel { grid-template-columns: 36px 1fr 36px; gap: 8px; }
   .slide-image { max-height: 60vh; }
+  /* Tabs scroll horizontally on narrow viewports — fade the right edge so
+     the user perceives there are more pillars off-screen. */
+  .pillar-tabs {
+    -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 32px), transparent 100%);
+            mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 32px), transparent 100%);
+  }
 }
 @media (max-width: 600px) {
   .carousel-prev, .carousel-next { width: 36px; height: 36px; font-size: 18px; }
