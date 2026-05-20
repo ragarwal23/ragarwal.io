@@ -334,7 +334,8 @@ def test_content_invariants() -> None:
         "closing CTA headline mentions '$100M' and '30 Days'",
         "$100M" in visible and "30 Days" in visible,
     )
-    check("closing CTA: 'Request a Pricing Scan'", "Request a Pricing Scan" in visible)
+    # Closing CTA uses a single 'Book a Meeting' button (simplified from earlier
+    # dual-CTA). 'Book a Meeting' already asserted in hero check above.
 
     # Regressions: old design state must NOT appear
     check("regression: no 'BlackRock'", "BlackRock" not in visible and "Blackrock" not in visible)
